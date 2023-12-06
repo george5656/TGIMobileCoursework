@@ -21,6 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="109dp"
             android:layout_marginBottom="20dp"
+            android:onClick="menuLoad"
             android:text="menu items"
             android:textSize="24sp" />
 
@@ -29,6 +30,7 @@
             android:layout_width="match_parent"
             android:layout_height="109dp"
             android:layout_marginBottom="20dp"
+            android:onClick="incomingOrderLoad"
             android:text="incoming orders"
             android:textSize="24sp" />
 
@@ -37,6 +39,7 @@
             android:layout_width="match_parent"
             android:layout_height="109dp"
             android:layout_marginBottom="20dp"
+            android:onClick="sendNotifcationLoad"
             android:text="Send Notifications"
             android:textSize="24sp" />
 
@@ -45,6 +48,7 @@
             android:layout_width="match_parent"
             android:layout_height="109dp"
             android:layout_marginBottom="20sp"
+            android:onClick="accountSettingLoad"
             android:text="Account Settings"
             android:textSize="24sp" />
     </LinearLayout>

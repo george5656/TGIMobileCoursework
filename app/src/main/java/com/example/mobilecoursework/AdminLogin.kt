@@ -12,9 +12,13 @@ class AdminLogin : AppCompatActivity() {
     }
 
     fun login(view: View){
-        var intent : Intent = Intent(this, AdminHomePage::class.java)
-startActivity(intent)
+        var loginIntent : Intent = Intent(this, AdminHomePage::class.java)
+startActivity(loginIntent)
     }
+    fun cancel(view: View){
+        var cancelIntent : Intent = Intent(this, MainActivity::class.java)
+    }
+
 
 
 }

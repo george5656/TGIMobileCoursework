@@ -6,4 +6,39 @@
     android:layout_height="match_parent"
     tools:context=".AdminDeleteCOnfirmation">
 
+    <TextView
+        android:id="@+id/txtWaring"
+        android:layout_width="217dp"
+        android:layout_height="215dp"
+        android:gravity="center"
+        android:text="Confrim you want to delete this."
+        android:textSize="34sp"
+        tools:layout_editor_absoluteX="97dp"
+        tools:layout_editor_absoluteY="81dp" />
+
+    <Button
+        android:id="@+id/btnConfirm"
+        android:layout_width="149dp"
+        android:layout_height="76dp"
+        android:text="confrim"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.904"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.583" />
+
+    <Button
+        android:id="@+id/btnDeleteCancel"
+        android:layout_width="149dp"
+        android:layout_height="76dp"
+        android:text="confrim"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.061"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.583" />
 </androidx.constraintlayout.widget.ConstraintLayout>
