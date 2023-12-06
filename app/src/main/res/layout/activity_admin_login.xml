@@ -62,7 +62,6 @@
         android:layout_height="wrap_content"
         android:text="Error"
         android:textSize="24sp"
-        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.473"

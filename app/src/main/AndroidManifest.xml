@@ -13,6 +13,36 @@
         android:theme="@style/Theme.MobileCoursework"
         tools:targetApi="31">
         <activity
+            android:name=".AdminDeleteCOnfirmation"
+            android:exported="false" />
+        <activity
+            android:name=".AdminSendPromotions"
+            android:exported="false" />
+        <activity
+            android:name=".AdminFeedbackAndRatings"
+            android:exported="false" />
+        <activity
+            android:name=".AdminSendNotification"
+            android:exported="false" />
+        <activity
+            android:name=".AdminEditOrderStatus"
+            android:exported="false" />
+        <activity
+            android:name=".AdminOrderFilter"
+            android:exported="false" />
+        <activity
+            android:name=".AdminMenuItemFilter"
+            android:exported="false" />
+        <activity
+            android:name=".AdminAddCafeItem"
+            android:exported="false" />
+        <activity
+            android:name=".AdminIncomingOrders"
+            android:exported="false" />
+        <activity
+            android:name=".AdminRegister"
+            android:exported="false" />
+        <activity
             android:name=".adminCafeMenu"
             android:exported="false" />
         <activity
