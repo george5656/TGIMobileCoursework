@@ -7,81 +7,77 @@ import android.database.sqlite.SQLiteOpenHelper
 class DatabaseHelper(context:Context) :SQLiteOpenHelper(context,"cafeDatabase.db",null,1){
     override fun onCreate(db: SQLiteDatabase?) {
 
-        var   SQlCreateStament :String = ""
-                SQlCreateStament = "CREATE TABLE Customers ("+
-                                "cusId INTEGER NOT NULL UNIQUE,"+
-                                "cusFullName TEXT NOT NULL,"+
-                                "cusEmail TEXT NOT NULL,"+
-                                "cusPhoneNo TEXT NOT NULL,"+
-                                "cusUserName TEXT NOT NULL UNIQUE,"+
-                                "cusPassword TEXT NOT NULL,"+
-                                "CusIsActive INTEGER NOT NULL,"+
-                                "PRIMARY KEY(cusId AUTOINCREMENT));"
+
+        var SQlCreateStament:String = "CREATE TABLE Customers ( "+
+                "cusId INTEGER PRIMARY KEY AUTOINCREMENT,"+
+                "cusFullName TEXT NOT NULL,"+
+                "cusEmail TEXT NOT NULL,"+
+                "cusPhoneNo TEXT NOT NULL,"+
+                "cusUserName TEXT NOT NULL UNIQUE,"+
+                "cusPassword TEXT NOT NULL,"+
+                "CusIsActive INTEGER NOT NULL);"
 
 
+         db?.execSQL(SQlCreateStament)
 
+             val SQlCreateStament2 = "CREATE TABLE Admin ("+
+                 "adminId INTEGER PRIMARY KEY AUTOINCREMENT,"+
+                 "adminFullName	TEXT NOT NULL,"+
+                 "AdminEmail TEXT NOT NULL,"+
+                 "adminPhoneNo TEXT NOT NULL,"+
+                 "adminUserName TEXT NOT NULL UNIQUE,"+
+                 "adminPassword TEXT NOT NULL,"+
+                 "AdminIsActive INTEGER NOT NULL);"
+        db?.execSQL(SQlCreateStament2)
 
-
-              SQlCreateStament = SQlCreateStament + "CREATE TABLE Admin (" +
-                                        "adminId INTEGER NOT NULL UNIQUE,"+
-                                        "adminFullName TEXT NOT NULL,"+
-                                        "AdminEmail TEXT NOT NULL,"+
-                                        "adminPhoneNo TEXT NOT NULL,"+
-                                        "adminUserName TEXT NOT NULL UNIQUE,"+
-                                        "adminPassword TEXT NOT NULL,"+
-                                        "AdminIsActive INTEGER NOT NULL,"+
-                                        "PRIMARY KEY(adminId AUTOINCREMENT));"
-
-
-       SQlCreateStament = SQlCreateStament + "CREATE TABLE Product ("+
-                            "productId INTEGER NOT NULL UNIQUE,"+
+        val SQlCreateStament3 =  "CREATE TABLE Product ("+
+                            "productId INTEGER PRIMARY KEY AUTOINCREMENT,"+
                             "prodName TEXT NOT NULL,"+
                             "prodPrice REAL NOT NULL,"+
                             "prodImage BLOB,"+
-                            "prodAvailable	INTEGER NOT NULL,"+
-                            "PRIMARY KEY(productId AUTOINCREMENT));"
+                            "prodAvailable	INTEGER NOT NULL);"
 
-
-        SQlCreateStament = "CREATE TABLE Order ("+
-                            "orderId INTEGER NOT NULL UNIQUE,"+
+        db?.execSQL(SQlCreateStament3)
+       // var tableName : String = "Order"
+        val SQlCreateStament4 = "CREATE TABLE Purchase ("+
+                            "orderId INTEGER PRIMARY KEY AUTOINCREMENT,"+
                             "cusId INTEGER NOT NULL,"+
                             "orderData TEXT NOT NULL,"+
                             "orderTime TEXT NOT NULL,"+
                             "orderStatus TEXT NOT NULL,"+
-                            "PRIMARY KEY(orderId AUTOINCREMENT),"+
+
                             "FOREIGN KEY(cusId) REFERENCES Customers(cusId));"
 
-
-       SQlCreateStament =  SQlCreateStament + "CREATE TABLE Payment ("+
-                            "paymentId INTEGER NOT NULL UNIQUE,"+
+        db?.execSQL(SQlCreateStament4)
+        val SQlCreateStament5 =  "CREATE TABLE Payment ("+
+                            "paymentId INTEGER PRIMARY KEY AUTOINCREMENT,"+
                             "orderId INTEGER NOT NULL,"+
                             "paymentType TEXT NOT NULL,"+
                             "Amount	INTEGER NOT NULL,"+
                             "paymentDate TEXT NOT NULL,"+
-                            "FOREIGN KEY(orderId) REFERENCES Order(orderId),"+
-                                "PRIMARY KEY(paymentId AUTOINCREMENT));"
+                            "FOREIGN KEY(orderId) REFERENCES Purchase (orderId));"
 
-
-        SQlCreateStament =  SQlCreateStament + "CREATE TABLE Feedback ("+
-                                "feedbackId	INTEGER NOT NULL UNIQUE,"+
+        db?.execSQL(SQlCreateStament5)
+        val SQlCreateStament6=  "CREATE TABLE Feedback ("+
+                                "feedbackId	INTEGER PRIMARY KEY AUTOINCREMENT,"+
                                 "cusId INTEGER NOT NULL,"+
                                 "orderId INTEGER NOT NULL,"+
                                 "feedback TEXT NOT NULL,"+
                                 "rating INTEGER NOT NULL,"+
-                                "PRIMARY KEY(feedbackId AUTOINCREMENT),"+
+
                                 "FOREIGN KEY(cusId) REFERENCES Customers(cusId),"+
-                                "FOREIGN KEY(orderId) REFERENCES Order(orderId));"
+                                "FOREIGN KEY(orderId) REFERENCES Purchase (orderId));"
 
-
-        SQlCreateStament =  SQlCreateStament + "CREATE TABLE OrderDetails ("+
-                                "orderDetailsID	INTEGER NOT NULL UNIQUE,"+
+        db?.execSQL(SQlCreateStament6)
+        val SQlCreateStament7 =   "CREATE TABLE OrderDetails ("+
+                                "orderDetailsID	INTEGER PRIMARY KEY AUTOINCREMENT,"+
                                 "orderId INTEGER NOT NULL,"+
                                 "prodId	INTEGER NOT NULL,"+
-                                "PRIMARY KEY(orderDetailsID AUTOINCREMENT),"+
-                                "FOREIGN KEY(orderId) REFERENCES Order(orderId),"+
-                                "FOREIGN KEY(prodId) REFERENCES Product(productId));"
-        db?.execSQL(SQlCreateStament)
 
+                                "FOREIGN KEY(orderId) REFERENCES Purchase (orderId),"+
+                                "FOREIGN KEY(prodId) REFERENCES Product(productId));"
+
+        db?.execSQL(SQlCreateStament7)
     }
 
     override fun onUpgrade(p0: SQLiteDatabase?, p1: Int, p2: Int) {

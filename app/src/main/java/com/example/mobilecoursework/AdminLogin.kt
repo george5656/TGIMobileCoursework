@@ -26,16 +26,16 @@ class AdminLogin : AppCompatActivity() {
 
         var Db: SQLiteDatabase = DBHelper.readableDatabase
 
-        var query: String = "select * from OrderDetails"
-        var output: Cursor? = Db.rawQuery(query,null)
-       // output.moveToFirst()
-//
-       // if(output.getString(5) == findViewById<EditText>(R.id.etPassword).text.toString()) {
-//
-//
-       //    var loginIntent: Intent = Intent(this, AdminHomePage::class.java)
-       //     startActivity(loginIntent)
-       //}
+        var query: String =  "select * from Admin"
+        var output: Cursor = Db.rawQuery(query,null)
+        output.moveToFirst()
+
+        if(output.getString(5) == findViewById<EditText>(R.id.etPassword).text.toString()) {
+
+
+           var loginIntent: Intent = Intent(this, AdminHomePage::class.java)
+            startActivity(loginIntent)
+       }
 var errorMessage :TextView = findViewById(R.id.txtErrorMessage)
         errorMessage.setText("error")
         errorMessage.isVisible = true
