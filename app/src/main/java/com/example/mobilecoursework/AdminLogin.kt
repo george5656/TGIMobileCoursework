@@ -28,17 +28,22 @@ class AdminLogin : AppCompatActivity() {
 
         var query: String =  "select * from Admin"
         var output: Cursor = Db.rawQuery(query,null)
-        output.moveToFirst()
+        var errorMessage: TextView = findViewById(R.id.txtErrorMessage)
+      if(output.moveToFirst()) {
 
-        if(output.getString(5) == findViewById<EditText>(R.id.etPassword).text.toString()) {
+          if (output.getString(5) == findViewById<EditText>(R.id.etPassword).text.toString()) {
 
 
-           var loginIntent: Intent = Intent(this, AdminHomePage::class.java)
-            startActivity(loginIntent)
-       }
-var errorMessage :TextView = findViewById(R.id.txtErrorMessage)
-        errorMessage.setText("error")
-        errorMessage.isVisible = true
+              var loginIntent: Intent = Intent(this, AdminHomePage::class.java)
+              startActivity(loginIntent)
+          }else{
+              errorMessage.setText("password doesnt match")
+          }
+      }else {
+
+          errorMessage.setText("no data")
+          errorMessage.isVisible = true
+      }
     }
     fun cancel(view: View){
         var cancelIntent : Intent = Intent(this, MainActivity::class.java)

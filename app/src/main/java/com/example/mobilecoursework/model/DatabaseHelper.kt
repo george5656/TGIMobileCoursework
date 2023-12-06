@@ -8,7 +8,7 @@ class DatabaseHelper(context:Context) :SQLiteOpenHelper(context,"cafeDatabase.db
     override fun onCreate(db: SQLiteDatabase?) {
 
 
-        var SQlCreateStament:String = "CREATE TABLE Customers ( "+
+        val SQlCreateStament:String = "CREATE TABLE Customers ( "+
                 "cusId INTEGER PRIMARY KEY AUTOINCREMENT,"+
                 "cusFullName TEXT NOT NULL,"+
                 "cusEmail TEXT NOT NULL,"+
