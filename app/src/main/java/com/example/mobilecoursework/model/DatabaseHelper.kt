@@ -86,9 +86,9 @@ var db : SQLiteDatabase = this.writableDatabase
     }
 
 
-    fun getDataRow():Cursor?{
-        var query : String = "select * from Admin"
-        return db?.rawQuery(query, null)
+    fun getLoginDetails(userName:String):Cursor?{
+        var query : String = "select * from Admin where adminUserName =" +"\""+ "$userName"+"\""
+        return db.rawQuery(query, null)
     }
 
 
