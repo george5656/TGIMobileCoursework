@@ -21,30 +21,15 @@ class AdminLogin : AppCompatActivity() {
     }
 
     fun login(view: View){
-
-        var DBHelper : DatabaseHelper = DatabaseHelper(this)
-
-        var Db: SQLiteDatabase = DBHelper.readableDatabase
-
-        var query: String =  "select * from Admin"
-        var output: Cursor = Db.rawQuery(query,null)
-        var errorMessage: TextView = findViewById(R.id.txtErrorMessage)
-      if(output.moveToFirst()) {
-
-          if (output.getString(5) == findViewById<EditText>(R.id.etPassword).text.toString()) {
+var db : DatabaseHelper = DatabaseHelper(this)
+var results : Cursor? = db.getDataRow()
+//        if(results.moveToFirst()) {
+            var loginIntent: Intent = Intent(this, AdminHomePage::class.java)
+            startActivity(loginIntent)
+  //      }
 
 
-              var loginIntent: Intent = Intent(this, AdminHomePage::class.java)
-              startActivity(loginIntent)
-          }else{
-              errorMessage.setText("password doesnt match")
-          }
-      }else {
-
-          errorMessage.setText("no data")
-          errorMessage.isVisible = true
-      }
-    }
+   }
     fun cancel(view: View){
         var cancelIntent : Intent = Intent(this, MainActivity::class.java)
         startActivity((cancelIntent))
