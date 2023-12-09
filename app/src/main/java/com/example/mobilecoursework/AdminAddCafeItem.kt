@@ -1,9 +1,12 @@
 package com.example.mobilecoursework
 
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+
+
 
 class AdminAddCafeItem : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -14,7 +17,9 @@ class AdminAddCafeItem : AppCompatActivity() {
         var fileChoserIntent : Intent = Intent()
         fileChoserIntent.setType("image/*")
         fileChoserIntent.setAction(Intent.ACTION_GET_CONTENT)
-         startActivity(fileChoserIntent)
+        startActivity(fileChoserIntent)
+      var results : Uri? = intent.clipData?.getItemAt(0)?.uri
+
     }
 
 }
