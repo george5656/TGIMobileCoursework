@@ -24,143 +24,184 @@
         app:title="Create Accout" />
 
     <LinearLayout
-        android:layout_width="409dp"
-        android:layout_height="543dp"
-        android:orientation="horizontal"
+        android:id="@+id/linearLayout"
+        android:layout_width="262dp"
+        android:layout_height="509dp"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.34"
-        tools:layout_editor_absoluteX="1dp">
+        app:layout_constraintVertical_bias="0.288">
 
-        <LinearLayout
-            android:layout_width="159dp"
-            android:layout_height="638dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/txtUserNameCreate"
-                android:layout_width="match_parent"
-                android:layout_height="13dp"
-                android:layout_weight="1"
-                android:text="Username"
-                android:textSize="24sp" />
-
-            <TextView
-                android:id="@+id/txtPasswordCreate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="password"
-                android:textSize="24sp" />
-
-            <TextView
-                android:id="@+id/txtFullNameCreate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="fullName"
-                android:textSize="24sp" />
-
-            <TextView
-                android:id="@+id/txtPhoneNoCreate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Phone number"
-                android:textSize="24sp" />
-
-            <TextView
-                android:id="@+id/txtEmailCreate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="0dp"
-                android:layout_weight="1"
-                android:text="Email"
-                android:textSize="24sp" />
-
-            <TextView
-                android:id="@+id/txtActiveCreate"
-                android:layout_width="145dp"
-                android:layout_height="106dp"
-                android:layout_weight="1"
-                android:text="Is Actice"
-                android:textSize="24sp" />
-        </LinearLayout>
-
-        <LinearLayout
+        <EditText
+            android:id="@+id/etUserNameCreate"
             android:layout_width="match_parent"
-            android:layout_height="458dp"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="33dp"
+            android:ems="10"
+            android:inputType="text"
+            android:text="Name" />
 
-            <EditText
-                android:id="@+id/etUserNameCreate"
+        <EditText
+            android:id="@+id/etPasswordCreate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="33dp"
+            android:ems="10"
+            android:inputType="textPassword" />
+
+        <EditText
+            android:id="@+id/etFullNameCreate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="33dp"
+            android:ems="10"
+            android:inputType="text"
+            android:text="Name" />
+
+        <EditText
+            android:id="@+id/etPhoneCreate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="33dp"
+            android:ems="10"
+            android:inputType="phone" />
+
+        <EditText
+            android:id="@+id/etEmailCreate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            android:ems="10"
+            android:inputType="textEmailAddress" />
+
+        <RadioGroup
+            android:id="@+id/rgCreateAcount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/rbYesActiveCreate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="text"
-                android:text="Name" />
+                android:text="Yes" />
 
-            <EditText
-                android:id="@+id/etPasswordCreate"
+            <RadioButton
+                android:id="@+id/rbNoActiveCreate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPassword" />
+                android:text="No" />
+        </RadioGroup>
 
-            <EditText
-                android:id="@+id/etFullNameCreate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="text"
-                android:text="Name" />
-
-            <EditText
-                android:id="@+id/etPhoneCreate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="phone" />
-
-            <EditText
-                android:id="@+id/etEmailCreate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textEmailAddress" />
-
-            <RadioGroup
-                android:id="@+id/rgCreateAcount"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <RadioButton
-                    android:id="@+id/rbYesActiveCreate"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="RadioButton" />
-
-                <RadioButton
-                    android:id="@+id/rbNoActiveCreate"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="RadioButton" />
-            </RadioGroup>
-
-        </LinearLayout>
     </LinearLayout>
 
     <Button
         android:id="@+id/btnRegister"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="153dp"
+        android:layout_height="69dp"
         android:onClick="create"
         android:text="Register"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.948"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.953" />
+
+    <Button
+        android:id="@+id/btnRegisterCancel"
+        android:layout_width="153dp"
+        android:layout_height="69dp"
+        android:onClick="create"
+        android:text="Cancel"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.062"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.953" />
+
+    <TextView
+        android:id="@+id/txtUseNameCreate"
+        android:layout_width="114dp"
+        android:layout_height="38dp"
+        android:text="Username"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.053"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="0.057" />
+
+    <TextView
+        android:id="@+id/txtPhoneNoCreate"
+        android:layout_width="110dp"
+        android:layout_height="69dp"
+        android:text="Phone Number"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.066"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="0.547" />
+
+    <TextView
+        android:id="@+id/txtActiveCreate"
+        android:layout_width="114dp"
+        android:layout_height="38dp"
+        android:text="Is Active"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.053"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="0.932" />
+
+    <TextView
+        android:id="@+id/txtEmailCreate"
+        android:layout_width="114dp"
+        android:layout_height="38dp"
+        android:text="Email"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.053"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="0.717" />
+
+    <TextView
+        android:id="@+id/txtFullNameCreate"
+        android:layout_width="114dp"
+        android:layout_height="38dp"
+        android:text="Full Name"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.053"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="0.386" />
+
+    <TextView
+        android:id="@+id/txtPasswordCreate"
+        android:layout_width="114dp"
+        android:layout_height="38dp"
+        android:text="Password"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.053"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="0.205" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

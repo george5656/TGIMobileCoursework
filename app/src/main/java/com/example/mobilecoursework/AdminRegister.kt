@@ -21,18 +21,14 @@ fun back(view:View) {
 }
     fun create(view:View){
 
-        //var userName : String = findViewById<EditText>(R.id.etUserNameCreate).text.toString()
-        //var password : String = MessageDigest.getInstance(findViewById<EditText>(R.id.etPasswordCreate).text.toString(),"MD5").toString()
-        //var fullname : String = findViewById<EditText>(R.id.etFullNameCreate).text.toString()
-        //var phonenumber : String = findViewById<EditText>(R.id.etPhoneCreate).text.toString()
-        //var email : String = findViewById<EditText>(R.id.etEmailCreate).text.toString()
-        //var active: Int
-        var userName : String = "test"
-       var password : String = "test"//MessageDigest.getInstance("Test","SHA-256").toString()
-       var fullname : String = "sir random message"
-       var phonenumber : String = "000000000"
-       var email : String = "test"
-       var active: Int
+        var userName : String = findViewById<EditText>(R.id.etUserNameCreate).text.toString()
+       // var password : String = MessageDigest.getInstance(findViewById<EditText>(R.id.etPasswordCreate).text.toString(),"MD5").toString()
+        var password : String = findViewById<EditText>(R.id.etPasswordCreate).text.toString()
+        var fullname : String = findViewById<EditText>(R.id.etFullNameCreate).text.toString()
+        var phonenumber : String = findViewById<EditText>(R.id.etPhoneCreate).text.toString()
+        var email : String = findViewById<EditText>(R.id.etEmailCreate).text.toString()
+        var active: Int
+
 
         if (findViewById<RadioButton>(R.id.rbYesActiveCreate).isChecked()){
             active = 1

@@ -8,13 +8,14 @@
 
     <ListView
         android:id="@+id/lvOrders"
-        android:layout_width="406dp"
-        android:layout_height="442dp"
+        android:layout_width="408dp"
+        android:layout_height="440dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.173" />
+        app:layout_constraintVertical_bias="0.233" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/tbIncomingOrders"
