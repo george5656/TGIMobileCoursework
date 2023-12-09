@@ -37,7 +37,7 @@ fun back(view:View) {
         }
 
         var db: DatabaseHelper = DatabaseHelper(this)
-      var output:Int=  db.createAdmin(userName,password,fullname,phonenumber,email,active).toInt()
+        var output:Int=  db.createAdmin(userName,password,fullname,phonenumber,email,active).toInt()
         if(output!=-1) {
             var adminHomePage: Intent = Intent(this, AdminHomePage::class.java)
             startActivity(adminHomePage)

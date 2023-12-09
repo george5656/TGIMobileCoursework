@@ -47,6 +47,7 @@
         android:id="@+id/btnSendToSelected"
         android:layout_width="120dp"
         android:layout_height="70dp"
+        android:onClick="loadNotificationCreator"
         android:text="Send to chosen"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
