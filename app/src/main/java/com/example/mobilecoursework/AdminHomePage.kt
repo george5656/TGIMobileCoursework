@@ -27,5 +27,13 @@ class AdminHomePage : AppCompatActivity() {
         var settingsIntent:Intent = Intent(this, AdminAccountEdit::class.java)
         startActivity(settingsIntent)
     }
+    fun logout(view:View){
+        var logOutIntent:Intent = Intent(this, MainActivity::class.java)
+        startActivity(logOutIntent)
+    }
+    fun register(view:View){
+        var registerIntent:Intent = Intent(this, AdminRegister::class.java)
+        startActivity(registerIntent)
+    }
 
 }
