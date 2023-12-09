@@ -1,9 +1,11 @@
 package com.example.mobilecoursework.model
 
+import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import com.example.mobilecoursework.AdminAddCafeItem
 
 class DatabaseHelper(context:Context) :SQLiteOpenHelper(context,"cafeDatabase.db",null,1){
 
@@ -91,7 +93,17 @@ var db : SQLiteDatabase = this.writableDatabase
         return db.rawQuery(query, null)
     }
 
-
+    fun createAdmin(userName: String, password: String, fullName:String, phoneNo:String, email:String, active: Int ):Long{
+        var table : String = "Admin"
+        var cv = ContentValues()
+        cv.put("adminUserName",userName)
+        cv.put("adminPassword",password)
+        cv.put("adminFullName",fullName)
+        cv.put("adminPhoneNo",phoneNo)
+        cv.put("adminEmail",email)
+        cv.put("adminIsActive",active)
+        return db.insert(table,null,cv)
+    }
 }
 
 
