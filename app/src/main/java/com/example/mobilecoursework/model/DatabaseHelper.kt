@@ -104,6 +104,15 @@ var db : SQLiteDatabase = this.writableDatabase
         cv.put("adminIsActive",active)
         return db.insert(table,null,cv)
     }
+
+fun getMenuItems():Cursor{
+
+    var query : String = "select * from Product"
+    return db.rawQuery(query, null)
+}
+
+
+
 }
 
 
