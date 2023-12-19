@@ -51,6 +51,7 @@
         android:id="@+id/btnCafeMenuAdd"
         android:layout_width="171dp"
         android:layout_height="65dp"
+        android:onClick="addItemLoad"
         android:text="Add"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -96,6 +97,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <ListView
+        android:id="@+id/lvAdminCafeMenuItems"
         android:layout_width="409dp"
         android:layout_height="394dp"
         app:layout_constraintBottom_toBottomOf="parent"
