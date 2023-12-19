@@ -17,5 +17,76 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0"
+        app:navigationIcon="?attr/actionModeCloseDrawable"
+        app:title="Order status" />
+
+    <RadioGroup
+        android:layout_width="193dp"
+        android:layout_height="374dp"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.296">
+
+        <RadioButton
+            android:id="@+id/rbPreparing"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:button="?android:attr/listChoiceIndicatorSingle"
+            android:scrollY="10dp"
+            android:text="preparing"
+            android:textSize="34sp" />
+
+        <RadioButton
+            android:id="@+id/rbCollect"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="collect"
+            android:textSize="34sp" />
+
+        <RadioButton
+            android:id="@+id/rbCancel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="cancel"
+            android:textSize="34sp" />
+
+        <RadioButton
+            android:id="@+id/rbFinish"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="finish"
+            android:textSize="34sp" />
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/btnOrderstatusCancel"
+        android:layout_width="174dp"
+        android:layout_height="119dp"
+        android:text="Cancel"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.067"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.834" />
+
+    <Button
+        android:id="@+id/btnOrderstatusApply"
+        android:layout_width="174dp"
+        android:layout_height="119dp"
+        android:text="Apply"
+        android:textSize="24sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/btnOrderstatusCancel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.932"
+        app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
