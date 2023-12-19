@@ -23,55 +23,167 @@
         app:navigationIcon="?attr/homeAsUpIndicator"
         app:title="Menu Filter" />
 
-    <LinearLayout
-        android:layout_width="415dp"
-        android:layout_height="678dp"
-        android:orientation="vertical"
-        tools:layout_editor_absoluteX="-5dp"
-        tools:layout_editor_absoluteY="63dp">
+    <RadioGroup
+        android:id="@+id/radioGroup4"
+        android:layout_width="215dp"
+        android:layout_height="148dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.106">
 
-        <EditText
-            android:id="@+id/editTextNumberDecimal"
+        <RadioButton
+            android:id="@+id/rbRemoveAvailable"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="numberDecimal" />
+            android:layout_marginTop="20dp"
+            android:text="Available"
+            android:textSize="24sp" />
 
-        <EditText
-            android:id="@+id/editTextNumberDecimal2"
+        <RadioButton
+            android:id="@+id/rbRemoveNotAvailable"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="numberDecimal" />
+            android:layout_marginTop="20dp"
+            android:text="Not available"
+            android:textSize="24sp" />
+    </RadioGroup>
 
-        <CheckBox
-            android:id="@+id/checkBox"
+    <RadioGroup
+        android:id="@+id/radioGroup3"
+        android:layout_width="210dp"
+        android:layout_height="105dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.98"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup4">
+
+        <RadioButton
+            android:id="@+id/rbRemoveNoImage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="CheckBox" />
+            android:text="No Image"
+            android:textSize="24sp" />
 
-        <CheckBox
-            android:id="@+id/checkBox2"
+        <RadioButton
+            android:id="@+id/reRemoveHasImage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="CheckBox" />
+            android:layout_marginTop="20dp"
+            android:text="Has image"
+            android:textSize="24sp" />
+    </RadioGroup>
 
-        <CheckBox
-            android:id="@+id/checkBox3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="CheckBox" />
+    <Button
+        android:id="@+id/btnMenuFilterCancel"
+        android:layout_width="138dp"
+        android:layout_height="70dp"
+        android:text="Cancel"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.058"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.975" />
 
-        <CheckBox
-            android:id="@+id/checkBox4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="CheckBox" />
+    <Button
+        android:id="@+id/btnMenuFilterApply"
+        android:layout_width="138dp"
+        android:layout_height="70dp"
+        android:text="Apply"
+        android:textSize="24sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/btnMenuFilterCancel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.941"
+        app:layout_constraintStart_toStartOf="parent" />
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="TextView" />
-    </LinearLayout>
+    <EditText
+        android:id="@+id/etMaxPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.94"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup3" />
+
+    <EditText
+        android:id="@+id/etMinPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.94"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etMaxPrice" />
+
+    <TextView
+        android:id="@+id/txtMenuFilterError"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Error"
+        android:textSize="24sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.876" />
+
+    <TextView
+        android:id="@+id/txtItemAvailble"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Item stock"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.044"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.175" />
+
+    <TextView
+        android:id="@+id/txtItemAvailble2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Item image"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.044"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.409" />
+
+    <TextView
+        android:id="@+id/txtMinPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Min price"
+        android:textSize="24sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/etMinPrice"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.054"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/txtMaxPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Max price"
+        android:textSize="24sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/etMaxPrice"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.054"
+        app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

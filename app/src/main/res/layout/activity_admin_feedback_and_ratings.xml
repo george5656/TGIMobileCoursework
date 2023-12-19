@@ -7,7 +7,7 @@
     tools:context=".AdminFeedbackAndRatings">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar4"
+        android:id="@+id/tbFeedback"
         android:layout_width="409dp"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
@@ -21,4 +21,27 @@
         app:layout_constraintVertical_bias="0.002"
         app:navigationIcon="?attr/actionModeCloseDrawable"
         app:title="Feedback" />
+
+    <ListView
+        android:id="@+id/lvFeedback"
+        android:layout_width="409dp"
+        android:layout_height="542dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.349" />
+
+    <Button
+        android:id="@+id/btnFeedbackFilter"
+        android:layout_width="141dp"
+        android:layout_height="69dp"
+        android:text="Filter"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.975" />
 </androidx.constraintlayout.widget.ConstraintLayout>
