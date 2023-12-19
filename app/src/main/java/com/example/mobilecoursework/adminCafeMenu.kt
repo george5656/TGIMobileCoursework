@@ -12,7 +12,7 @@ import com.example.mobilecoursework.model.DatabaseHelper
 class adminCafeMenu : AppCompatActivity() {
 
     var db = DatabaseHelper(this)
-    var adapter = AdminMenuItemAdapter(this, getCafeItems())
+    var adapter = AdminMenuItemAdapter(this, arrayOf(CafeItem("Test",10.100,ByteArray(1),true)))
     var lv = findViewById<ListView>(R.id.lvAdminCafeMenuItems)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,9 +40,9 @@ lv.adapter = adapter
                 }else{
                     inStock= false
                 }
-                item = CafeItem(cusrsor.getString(1),cusrsor.getFloat(2),cusrsor.getBlob(3),inStock)
+            //    item = CafeItem(cusrsor.getString(1),cusrsor.getFloat(2),cusrsor.getBlob(3),inStock)
             menuItem[counter] = item
-                counter = counter +1
+                counter = counter + 1
             }while(cusrsor.moveToNext())
 
 

@@ -107,7 +107,7 @@ var db : SQLiteDatabase = this.writableDatabase
 
 fun getMenuItems():Cursor{
 
-    var query : String = "select * from Product"
+    var query : String = "select * from \"Product\""
     return db.rawQuery(query, null)
 }
 

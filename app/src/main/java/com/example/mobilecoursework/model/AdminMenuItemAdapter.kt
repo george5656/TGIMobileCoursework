@@ -9,13 +9,13 @@ import android.widget.TextView
 import com.example.mobilecoursework.R
 
 
-class AdminMenuItemAdapter(var context : Context, var items:Array<CafeItem>) : BaseAdapter()  {
+class AdminMenuItemAdapter(var context : Context, var items:Array<CafeItem?>) : BaseAdapter()  {
 
     override fun getCount(): Int {
         return items.size
     }
 
-    override fun getItem(p0: Int): CafeItem {
+    override fun getItem(p0: Int): CafeItem? {
         return items[p0]
     }
 
@@ -33,7 +33,7 @@ class AdminMenuItemAdapter(var context : Context, var items:Array<CafeItem>) : B
             var price = view.findViewById<TextView>(R.id.txtProdPrice)
             var availble = view.findViewById<TextView>(R.id.txtProdAvailable)
             var image = view.findViewById<TextView>(R.id.ivProduct)
-                name.text = getItem(position).proName
+                name.text = getItem(position)?.proName
         }
 
         return view!!
