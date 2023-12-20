@@ -15,6 +15,10 @@ class AdminHomePage : AppCompatActivity() {
         var menuIntent:Intent = Intent(this,adminCafeMenu::class.java)
         startActivity(menuIntent)
     }
+    fun feedbackLoad(view: View){
+        var feedbackIntent:Intent = Intent(this,AdminFeedbackAndRatings::class.java)
+        startActivity(feedbackIntent)
+    }
     fun incomingOrderLoad(view: View){
         var orderIntent:Intent = Intent(this,AdminIncomingOrders::class.java)
         startActivity(orderIntent)

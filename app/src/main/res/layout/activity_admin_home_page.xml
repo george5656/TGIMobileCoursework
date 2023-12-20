@@ -36,7 +36,7 @@
         <Button
             android:id="@+id/btnMenuItems"
             android:layout_width="match_parent"
-            android:layout_height="109dp"
+            android:layout_height="90dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="20dp"
             android:onClick="menuLoad"
@@ -46,25 +46,34 @@
         <Button
             android:id="@+id/btnIncomingOrders"
             android:layout_width="match_parent"
-            android:layout_height="109dp"
+            android:layout_height="90dp"
             android:layout_marginBottom="20dp"
             android:onClick="incomingOrderLoad"
             android:text="incoming orders"
             android:textSize="24sp" />
 
         <Button
-            android:id="@+id/btnSendNotfications"
+            android:id="@+id/btnFeedback"
             android:layout_width="match_parent"
-            android:layout_height="109dp"
+            android:layout_height="90dp"
             android:layout_marginBottom="20dp"
             android:onClick="sendNotifcationLoad"
             android:text="Send Notifications"
             android:textSize="24sp" />
 
         <Button
+            android:id="@+id/btnFeedback"
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:layout_marginBottom="20dp"
+            android:onClick="feedbackLoad"
+            android:text="Feedback"
+            android:textSize="24sp" />
+
+        <Button
             android:id="@+id/btnAccountSetting"
             android:layout_width="match_parent"
-            android:layout_height="109dp"
+            android:layout_height="90dp"
             android:layout_marginBottom="20sp"
             android:onClick="accountSettingLoad"
             android:text="Account Settings"
@@ -73,7 +82,7 @@
         <Button
             android:id="@+id/btnCreateAccount"
             android:layout_width="match_parent"
-            android:layout_height="109dp"
+            android:layout_height="90dp"
             android:layout_marginBottom="20sp"
             android:onClick="register"
             android:text="Create Account"
