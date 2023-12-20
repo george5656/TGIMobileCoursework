@@ -23,6 +23,7 @@
         app:title="notfication" />
 
     <ListView
+        android:id="@+id/lvUsername"
         android:layout_width="413dp"
         android:layout_height="386dp"
         app:layout_constraintBottom_toBottomOf="parent"

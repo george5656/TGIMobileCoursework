@@ -12,7 +12,7 @@ import com.example.mobilecoursework.model.DatabaseHelper
 class adminCafeMenu : AppCompatActivity() {
 
     var db = DatabaseHelper(this)
-    var adapter = AdminMenuItemAdapter(this, arrayOf(CafeItem("Test",10.100,ByteArray(1),true)))
+    var adapter = AdminMenuItemAdapter(this, arrayOf(CafeItem("Test",10.100f,ByteArray(1),true)))
     var lv = findViewById<ListView>(R.id.lvAdminCafeMenuItems)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

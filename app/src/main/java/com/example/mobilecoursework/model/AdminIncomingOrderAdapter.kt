@@ -11,7 +11,6 @@ import com.example.mobilecoursework.R
 
 class AdminIncomingOrderAdapter(private var context : Context, private var items: Array<Order>):BaseAdapter() {
 
-    private var inflater: LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
     override fun getCount(): Int {
        return items.size
@@ -28,7 +27,7 @@ class AdminIncomingOrderAdapter(private var context : Context, private var items
 
     override fun getView(p0: Int, p1: View?, p2: ViewGroup?): View {
 
-       var view = inflater.inflate(R.layout.admin_incoming_orders_list_item,p2,false)
+       var view = LayoutInflater.from(context).inflate(R.layout.admin_incoming_orders_list_item,p2,false)
         var username = view.findViewById<TextView>(R.id.txtOrderListItemName)
         var date = view.findViewById<TextView>(R.id.txtOrderListItemDate)
         var time = view.findViewById<TextView>(R.id.txtOrderListItemTime)

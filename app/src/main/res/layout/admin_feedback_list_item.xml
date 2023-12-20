@@ -9,15 +9,24 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/txtFeedbackListItemUserName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:text="TextView" />
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/txtFeedbackListItemFeedback"
+            android:layout_width="match_parent"
+            android:layout_height="58dp"
+            android:gravity="center|top"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/txtFeedbackListItemRating"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:text="TextView" />
 
     </LinearLayout>
