@@ -10,12 +10,14 @@
         android:id="@+id/lvOrders"
         android:layout_width="408dp"
         android:layout_height="440dp"
+        android:choiceMode="singleChoice"
+        android:clickable="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.666"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.233" />
+        app:layout_constraintVertical_bias="0.23" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/tbIncomingOrders"
@@ -30,7 +32,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.001"
+        app:layout_constraintVertical_bias="0.0"
         app:navigationIcon="?attr/homeAsUpIndicator"
         app:title="IncomingOrders" />
 
@@ -52,6 +54,7 @@
         android:id="@+id/btnOrderMessage"
         android:layout_width="114dp"
         android:layout_height="61dp"
+        android:onClick="message"
         android:text="Message"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"

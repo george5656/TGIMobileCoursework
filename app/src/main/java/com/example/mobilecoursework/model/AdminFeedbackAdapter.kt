@@ -23,5 +23,6 @@ class AdminFeedbackAdapter(var context : Context): BaseAdapter() {
     override fun getView(p0: Int, p1: View?, p2: ViewGroup?): View {
 
        var view = LayoutInflater.from(context).inflate(R.layout.admin_cafe_menu_list_item,p2,false)
+    return view
     }
 }

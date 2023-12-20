@@ -20,7 +20,7 @@ class AdminMenuItemAdapter(var context : Context, var items:Array<CafeItem?>) : 
     }
 
     override fun getItemId(p0: Int): Long {
-        TODO("Not yet implemented")
+        return p0.toLong()
     }
 
     override fun getView(position: Int, view: View?, parent: ViewGroup?): View {
