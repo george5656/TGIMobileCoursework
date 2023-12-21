@@ -4,33 +4,48 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.view.ViewGroup
+
 import android.widget.AdapterView
+import android.widget.EditText
+import android.widget.ImageView
 import android.widget.ListView
+import android.widget.TextView
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.view.isVisible
+
 import com.example.mobilecoursework.model.AdminMenuItemAdapter
 import com.example.mobilecoursework.model.CafeItem
 import com.example.mobilecoursework.model.DatabaseHelper
 
 class adminCafeMenu : AppCompatActivity() {
 
-    var selectedItem: Any? = null
+    var x = test()
 
-   var x = ArrayList<CafeItem>()
-
-
+    var selectedItem: CafeItem? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_admin_cafe_menu)
 
-        x.add(CafeItem("test",10.00f,ByteArray(1),true))
 
         var adapter = AdminMenuItemAdapter(this, getCafeItems() )
         var lv = findViewById<ListView>(R.id.lvAdminCafeMenuItems)
         lv.adapter = adapter
 
-        var onclick = AdapterView.OnItemClickListener { adapterView, view, i, l -> selectedItem = lv.getItemAtPosition(i) }
+        var onclick = AdapterView.OnItemClickListener { adapterView, view, i, l -> selectedItem = lv.getItemAtPosition(i) as? CafeItem;
+
+        }
+
         lv.setOnItemClickListener(onclick)
 
 
+
+    }
+    class test : AdapterView.OnItemClickListener{
+        public
+        override fun onItemClick(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+
+        }
 
     }
     fun addItemLoad(view: View){
@@ -75,16 +90,32 @@ class adminCafeMenu : AppCompatActivity() {
         startActivity(editItemIntent)
     }
     fun editLoad(view:View){
-      if(selectedItem == null){
 
+        var error = findViewById<TextView>(R.id.txtCafeMenuError)
+      if(selectedItem == null){
+          error.isVisible = true
+          error.text = "none selected"
       }else {
 
+
           var editItemIntent: Intent = Intent(this, AdminAddCafeItem::class.java)
+          editItemIntent.putExtra("type","edit")
+
+
+         editItemIntent.putExtra("menuItem", selectedItem!!.proName)
           startActivity(editItemIntent)
+
+         error.isVisible = false
+
+        findViewById<EditText>(R.id.etItem).text.clear()
+        findViewById<EditText>(R.id.etItem).append(selectedItem?.proName)
       }
       }
     fun filterLoad(view:View){
         var filterItemIntent: Intent = Intent(this, AdminNotificationFilter::class.java)
        startActivity(filterItemIntent)
     }
+
+
+
 }

@@ -110,7 +110,10 @@ fun getMenuItems():Cursor{
     var query : String = "select * from \"Product\""
     return db.rawQuery(query, null)
 }
-
+fun getMenuItemThatMatchName(name:String):Cursor{
+    var query : String = "select * from \"Product\" where prodName = \"" + name  + "\""
+return db.rawQuery(query, null)
+}
 
 
 }
