@@ -11,7 +11,9 @@ import android.widget.TextView
 import com.example.mobilecoursework.R
 
 
+
 class AdminMenuItemAdapter(var context : Context, var items:ArrayList<CafeItem>) : BaseAdapter()  {
+
 
     override fun getCount(): Int {
         return items.size
@@ -34,6 +36,7 @@ class AdminMenuItemAdapter(var context : Context, var items:ArrayList<CafeItem>)
             var name = view.findViewById<TextView>(R.id.txtProdName)
             var price = view.findViewById<TextView>(R.id.txtProdPrice)
             var availble = view.findViewById<TextView>(R.id.txtProdAvailable)
+
             var image = view.findViewById<ImageView>(R.id.ivProduct)
 
         name.text = "name " + items[position].proName
@@ -45,6 +48,7 @@ class AdminMenuItemAdapter(var context : Context, var items:ArrayList<CafeItem>)
         byte array to decoded
          */
         image.setImageBitmap(BitmapFactory.decodeByteArray(items[position].prodImage,0,items[position].prodImage.size))
+
 
 
 

@@ -22,6 +22,7 @@
         app:navigationIcon="?attr/actionModeCloseDrawable"
         app:title="notfication" />
 
+
     <TextView
         android:id="@+id/txtNotificatonError"
         android:layout_width="wrap_content"

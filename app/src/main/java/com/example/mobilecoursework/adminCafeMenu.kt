@@ -12,6 +12,7 @@ import com.example.mobilecoursework.model.DatabaseHelper
 class adminCafeMenu : AppCompatActivity() {
 
 
+
    var x = ArrayList<CafeItem>()
 
 
