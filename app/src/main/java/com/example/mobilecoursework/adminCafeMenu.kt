@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.AdapterView
 import android.widget.ListView
 import com.example.mobilecoursework.model.AdminMenuItemAdapter
 import com.example.mobilecoursework.model.CafeItem
@@ -11,10 +12,9 @@ import com.example.mobilecoursework.model.DatabaseHelper
 
 class adminCafeMenu : AppCompatActivity() {
 
-
+    var selectedItem: Any? = null
 
    var x = ArrayList<CafeItem>()
-
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,12 +27,19 @@ class adminCafeMenu : AppCompatActivity() {
         var lv = findViewById<ListView>(R.id.lvAdminCafeMenuItems)
         lv.adapter = adapter
 
+        var onclick = AdapterView.OnItemClickListener { adapterView, view, i, l -> selectedItem = lv.getItemAtPosition(i) }
+        lv.setOnItemClickListener(onclick)
+
 
 
     }
     fun addItemLoad(view: View){
         var addItemIntent: Intent = Intent(this, AdminAddCafeItem::class.java)
         startActivity(addItemIntent)
+    }
+    fun backButton(view:View){
+        var homeIntent: Intent = Intent(this, AdminHomePage::class.java)
+        startActivity(homeIntent)
     }
 
    fun getCafeItems(): ArrayList<CafeItem>{
@@ -60,4 +67,24 @@ class adminCafeMenu : AppCompatActivity() {
     return menuItem
     }
 
+
+
+    fun deleteButton(view:View){
+        //shows red as refactoed the name so  for somereason doesn't work unless original name is used
+        var editItemIntent: Intent = Intent(this, AdminDeleteCOnfirmation::class.java)
+        startActivity(editItemIntent)
+    }
+    fun editLoad(view:View){
+      if(selectedItem == null){
+
+      }else {
+
+          var editItemIntent: Intent = Intent(this, AdminAddCafeItem::class.java)
+          startActivity(editItemIntent)
+      }
+      }
+    fun filterLoad(view:View){
+        var filterItemIntent: Intent = Intent(this, AdminNotificationFilter::class.java)
+       startActivity(filterItemIntent)
+    }
 }

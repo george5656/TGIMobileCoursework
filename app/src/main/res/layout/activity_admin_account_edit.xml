@@ -13,6 +13,7 @@
         android:background="?attr/colorPrimary"
         android:contextClickable="true"
         android:minHeight="?attr/actionBarSize"
+        android:onClick="backButton"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

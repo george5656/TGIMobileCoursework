@@ -40,8 +40,14 @@ class AdminIncomingOrders : AppCompatActivity() {
         startActivity((backPage))
     }
 
-
-
+    fun  filterButton(view: View){
+        var filterPage : Intent = Intent(this, AdminOrderFilter::class.java)
+        startActivity((filterPage))
+    }
+    fun orderStatus(view:View){
+        var orderStatusPage : Intent = Intent(this, AdminEditOrderStatus::class.java)
+        startActivity((orderStatusPage))
+    }
 
     // used as the eventhandler, for when
     fun message(view:View){

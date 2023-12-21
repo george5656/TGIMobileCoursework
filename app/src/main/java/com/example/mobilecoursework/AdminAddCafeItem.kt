@@ -21,5 +21,8 @@ class AdminAddCafeItem : AppCompatActivity() {
       var results : Uri? = intent.clipData?.getItemAt(0)?.uri
 
     }
-
+    fun backButton(view:View){
+        var homeIntent: Intent = Intent(this, AdminHomePage::class.java)
+        startActivity(homeIntent)
+    }
 }

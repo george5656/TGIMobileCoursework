@@ -82,16 +82,18 @@
         android:id="@+id/btnOrderStatus"
         android:layout_width="114dp"
         android:layout_height="61dp"
+        android:onClick="orderStatus"
         android:text="order"
         app:layout_constraintBaseline_toBaselineOf="@+id/btnOrderMessage"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toStartOf="@+id/btnFilterOrders"
+        app:layout_constraintHorizontal_bias="0.473"
+        app:layout_constraintStart_toEndOf="@+id/btnOrderMessage" />
 
     <Button
         android:id="@+id/btnFilterOrders"
         android:layout_width="114dp"
         android:layout_height="61dp"
+        android:onClick="filterButton"
         android:text="filter"
         app:layout_constraintBaseline_toBaselineOf="@+id/btnOrderStatus"
         app:layout_constraintEnd_toEndOf="parent"

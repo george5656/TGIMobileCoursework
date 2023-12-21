@@ -24,4 +24,17 @@ class AdminSendNotification : AppCompatActivity() {
         var notifcationMakerLoad: Intent = Intent(this, AdminSendPromotions::class.java)
         startActivity(notifcationMakerLoad)
     }
+
+    fun sendToAllButton(view:View){
+        var notifcationMakerLoad: Intent = Intent(this, AdminSendPromotions::class.java)
+        startActivity(notifcationMakerLoad)
+    }
+    fun backButton(view:View){
+        var homeIntent: Intent = Intent(this, AdminHomePage::class.java)
+        startActivity(homeIntent)
+    }
+    fun filterButton(view:View){
+        var filterLoad: Intent = Intent(this, AdminSendPromotions::class.java)
+        startActivity(filterLoad)
+    }
 }
