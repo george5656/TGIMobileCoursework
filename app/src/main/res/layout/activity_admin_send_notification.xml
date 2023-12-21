@@ -22,15 +22,6 @@
         app:navigationIcon="?attr/actionModeCloseDrawable"
         app:title="notfication" />
 
-    <ListView
-        android:id="@+id/lvUsername"
-        android:layout_width="413dp"
-        android:layout_height="386dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.185" />
 
     <TextView
         android:id="@+id/txtNotificatonError"
@@ -108,4 +99,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.865"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <ListView
+        android:id="@+id/lvUserUsernames"
+        android:layout_width="409dp"
+        android:layout_height="422dp"
+        android:layout_marginTop="48dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.051" />
 </androidx.constraintlayout.widget.ConstraintLayout>

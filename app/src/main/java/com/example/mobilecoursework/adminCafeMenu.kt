@@ -11,14 +11,22 @@ import com.example.mobilecoursework.model.DatabaseHelper
 
 class adminCafeMenu : AppCompatActivity() {
 
-    var db = DatabaseHelper(this)
-    var adapter = AdminMenuItemAdapter(this, arrayOf(CafeItem("Test",10.100f,ByteArray(1),true)))
-    var lv = findViewById<ListView>(R.id.lvAdminCafeMenuItems)
+
+
+   var x = ArrayList<CafeItem>()
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_admin_cafe_menu)
 
-lv.adapter = adapter
+        x.add(CafeItem("test",10.00f,ByteArray(1),true))
+
+        var adapter = AdminMenuItemAdapter(this, getCafeItems() )
+        var lv = findViewById<ListView>(R.id.lvAdminCafeMenuItems)
+        lv.adapter = adapter
+
 
 
     }
@@ -27,10 +35,11 @@ lv.adapter = adapter
         startActivity(addItemIntent)
     }
 
-    fun getCafeItems(): Array<CafeItem?>{
+   fun getCafeItems(): ArrayList<CafeItem>{
+       var db: DatabaseHelper = DatabaseHelper(this)
         var cusrsor = db.getMenuItems()
-        var menuItem = arrayOfNulls<CafeItem>(cusrsor.count)
-        var item: CafeItem? = null
+        var menuItem = ArrayList<CafeItem>()
+        var item: CafeItem
         var inStock: Boolean = false
         var counter = 0
         if(cusrsor.moveToFirst()){
@@ -40,13 +49,14 @@ lv.adapter = adapter
                 }else{
                     inStock= false
                 }
-            //    item = CafeItem(cusrsor.getString(1),cusrsor.getFloat(2),cusrsor.getBlob(3),inStock)
-            menuItem[counter] = item
+                item = CafeItem(cusrsor.getString(1),cusrsor.getFloat(2),cusrsor.getBlob(3),inStock)
+            menuItem.add(item)
                 counter = counter + 1
             }while(cusrsor.moveToNext())
 
 
         }
+
     return menuItem
     }
 
