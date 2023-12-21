@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:visibility="visible"
     tools:context=".adminCafeMenu">
 
     <Button
@@ -102,8 +103,8 @@
 
     <ListView
         android:id="@+id/lvAdminCafeMenuItems"
-        android:layout_width="409dp"
-        android:layout_height="394dp"
+        android:layout_width="406dp"
+        android:layout_height="337dp"
         android:choiceMode="singleChoice"
         android:clickable="true"
         android:listSelector="@android:drawable/alert_light_frame"
@@ -112,5 +113,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.189" />
+
+    <TextView
+        android:id="@+id/txtCafeMenuError"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Error"
+        android:textSize="24sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lvAdminCafeMenuItems"
+        app:layout_constraintVertical_bias="0.063" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

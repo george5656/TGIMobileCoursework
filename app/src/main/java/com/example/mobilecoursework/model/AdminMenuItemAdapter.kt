@@ -19,8 +19,8 @@ class AdminMenuItemAdapter(var context : Context, var items:ArrayList<CafeItem>)
         return items.size
     }
 
-    override fun getItem(p0: Int): Any {
-        return p0
+    override fun getItem(p0: Int): CafeItem {
+        return items[p0]
     }
 
     override fun getItemId(p0: Int): Long {
