@@ -118,7 +118,9 @@ fun getAdminDetails(id:String?):Cursor{
     var query : String = "select * from \"Admin\" where adminId = \"" + id + "\""
     return db.rawQuery(query, null)
 }
-
+fun deleteCafeMenuItem(id:String?){
+    db.delete("\"Product\"","productId = " + id ,null)
+}
 }
 
 

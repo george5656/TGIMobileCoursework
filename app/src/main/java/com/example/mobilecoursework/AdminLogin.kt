@@ -34,7 +34,7 @@ class AdminLogin : AppCompatActivity() {
 
                        //as sending to home page will need another one to send message to the activity want to use
                         var loginIntent: Intent = Intent(this, AdminHomePage::class.java).apply{
-                            putExtra("id",results.getString(0).toString())
+                            putExtra("logedInId",results.getString(0).toString())
                         }
 
                         startActivity(loginIntent)

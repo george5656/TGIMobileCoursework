@@ -14,7 +14,7 @@ class AdminAccountEdit : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_admin_account_edit)
 
-        var accountid = intent.getStringExtra("id")
+        var accountid = intent.getStringExtra("adminId")
     var db = DatabaseHelper(this)
         var details = db.getAdminDetails(accountid)
         var userName = findViewById<EditText>(R.id.etuserNameEdit)

@@ -23,6 +23,7 @@
         android:id="@+id/btnConfirm"
         android:layout_width="149dp"
         android:layout_height="76dp"
+        android:onClick="confirmButton"
         android:text="confrim"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"

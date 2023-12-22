@@ -16,6 +16,11 @@ class AdminAddCafeItem : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_admin_add_cafe_item)
+    }
+
+    override fun onStart() {
+        super.onStart()
+
         var db = DatabaseHelper(this)
       var typeCall = intent.getStringExtra("type")
 
@@ -33,7 +38,7 @@ class AdminAddCafeItem : AppCompatActivity() {
             tOrF= false
         }
 
-        var data = CafeItem(result.getString(1), result.getFloat(2),result.getBlob(3), tOrF)
+        var data = CafeItem(result.getInt(0),result.getString(1), result.getFloat(2),result.getBlob(3), tOrF)
         populateWidgets(data)
   }
 
