@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:visibility="visible"
     tools:context=".AdminRegister">
 
     <androidx.appcompat.widget.Toolbar
@@ -42,8 +43,7 @@
             android:layout_marginTop="20dp"
             android:layout_marginBottom="33dp"
             android:ems="10"
-            android:inputType="text"
-            android:text="Name" />
+            android:inputType="text" />
 
         <EditText
             android:id="@+id/etPasswordCreate"
@@ -59,8 +59,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="33dp"
             android:ems="10"
-            android:inputType="text"
-            android:text="Name" />
+            android:inputType="text" />
 
         <EditText
             android:id="@+id/etPhoneCreate"
@@ -116,7 +115,7 @@
         android:id="@+id/btnRegisterCancel"
         android:layout_width="153dp"
         android:layout_height="69dp"
-        android:onClick="create"
+        android:onClick="back"
         android:text="Cancel"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -203,5 +202,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/linearLayout"
         app:layout_constraintVertical_bias="0.205" />
+
+    <TextView
+        android:id="@+id/txtRegisterErrorMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Error"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.859" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

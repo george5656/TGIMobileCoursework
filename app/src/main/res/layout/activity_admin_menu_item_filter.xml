@@ -69,7 +69,7 @@
             android:textSize="24sp" />
 
         <RadioButton
-            android:id="@+id/reRemoveHasImage"
+            android:id="@+id/rbRemoveHasImage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -94,6 +94,7 @@
         android:id="@+id/btnMenuFilterApply"
         android:layout_width="138dp"
         android:layout_height="70dp"
+        android:onClick="applyButton"
         android:text="Apply"
         android:textSize="24sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/btnMenuFilterCancel"
