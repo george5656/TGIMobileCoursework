@@ -5,6 +5,7 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.AlarmClock.EXTRA_MESSAGE
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
@@ -30,7 +31,12 @@ class AdminLogin : AppCompatActivity() {
             if (results.moveToFirst()) {
                 do {
                     if (password.equals(results.getString(5))) {
-                        var loginIntent: Intent = Intent(this, AdminHomePage::class.java)
+
+                       //as sending to home page will need another one to send message to the activity want to use
+                        var loginIntent: Intent = Intent(this, AdminHomePage::class.java).apply{
+                            putExtra("id",results.getString(0).toString())
+                        }
+
                         startActivity(loginIntent)
                     }
                 } while (results.moveToNext())

@@ -29,6 +29,8 @@ class AdminHomePage : AppCompatActivity() {
     }
     fun accountSettingLoad(view: View){
         var settingsIntent:Intent = Intent(this, AdminAccountEdit::class.java)
+        // as intent aren't super global i am just forwaring the message here
+        settingsIntent.putExtra("id",intent.getStringExtra("id").toString())
         startActivity(settingsIntent)
     }
     fun logout(view:View){

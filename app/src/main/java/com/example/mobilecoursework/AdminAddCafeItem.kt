@@ -20,6 +20,7 @@ class AdminAddCafeItem : AppCompatActivity() {
       var typeCall = intent.getStringExtra("type")
 
     if(typeCall == "edit") {
+
         var name = intent.getStringExtra("menuItem")
       var result =  db.getMenuItemThatMatchName(name!!);
     result.moveToFirst();
