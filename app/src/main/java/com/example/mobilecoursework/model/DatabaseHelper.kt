@@ -114,6 +114,10 @@ fun getMenuItemThatMatchName(name:String):Cursor{
     var query : String = "select * from \"Product\" where prodName = \"" + name  + "\""
 return db.rawQuery(query, null)
 }
+    fun getMenuItemThatMatchPassedInWhere(where:String):Cursor{
+        var query : String = "select * from \"Product\" where $where"
+        return db.rawQuery(query, null)
+    }
 fun getAdminDetails(id:String?):Cursor{
     var query : String = "select * from \"Admin\" where adminId = \"" + id + "\""
     return db.rawQuery(query, null)

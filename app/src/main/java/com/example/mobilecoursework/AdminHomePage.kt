@@ -6,13 +6,20 @@ import android.os.Bundle
 import android.view.View
 
 class AdminHomePage : AppCompatActivity() {
+    var accountId : String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_admin_home_page)
+        accountId = intent.getStringExtra("logedInId").toString()
     }
 
+    override fun onStart() {
+        super.onStart()
+
+    }
     fun menuLoad(view: View){
         var menuIntent:Intent = Intent(this,adminCafeMenu::class.java)
+
         startActivity(menuIntent)
     }
     fun feedbackLoad(view: View){
@@ -30,7 +37,7 @@ class AdminHomePage : AppCompatActivity() {
     fun accountSettingLoad(view: View){
         var settingsIntent:Intent = Intent(this, AdminAccountEdit::class.java)
         // as intent aren't super global i am just forwaring the message here
-        settingsIntent.putExtra("adminId",intent.getStringExtra("logedInId").toString())
+        settingsIntent.putExtra("adminId",accountId)
         startActivity(settingsIntent)
     }
     fun logout(view:View){

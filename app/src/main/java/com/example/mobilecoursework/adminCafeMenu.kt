@@ -1,6 +1,7 @@
 package com.example.mobilecoursework
 
 import android.content.Intent
+import android.database.Cursor
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -21,7 +22,6 @@ import com.example.mobilecoursework.model.DatabaseHelper
 class adminCafeMenu : AppCompatActivity() {
 
 
-
     var selectedItem: CafeItem? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +30,41 @@ class adminCafeMenu : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
 
-        var adapter = AdminMenuItemAdapter(this, getCafeItems() )
+
+
+        var db: DatabaseHelper = DatabaseHelper(this)
+
+        var cusrsor = db.getMenuItems()
+    var whereClause = ""
+        var whereClauseUse =""
+        var maxPrice = intent.getStringExtra("maxPrice")
+        var minPrice = intent.getStringExtra("minPrice")
+        var inStock = intent.getStringExtra("inStock")
+        var hasImage = intent.getStringExtra("image")
+        if(intent.getStringExtra("from")=="filter"){
+        if(maxPrice!=""){
+            whereClause = whereClause + "prodPrice <= " + maxPrice + " AND "
+        }
+            if(minPrice!=""){
+                whereClause = whereClause + "prodPrice >= " + minPrice + " AND "
+           }
+
+            if(inStock!=""){
+                whereClause = whereClause + "prodAvailable == " + inStock + " AND "
+            }
+            if(hasImage!=""){
+                if(hasImage=="false"){
+                    whereClause = whereClause + "prodImage == " + "null" + " AND "
+                }
+
+            }
+        if(whereClause!="") {
+            whereClauseUse = whereClause.subSequence(0, whereClause.length-4).toString() + ";"
+        }
+            cusrsor = db.getMenuItemThatMatchPassedInWhere(whereClauseUse)
+    }
+        var data : ArrayList<CafeItem> = getCafeItems(cusrsor)
+    var adapter = AdminMenuItemAdapter(this,data)
         var lv = findViewById<ListView>(R.id.lvAdminCafeMenuItems)
         lv.adapter = adapter
 
@@ -55,9 +89,8 @@ class adminCafeMenu : AppCompatActivity() {
         startActivity(homeIntent)
     }
 
-   fun getCafeItems(): ArrayList<CafeItem>{
-       var db: DatabaseHelper = DatabaseHelper(this)
-        var cusrsor = db.getMenuItems()
+   fun getCafeItems(cusrsor: Cursor): ArrayList<CafeItem>{
+
         var menuItem = ArrayList<CafeItem>()
         var item: CafeItem
         var inStock: Boolean = false
@@ -118,10 +151,23 @@ class adminCafeMenu : AppCompatActivity() {
       }
       }
     fun filterLoad(view:View){
-        var filterItemIntent: Intent = Intent(this, AdminNotificationFilter::class.java)
+        var filterItemIntent: Intent = Intent(this, AdminMenuItemFilter::class.java)
        startActivity(filterItemIntent)
     }
 
+    fun  findButton(view:View){
+        var db: DatabaseHelper = DatabaseHelper(this)
+        var menuItemName = findViewById<EditText>(R.id.etItem).text.toString()
+        if(menuItemName!="") {
+            var whereClauseUse = "prodName == \"" + menuItemName+"\""
+            var cusrsor = db.getMenuItemThatMatchPassedInWhere(whereClauseUse)
+            var data : ArrayList<CafeItem> = getCafeItems(cusrsor)
+            var adapter = AdminMenuItemAdapter(this,data)
+            var lv = findViewById<ListView>(R.id.lvAdminCafeMenuItems)
+            lv.adapter = adapter
 
+        }
+
+    }
 
 }

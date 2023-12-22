@@ -1,11 +1,13 @@
 package com.example.mobilecoursework
 
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.RadioButton
 import com.example.mobilecoursework.model.CafeItem
 import com.example.mobilecoursework.model.DatabaseHelper
@@ -60,6 +62,8 @@ class AdminAddCafeItem : AppCompatActivity() {
         var price = findViewById<EditText>(R.id.etPriceCafeItemAdd)
         var availableYes = findViewById<RadioButton>(R.id.rbCafeItemAddYes)
         var availableNo = findViewById<RadioButton>(R.id.rbCafeItemAddNo)
+        var image = findViewById<ImageView>(R.id.ivImageAddCafeItem)
+        image.setImageBitmap(BitmapFactory.decodeByteArray(data.prodImage,0,data.prodImage.size))
        var nameText = name.text
         var priceText = price.text
         //as is an editable object have to do the eextra loops
