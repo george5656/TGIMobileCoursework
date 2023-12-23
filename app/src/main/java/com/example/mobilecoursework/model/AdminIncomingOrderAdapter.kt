@@ -9,7 +9,7 @@ import android.widget.BaseAdapter
 import android.widget.TextView
 import com.example.mobilecoursework.R
 
-class AdminIncomingOrderAdapter(private var context : Context, private var items: Array<Order>):BaseAdapter() {
+class AdminIncomingOrderAdapter(private var context : Context, private var items: ArrayList<Order>):BaseAdapter() {
 
 
     override fun getCount(): Int {

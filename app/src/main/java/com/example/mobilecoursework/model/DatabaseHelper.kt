@@ -137,7 +137,10 @@ fun getFeedbackCustomerWhere(where:String):Cursor{
     var query : String = "select * from \"Feedback\", \"Purchase\" where " + where
     return db.rawQuery(query, null)
 }
-
+fun getOrders():Cursor {
+    var query: String = "select * from \"Purchase\""
+    return db.rawQuery(query, null)
+}
 }
 
 

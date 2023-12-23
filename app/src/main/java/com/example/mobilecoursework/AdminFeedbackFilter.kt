@@ -34,6 +34,10 @@ if(maxRating==""&&minRating==""&&beforeDate==""&&afterDate==""){
     startActivity(applyIntent)
 }
     }
+fun cancelButton(view:View){
+    var feedbackIntent:Intent = Intent(this,AdminFeedbackAndRatings::class.java)
+    startActivity(feedbackIntent)
+}
 
 
 }

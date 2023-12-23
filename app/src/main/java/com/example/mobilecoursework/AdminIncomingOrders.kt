@@ -1,14 +1,17 @@
 package com.example.mobilecoursework
 
 import android.content.Intent
+import android.database.Cursor
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.ContactsContract.Data
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ListView
 import android.widget.TextView
 import androidx.core.view.isVisible
 import com.example.mobilecoursework.model.AdminIncomingOrderAdapter
+import com.example.mobilecoursework.model.DatabaseHelper
 import com.example.mobilecoursework.model.Order
 
 class AdminIncomingOrders : AppCompatActivity() {
@@ -19,9 +22,15 @@ class AdminIncomingOrders : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_admin_incoming_orders)
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        var db = DatabaseHelper(this)
         var list = findViewById<ListView>(R.id.lvOrders)
 
-        var adapter = AdminIncomingOrderAdapter(this, arrayOf(Order("test1","test2","test3","test4"),Order("testa","testb","testc","testd")))
+        var adapter = AdminIncomingOrderAdapter(this,createData(db.getOrders()))
         list!!.adapter = adapter
 
 
@@ -31,10 +40,12 @@ class AdminIncomingOrders : AppCompatActivity() {
             event listener can take it as no first class functions.
 
          */
-        var onclick = AdapterView.OnItemClickListener { adapterView, view, i, l -> selectedItem = list.getItemAtPosition(i) }
+        var onclick = AdapterView.OnItemClickListener { adapterView, view, i, l ->
+            selectedItem = list.getItemAtPosition(i)
+        }
         list.setOnItemClickListener(onclick)
-    }
 
+    }
     fun backButton(view: View){
         var backPage : Intent = Intent(this, AdminHomePage::class.java)
         startActivity((backPage))
@@ -62,6 +73,19 @@ class AdminIncomingOrders : AppCompatActivity() {
         }
 
 
+    }
+
+    fun createData(cursor:Cursor):ArrayList<Order>{
+        var orderItems = ArrayList<Order>()
+        var order: Order
+        if(cursor.moveToFirst()){
+            var db = DatabaseHelper(this)
+            var user =  db.getSpecificUser(cursor.getInt(1).toString())
+            user.moveToFirst()
+            order = Order(user.getString(4),cursor.getInt(2),cursor.getString(3),cursor.getString(4))
+            orderItems.add(order)
+        }
+        return orderItems
     }
 
 }
