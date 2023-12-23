@@ -6,6 +6,7 @@ import android.database.Cursor
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.EditText
 
 import android.widget.ListView
 import com.example.mobilecoursework.model.AdminUserUserNameList
@@ -55,5 +56,13 @@ class AdminSendNotification : AppCompatActivity() {
         }
     return userNames
     }
-
+fun findButton(view:View){
+    var userInput = findViewById<EditText>(R.id.etNotficationUser).text
+    if(userInput.toString()!=""){
+        var db = DatabaseHelper(this)
+        var list = findViewById<ListView>(R.id.lvUserUsernames)
+        var adapter = AdminUserUserNameList(this, getUserName(db.getSpecificCustomer(userInput.toString())))
+        list.adapter = adapter
+    }
+}
 }

@@ -145,6 +145,25 @@ fun getAllCustomer():Cursor{
     var query : String = "select * from \"Customers\""
     return db.rawQuery(query, null)
 }
+fun getSpecificOrders (userName: String):Cursor{
+    var query : String = "select * from \"Purchase\", \"Customers\" where (Purchase.cusId == Customers.cusId) AND Customers.cusUserName like \'%" + userName + "%\'"
+    return db.rawQuery(query, null)
+}
+fun getSpecificOrderFromOrderId(id:String?):Cursor{
+    var query : String = "select * from \"Purchase\" where orderId = \"" + id + "\""
+    return db.rawQuery(query, null)
+}
+fun updateOrderStatus(status : String, id:String){
+    var cv = ContentValues()
+        cv.put("orderStatus",status)
+
+    db.update("Purchase",cv,"orderId = " + id,null )
+}
+fun getSpecificCustomer(userName:String):Cursor{
+
+    var query : String = "select * from \"Customers\" where cusUserName like \'%" + userName + "%\'"
+    return db.rawQuery(query, null)
+}
 
 }
 

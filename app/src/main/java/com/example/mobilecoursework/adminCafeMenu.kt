@@ -159,7 +159,7 @@ class adminCafeMenu : AppCompatActivity() {
         var db: DatabaseHelper = DatabaseHelper(this)
         var menuItemName = findViewById<EditText>(R.id.etItem).text.toString()
         if(menuItemName!="") {
-            var whereClauseUse = "prodName == \"" + menuItemName+"\""
+            var whereClauseUse = "prodName like \"%" + menuItemName+"%\""
             var cusrsor = db.getMenuItemThatMatchPassedInWhere(whereClauseUse)
             var data : ArrayList<CafeItem> = getCafeItems(cusrsor)
             var adapter = AdminMenuItemAdapter(this,data)

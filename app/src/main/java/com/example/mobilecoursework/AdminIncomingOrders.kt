@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.provider.ContactsContract.Data
 import android.view.View
 import android.widget.AdapterView
+import android.widget.EditText
 import android.widget.ListView
 import android.widget.TextView
 import androidx.core.view.isVisible
@@ -17,7 +18,7 @@ import com.example.mobilecoursework.model.Order
 class AdminIncomingOrders : AppCompatActivity() {
 
 
-    var selectedItem: Any? = null
+    var selectedItem: Order? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +42,7 @@ class AdminIncomingOrders : AppCompatActivity() {
 
          */
         var onclick = AdapterView.OnItemClickListener { adapterView, view, i, l ->
-            selectedItem = list.getItemAtPosition(i)
+            selectedItem = list.getItemAtPosition(i) as Order
         }
         list.setOnItemClickListener(onclick)
 
@@ -56,8 +57,17 @@ class AdminIncomingOrders : AppCompatActivity() {
         startActivity((filterPage))
     }
     fun orderStatus(view:View){
-        var orderStatusPage : Intent = Intent(this, AdminEditOrderStatus::class.java)
-        startActivity((orderStatusPage))
+        if (selectedItem != null ){
+            var orderStatusPage : Intent = Intent(this, AdminEditOrderStatus::class.java)
+
+            orderStatusPage.putExtra("orderId",selectedItem!!.orderId.toString())
+            startActivity(orderStatusPage)
+        }else{
+            var errorMessage = findViewById<TextView>(R.id.txtErrorMessageIncomingOrders)
+            errorMessage.isVisible = true
+            errorMessage.text = "no data selected"
+        }
+
     }
 
     // used as the eventhandler, for when
@@ -84,6 +94,7 @@ class AdminIncomingOrders : AppCompatActivity() {
                 var user = db.getSpecificUser(cursor.getInt(1).toString())
                 user.moveToFirst()
                 order = Order(
+                    cursor.getInt(0),
                     user.getString(4),
                     cursor.getInt(2),
                     cursor.getString(3),
@@ -94,5 +105,20 @@ class AdminIncomingOrders : AppCompatActivity() {
             }
         return orderItems
     }
+fun findButton(view: View){
+    var userInput = findViewById<EditText>(R.id.etOrderName).text.toString()
+    if(userInput!="") {
+        var db = DatabaseHelper(this)
+        var list = findViewById<ListView>(R.id.lvOrders)
+        var data = db.getSpecificOrders(userInput)
+        var adapter = AdminIncomingOrderAdapter(this, createData(data))
+        list!!.adapter = adapter
 
+
+    }else{
+        var Error = findViewById<TextView>(R.id.txtErrorMessageIncomingOrders)
+        Error.isVisible = true
+        Error.text = "no inputted date"
+    }
+}
 }

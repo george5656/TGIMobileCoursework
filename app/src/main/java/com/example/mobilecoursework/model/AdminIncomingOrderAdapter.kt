@@ -17,7 +17,7 @@ class AdminIncomingOrderAdapter(private var context : Context, private var items
     }
 
     override fun getItem(p0: Int): Any {
-        return p0
+        return items[p0]
     }
 
     override fun getItemId(p0: Int): Long {

@@ -68,6 +68,7 @@
         android:id="@+id/txtFindUser"
         android:layout_width="120dp"
         android:layout_height="70dp"
+        android:onClick="findButton"
         android:text="Find"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -91,7 +92,7 @@
         app:layout_constraintVertical_bias="0.975" />
 
     <EditText
-        android:id="@+id/editTextText"
+        android:id="@+id/etNotficationUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -106,10 +107,9 @@
         android:id="@+id/lvUserUsernames"
         android:layout_width="409dp"
         android:layout_height="422dp"
-        android:layout_marginTop="48dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.051" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar2"
+        app:layout_constraintVertical_bias="0.008" />
 </androidx.constraintlayout.widget.ConstraintLayout>

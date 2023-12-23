@@ -70,9 +70,10 @@
         android:id="@+id/btnOrderFind"
         android:layout_width="114dp"
         android:layout_height="61dp"
+        android:onClick="findButton"
         android:text="Find"
-        app:layout_constraintBaseline_toBaselineOf="@+id/ertOrderName"
-        app:layout_constraintEnd_toStartOf="@+id/ertOrderName"
+        app:layout_constraintBaseline_toBaselineOf="@+id/etOrderName"
+        app:layout_constraintEnd_toStartOf="@+id/etOrderName"
         app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -99,7 +100,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/ertOrderName"
+        android:id="@+id/etOrderName"
         android:layout_width="242dp"
         android:layout_height="45dp"
         android:ems="10"

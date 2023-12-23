@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
+        android:onClick="backToIncomingOrders"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -22,6 +23,7 @@
         app:title="Order status" />
 
     <RadioGroup
+        android:id="@+id/radioGroup5"
         android:layout_width="193dp"
         android:layout_height="374dp"
         android:gravity="center"
@@ -69,6 +71,7 @@
         android:id="@+id/btnOrderstatusCancel"
         android:layout_width="174dp"
         android:layout_height="119dp"
+        android:onClick="backToIncomingOrders"
         android:text="Cancel"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -82,6 +85,7 @@
         android:id="@+id/btnOrderstatusApply"
         android:layout_width="174dp"
         android:layout_height="119dp"
+        android:onClick="applyButton"
         android:text="Apply"
         android:textSize="24sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/btnOrderstatusCancel"
