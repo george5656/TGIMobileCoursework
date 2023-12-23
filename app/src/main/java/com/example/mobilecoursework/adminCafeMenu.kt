@@ -64,7 +64,7 @@ class adminCafeMenu : AppCompatActivity() {
             cusrsor = db.getMenuItemThatMatchPassedInWhere(whereClauseUse)
     }
         var data : ArrayList<CafeItem> = getCafeItems(cusrsor)
-    var adapter = AdminMenuItemAdapter(this,data)
+        var adapter = AdminMenuItemAdapter(this,data)
         var lv = findViewById<ListView>(R.id.lvAdminCafeMenuItems)
         lv.adapter = adapter
 
@@ -94,7 +94,7 @@ class adminCafeMenu : AppCompatActivity() {
         var menuItem = ArrayList<CafeItem>()
         var item: CafeItem
         var inStock: Boolean = false
-        var counter = 0
+       // var counter = 0
         if(cusrsor.moveToFirst()){
             do{
                  if(cusrsor.getInt(4)==1){
@@ -104,7 +104,7 @@ class adminCafeMenu : AppCompatActivity() {
                 }
                 item = CafeItem(cusrsor.getInt(0),cusrsor.getString(1),cusrsor.getFloat(2),cusrsor.getBlob(3),inStock)
             menuItem.add(item)
-                counter = counter + 1
+               // counter = counter + 1
             }while(cusrsor.moveToNext())
 
 

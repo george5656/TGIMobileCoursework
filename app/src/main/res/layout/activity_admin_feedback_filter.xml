@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AdminFeedbackFilter">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/tbFeedbackFilter"
+        android:layout_width="409dp"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:navigationIcon="?attr/actionModeCloseDrawable"
+        app:title="Feedback filter" />
+
+    <Button
+        android:id="@+id/btnFeedbackFilterCancel"
+        android:layout_width="150dp"
+        android:layout_height="64dp"
+        android:text="cancel"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.061"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.976" />
+
+    <Button
+        android:id="@+id/btnFeedbackFilterApply"
+        android:layout_width="159dp"
+        android:layout_height="62dp"
+        android:onClick="applyButton"
+        android:text="apply"
+        android:textSize="24sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/btnFeedbackFilterCancel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.813"
+        app:layout_constraintStart_toEndOf="@+id/btnFeedbackFilterCancel" />
+
+    <EditText
+        android:id="@+id/etFeedbackMaxRating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.92"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tbFeedbackFilter" />
+
+    <EditText
+        android:id="@+id/etFeedbackMinRating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.925"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etFeedbackMaxRating" />
+
+    <EditText
+        android:id="@+id/etFeedbackBeforeDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:ems="10"
+        android:inputType="date"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.925"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etFeedbackMinRating" />
+
+    <EditText
+        android:id="@+id/etFeedbackAfterDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:ems="10"
+        android:inputType="date"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.93"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etFeedbackBeforeDate" />
+
+    <TextView
+        android:id="@+id/txtFeedbackMaxRating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="max rating"
+        android:textSize="24sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/etFeedbackMaxRating"
+        app:layout_constraintEnd_toStartOf="@+id/etFeedbackMaxRating"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/txtFeedbackMinRating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="min rating"
+        android:textSize="24sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/etFeedbackMinRating"
+        app:layout_constraintEnd_toStartOf="@+id/etFeedbackMinRating"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/txtFeedbackBefireSetDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="before date"
+        android:textSize="24sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/etFeedbackBeforeDate"
+        app:layout_constraintEnd_toStartOf="@+id/etFeedbackBeforeDate"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/txtFeedbackAfterSetDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="after date"
+        android:textSize="24sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/etFeedbackAfterDate"
+        app:layout_constraintEnd_toStartOf="@+id/etFeedbackAfterDate"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/txtFeedbackFilterError"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Error"
+        android:textSize="24sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/btnFeedbackFilterApply"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etFeedbackAfterDate" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

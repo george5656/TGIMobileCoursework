@@ -48,7 +48,7 @@ var db : SQLiteDatabase = this.writableDatabase
         val sQlCreateStament4 = "CREATE TABLE Purchase ("+
                             "orderId INTEGER PRIMARY KEY AUTOINCREMENT,"+
                             "cusId INTEGER NOT NULL,"+
-                            "orderData TEXT NOT NULL,"+
+                            "orderData INTEGER NOT NULL,"+
                             "orderTime TEXT NOT NULL,"+
                             "orderStatus TEXT NOT NULL,"+
                             "FOREIGN KEY(cusId) REFERENCES Customers(cusId));"
@@ -125,6 +125,19 @@ fun getAdminDetails(id:String?):Cursor{
 fun deleteCafeMenuItem(id:String?){
     db.delete("\"Product\"","productId = " + id ,null)
 }
+    fun getSpecificUser(id:String):Cursor{
+        var query : String = "select * from \"Customers\" where cusId = \"" + id + "\""
+        return db.rawQuery(query, null)
+    }
+    fun getFeedback():Cursor{
+        var query : String = "select * from \"Feedback\""
+        return db.rawQuery(query, null)
+    }
+fun getFeedbackCustomerWhere(where:String):Cursor{
+    var query : String = "select * from \"Feedback\", \"Purchase\" where " + where
+    return db.rawQuery(query, null)
+}
+
 }
 
 
