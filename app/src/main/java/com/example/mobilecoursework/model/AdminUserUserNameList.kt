@@ -8,7 +8,7 @@ import android.widget.BaseAdapter
 import android.widget.TextView
 import com.example.mobilecoursework.R
 
-class AdminUserUserNameList(var context : Context, var items:Array<String>):BaseAdapter() {
+class AdminUserUserNameList(var context : Context, var items:ArrayList<String>):BaseAdapter() {
     override fun getCount(): Int {
         return items.size
     }

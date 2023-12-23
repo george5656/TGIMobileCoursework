@@ -13,6 +13,10 @@ class AdminAccountEdit : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_admin_account_edit)
+    }
+
+    override fun onStart() {
+        super.onStart()
 
         var accountid = intent.getStringExtra("adminId")
     var db = DatabaseHelper(this)

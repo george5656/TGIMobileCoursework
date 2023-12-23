@@ -79,12 +79,19 @@ class AdminIncomingOrders : AppCompatActivity() {
         var orderItems = ArrayList<Order>()
         var order: Order
         if(cursor.moveToFirst()){
-            var db = DatabaseHelper(this)
-            var user =  db.getSpecificUser(cursor.getInt(1).toString())
-            user.moveToFirst()
-            order = Order(user.getString(4),cursor.getInt(2),cursor.getString(3),cursor.getString(4))
-            orderItems.add(order)
-        }
+            do {
+                var db = DatabaseHelper(this)
+                var user = db.getSpecificUser(cursor.getInt(1).toString())
+                user.moveToFirst()
+                order = Order(
+                    user.getString(4),
+                    cursor.getInt(2),
+                    cursor.getString(3),
+                    cursor.getString(4)
+                )
+                orderItems.add(order)
+            }while(cursor.moveToNext())
+            }
         return orderItems
     }
 

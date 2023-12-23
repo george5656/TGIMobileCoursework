@@ -141,6 +141,11 @@ fun getOrders():Cursor {
     var query: String = "select * from \"Purchase\""
     return db.rawQuery(query, null)
 }
+fun getAllCustomer():Cursor{
+    var query : String = "select * from \"Customers\""
+    return db.rawQuery(query, null)
+}
+
 }
 
 
