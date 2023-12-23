@@ -49,7 +49,7 @@ var db : SQLiteDatabase = this.writableDatabase
                             "orderId INTEGER PRIMARY KEY AUTOINCREMENT,"+
                             "cusId INTEGER NOT NULL,"+
                             "orderData INTEGER NOT NULL,"+
-                            "orderTime TEXT NOT NULL,"+
+                            "orderTime NTEGER NOT NULL,"+
                             "orderStatus TEXT NOT NULL,"+
                             "FOREIGN KEY(cusId) REFERENCES Customers(cusId));"
 
@@ -164,7 +164,10 @@ fun getSpecificCustomer(userName:String):Cursor{
     var query : String = "select * from \"Customers\" where cusUserName like \'%" + userName + "%\'"
     return db.rawQuery(query, null)
 }
-
+fun getOrdersThatMatchWhere(where:String):Cursor {
+    var query: String = "select * from \"Purchase\" where $where"
+    return db.rawQuery(query, null)
+}
 }
 
 

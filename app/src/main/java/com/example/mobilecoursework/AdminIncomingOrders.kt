@@ -12,6 +12,7 @@ import android.widget.ListView
 import android.widget.TextView
 import androidx.core.view.isVisible
 import com.example.mobilecoursework.model.AdminIncomingOrderAdapter
+import com.example.mobilecoursework.model.AdminUserUserNameList
 import com.example.mobilecoursework.model.DatabaseHelper
 import com.example.mobilecoursework.model.Order
 
@@ -30,21 +31,45 @@ class AdminIncomingOrders : AppCompatActivity() {
 
         var db = DatabaseHelper(this)
         var list = findViewById<ListView>(R.id.lvOrders)
-
+        var status = intent.getStringExtra("status")
+        var afterDate = intent.getStringExtra("afterDate")
+        var beforeDate = intent.getStringExtra("beforeDate")
+        var beforeTime = intent.getStringExtra("beforeTime")
+        var afterTime = intent.getStringExtra("afterTime")
+        var whereClause = ""
         var adapter = AdminIncomingOrderAdapter(this,createData(db.getOrders()))
-        list!!.adapter = adapter
+        if (intent.getStringExtra("from")=="filter") {
+            if (status != "") {
+                whereClause = whereClause + "\"orderStatus\" == \"" + status + "\" AND "
+            } else if (afterDate != "") {
+                whereClause = whereClause + "\"orderData\" >= \"" + afterDate + "\" AND "
+            } else if (beforeDate != "") {
+                whereClause = whereClause + "\"orderData\" <= \"" + beforeDate + "\" AND "
+            } else if (beforeTime != "") {
+                whereClause = whereClause + "\"orderTime\" <= \"" + beforeTime + "\" AND "
+            } else if (afterTime != "") {
+                whereClause = whereClause + "\"orderTime\" >= \"" + afterTime + "\" AND "
+            }
+            if (whereClause != "") {
+                whereClause = whereClause.subSequence(0, whereClause.length - 4).toString() + ";"
+                adapter = AdminIncomingOrderAdapter(this, createData(db.getOrdersThatMatchWhere(whereClause))
+                )
+            }
+
+        }
+            list!!.adapter = adapter
 
 
-        /*  as the drag and drop doesn't have the onclick without crashing, had to use another
+            /*  as the drag and drop doesn't have the onclick without crashing, had to use another
             event litininer,
             basically its a lambda function, going in to a OnitemClickListener, interface so
             event listener can take it as no first class functions.
 
          */
-        var onclick = AdapterView.OnItemClickListener { adapterView, view, i, l ->
-            selectedItem = list.getItemAtPosition(i) as Order
-        }
-        list.setOnItemClickListener(onclick)
+            var onclick = AdapterView.OnItemClickListener { adapterView, view, i, l ->
+                selectedItem = list.getItemAtPosition(i) as Order
+            }
+            list.setOnItemClickListener(onclick)
 
     }
     fun backButton(view: View){

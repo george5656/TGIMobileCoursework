@@ -3,13 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/txtNotficationUsername"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <Switch
+        android:id="@+id/sNotificationUserName"
+        android:layout_width="763dp"
+        android:layout_height="5dp"
         android:layout_weight="1"
-
-        android:gravity="center"
-
-        android:text="TextView" />
+        android:text="Switch"
+        android:textSize="24sp" />
 </LinearLayout>

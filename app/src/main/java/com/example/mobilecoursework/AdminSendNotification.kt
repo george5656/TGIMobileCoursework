@@ -6,15 +6,17 @@ import android.database.Cursor
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.AdapterView
 import android.widget.EditText
 
 import android.widget.ListView
 import com.example.mobilecoursework.model.AdminUserUserNameList
+import com.example.mobilecoursework.model.CafeItem
 import com.example.mobilecoursework.model.DatabaseHelper
 
 class AdminSendNotification : AppCompatActivity() {
 
-
+var selectedItems:ArrayList<String> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,7 +30,16 @@ class AdminSendNotification : AppCompatActivity() {
         var list = findViewById<ListView>(R.id.lvUserUsernames)
         var adapter = AdminUserUserNameList(this, getUserName(db.getAllCustomer()))
         list.adapter = adapter
+        var onclick = AdapterView.OnItemClickListener { adapterView, view, i, l ->
 
+            if(selectedItems.contains(list.getItemAtPosition(i))){
+                selectedItems.remove(list.getItemAtPosition(i))
+            }else{
+                selectedItems.add(list.getItemAtPosition(i).toString())
+            }
+
+
+        }
     }
     fun loadNotificationCreator(view: View){
         var notifcationMakerLoad: Intent = Intent(this, AdminSendPromotions::class.java)
