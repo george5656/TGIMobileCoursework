@@ -48,8 +48,8 @@ var db : SQLiteDatabase = this.writableDatabase
         val sQlCreateStament4 = "CREATE TABLE Purchase ("+
                             "orderId INTEGER PRIMARY KEY AUTOINCREMENT,"+
                             "cusId INTEGER NOT NULL,"+
-                            "orderData TEXT NOT NULL,"+
-                            "orderTime TEXT NOT NULL,"+
+                            "orderData INTEGER NOT NULL,"+
+                            "orderTime NTEGER NOT NULL,"+
                             "orderStatus TEXT NOT NULL,"+
                             "FOREIGN KEY(cusId) REFERENCES Customers(cusId));"
 
@@ -124,6 +124,49 @@ fun getAdminDetails(id:String?):Cursor{
 }
 fun deleteCafeMenuItem(id:String?){
     db.delete("\"Product\"","productId = " + id ,null)
+}
+    fun getSpecificUser(id:String):Cursor{
+        var query : String = "select * from \"Customers\" where cusId = \"" + id + "\""
+        return db.rawQuery(query, null)
+    }
+    fun getFeedback():Cursor{
+        var query : String = "select * from \"Feedback\""
+        return db.rawQuery(query, null)
+    }
+fun getFeedbackCustomerWhere(where:String):Cursor{
+    var query : String = "select * from \"Feedback\", \"Purchase\" where " + where
+    return db.rawQuery(query, null)
+}
+fun getOrders():Cursor {
+    var query: String = "select * from \"Purchase\""
+    return db.rawQuery(query, null)
+}
+fun getAllCustomer():Cursor{
+    var query : String = "select * from \"Customers\""
+    return db.rawQuery(query, null)
+}
+fun getSpecificOrders (userName: String):Cursor{
+    var query : String = "select * from \"Purchase\", \"Customers\" where (Purchase.cusId == Customers.cusId) AND Customers.cusUserName like \'%" + userName + "%\'"
+    return db.rawQuery(query, null)
+}
+fun getSpecificOrderFromOrderId(id:String?):Cursor{
+    var query : String = "select * from \"Purchase\" where orderId = \"" + id + "\""
+    return db.rawQuery(query, null)
+}
+fun updateOrderStatus(status : String, id:String){
+    var cv = ContentValues()
+        cv.put("orderStatus",status)
+
+    db.update("Purchase",cv,"orderId = " + id,null )
+}
+fun getSpecificCustomer(userName:String):Cursor{
+
+    var query : String = "select * from \"Customers\" where cusUserName like \'%" + userName + "%\'"
+    return db.rawQuery(query, null)
+}
+fun getOrdersThatMatchWhere(where:String):Cursor {
+    var query: String = "select * from \"Purchase\" where $where"
+    return db.rawQuery(query, null)
 }
 }
 

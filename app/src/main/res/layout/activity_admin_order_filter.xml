@@ -39,6 +39,7 @@
         android:id="@+id/btnOrderFilterApply"
         android:layout_width="132dp"
         android:layout_height="60dp"
+        android:onClick="applyButton"
         android:text="apply"
         android:textSize="24sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/btnOrderFilterCancel"
@@ -82,7 +83,7 @@
             android:textSize="24sp" />
 
         <RadioButton
-            android:id="@+id/rdFilterCancled"
+            android:id="@+id/rbFilterCancled"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"

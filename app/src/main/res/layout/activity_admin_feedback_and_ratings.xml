@@ -16,17 +16,16 @@
         android:theme="?attr/actionBarTheme"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.002"
+        app:layout_constraintVertical_bias="0.0"
         app:navigationIcon="?attr/actionModeCloseDrawable"
         app:title="Feedback" />
 
     <ListView
         android:id="@+id/lvFeedback"
-        android:layout_width="409dp"
-        android:layout_height="542dp"
+        android:layout_width="412dp"
+        android:layout_height="528dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -38,6 +37,7 @@
         android:id="@+id/btnFeedbackFilter"
         android:layout_width="141dp"
         android:layout_height="69dp"
+        android:onClick="filterButton"
         android:text="Filter"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -8,7 +8,7 @@ import android.widget.BaseAdapter
 import android.widget.TextView
 import com.example.mobilecoursework.R
 
-class AdminFeedbackAdapter(var context : Context, var items: Array<Feedback>): BaseAdapter() {
+class AdminFeedbackAdapter(var context : Context, var items: ArrayList<Feedback>): BaseAdapter() {
 
    // private var inflater: LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
     override fun getCount(): Int {

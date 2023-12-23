@@ -9,7 +9,7 @@ import android.widget.BaseAdapter
 import android.widget.TextView
 import com.example.mobilecoursework.R
 
-class AdminIncomingOrderAdapter(private var context : Context, private var items: Array<Order>):BaseAdapter() {
+class AdminIncomingOrderAdapter(private var context : Context, private var items: ArrayList<Order>):BaseAdapter() {
 
 
     override fun getCount(): Int {
@@ -17,7 +17,7 @@ class AdminIncomingOrderAdapter(private var context : Context, private var items
     }
 
     override fun getItem(p0: Int): Any {
-        return p0
+        return items[p0]
     }
 
     override fun getItemId(p0: Int): Long {

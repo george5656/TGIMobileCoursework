@@ -13,21 +13,24 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textSize="24sp" />
 
         <TextView
             android:id="@+id/txtFeedbackListItemFeedback"
             android:layout_width="match_parent"
-            android:layout_height="58dp"
+            android:layout_height="wrap_content"
             android:gravity="center|top"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textSize="24sp" />
 
         <TextView
             android:id="@+id/txtFeedbackListItemRating"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textSize="24sp" />
 
     </LinearLayout>
 </LinearLayout>

@@ -6,7 +6,9 @@ import android.os.Bundle
 import android.view.View
 
 class AdminHomePage : AppCompatActivity() {
-    var accountId : String? = null
+    //companion object{
+        var accountId : String? = null
+    //}
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_admin_home_page)
