@@ -21,7 +21,6 @@ class AdminHomePage : AppCompatActivity() {
     }
     fun menuLoad(view: View){
         var menuIntent:Intent = Intent(this,adminCafeMenu::class.java)
-
         startActivity(menuIntent)
     }
     fun feedbackLoad(view: View){

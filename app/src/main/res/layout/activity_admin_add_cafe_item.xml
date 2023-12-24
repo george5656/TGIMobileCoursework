@@ -10,7 +10,7 @@
         android:id="@+id/btnCafeItemAddSave"
         android:layout_width="176dp"
         android:layout_height="87dp"
-        android:onClick="imageLoader"
+        android:onClick="saveButton"
         android:text="Save"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"

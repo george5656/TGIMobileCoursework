@@ -189,7 +189,11 @@ fun getOrdersThatMatchWhere(where:String):Cursor {
 db.insert("Notfifcation",null,cv)
 
   }
+fun updateCafeMenuItem(cv:ContentValues, id:String){
 
+
+    db.update("Product",cv,"productId = " + id,null )
+}
 }
 
 
