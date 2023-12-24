@@ -18,9 +18,8 @@ class AdminAccountEdit : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
 
-        var accountid = intent.getStringExtra("adminId")
+        var accountId = intent.getStringExtra("adminId")
     var db = DatabaseHelper(this)
-        var details = db.getAdminDetails(accountid)
         var userName = findViewById<EditText>(R.id.etuserNameEdit)
         var password = findViewById<EditText>(R.id.etPasswordEdit)
         var fullName = findViewById<EditText>(R.id.etFullNameEdit)
@@ -31,17 +30,21 @@ class AdminAccountEdit : AppCompatActivity() {
         fullName.text.clear()
         email.text.clear()
         phoneNo.text.clear()
+
+        var details = db.getAdminDetails(accountId)
+
         details.moveToFirst()
-        userName.text.append(details.getString(4).toString())
-        password.text.append(details.getString(5).toString())
-        fullName.text.append(details.getString(2).toString())
-        email.text.append(details.getString(2).toString())
-        phoneNo.text.append(details.getString(3).toString())
-        if(details.getInt(6) == 1){
-            findViewById<RadioButton>(R.id.rbYesAdminAccountEdit).isChecked = true
-        }else{
-            findViewById<RadioButton>(R.id.rbNoAdminAccountEdit).isChecked = true
-        }
+
+            userName.text.append(details.getString(4).toString())
+            password.text.append(details.getString(5).toString())
+            fullName.text.append(details.getString(2).toString())
+            email.text.append(details.getString(2).toString())
+            phoneNo.text.append(details.getString(3).toString())
+            if (details.getInt(6) == 1) {
+                findViewById<RadioButton>(R.id.rbYesAdminAccountEdit).isChecked = true
+            } else {
+                findViewById<RadioButton>(R.id.rbNoAdminAccountEdit).isChecked = true
+            }
 
 
 

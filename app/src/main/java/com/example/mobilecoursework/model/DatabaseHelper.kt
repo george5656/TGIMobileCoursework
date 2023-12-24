@@ -26,6 +26,7 @@ var db : SQLiteDatabase = this.writableDatabase
 
          db?.execSQL(sQlCreateStament)
 
+
              val sQlCreateStament2 = "CREATE TABLE Admin ("+
                  "adminId INTEGER PRIMARY KEY AUTOINCREMENT,"+
                  "adminFullName	TEXT NOT NULL,"+
@@ -81,6 +82,16 @@ var db : SQLiteDatabase = this.writableDatabase
                                 "FOREIGN KEY(prodId) REFERENCES Product(productId));"
 
         db?.execSQL(sQlCreateStament7)
+
+       val sQlCreateStament8 = "CREATE TABLE Notfifcation ("+
+           " \"notficationId\"	PRIMARY KEY AUTOINCREMENT,"+
+           " \"cusId\"	INTEGER NOT NULL,"+
+           " \"Title\"	TEXT NOT NULL,"+
+           " \"Messeage\"	TEXT NOT NULL,"+
+           " \"sent\"	INTEGER NOT NULL,"+
+           " FOREIGN KEY(cusId) REFERENCES Customers(cusId));"
+        db?.execSQL(sQlCreateStament8)
+
     }
 
     override fun onUpgrade(p0: SQLiteDatabase?, p1: Int, p2: Int) {
@@ -164,9 +175,24 @@ fun getSpecificCustomer(userName:String):Cursor{
     var query : String = "select * from \"Customers\" where cusUserName like \'%" + userName + "%\'"
     return db.rawQuery(query, null)
 }
+    fun getCustomerThatMatchesUserName(userName:String):Cursor{
+        var query : String = "select * from \"Customers\" where cusUserName == \'" + userName + "\'"
+        return db.rawQuery(query, null)
+    }
 fun getOrdersThatMatchWhere(where:String):Cursor {
     var query: String = "select * from \"Purchase\" where $where"
     return db.rawQuery(query, null)
+}
+
+  fun createNotification(cv : ContentValues){
+
+db.insert("Notfifcation",null,cv)
+
+  }
+fun updateCafeMenuItem(cv:ContentValues, id:String){
+
+
+    db.update("Product",cv,"productId = " + id,null )
 }
 }
 
