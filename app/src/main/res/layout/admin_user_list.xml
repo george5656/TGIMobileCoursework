@@ -3,11 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <Switch
-        android:id="@+id/sNotificationUserName"
-        android:layout_width="763dp"
-        android:layout_height="5dp"
+    <CheckBox
+        android:id="@+id/cbNotificationUserName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="Switch"
-        android:textSize="24sp" />
+        android:onClick="optionTicked"
+        android:text="CheckBox" />
 </LinearLayout>

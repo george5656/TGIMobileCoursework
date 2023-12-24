@@ -14,7 +14,7 @@ class AdminUserUserNameList(var context : Context, var items:ArrayList<String>):
     }
 
     override fun getItem(p0: Int): Any {
-        return items[p0]
+        return items.get(p0)
     }
 
     override fun getItemId(p0: Int): Long {
@@ -23,12 +23,13 @@ class AdminUserUserNameList(var context : Context, var items:ArrayList<String>):
 
     override fun getView(p0: Int, p1: View?, p2: ViewGroup?): View {
         var view: View? = p1
+if(view==null) {
+    view = LayoutInflater.from(context).inflate(R.layout.admin_user_list, p2, false)
 
-        view = LayoutInflater.from(context).inflate(R.layout.admin_user_list,p2,false)
+    var userName = view.findViewById<TextView>(R.id.cbNotificationUserName)
+    userName.text = items[p0]
 
-        var userName = view.findViewById<TextView>(R.id.sNotificationUserName)
-       userName.text = items[p0]
-
-        return view
+        }
+        return view!!
     }
 }

@@ -80,6 +80,7 @@
         android:id="@+id/btnNotificationSend"
         android:layout_width="129dp"
         android:layout_height="72dp"
+        android:onClick="sendButton"
         android:text="Send"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -105,7 +106,7 @@
         app:layout_constraintVertical_bias="0.211" />
 
     <EditText
-        android:id="@+id/editTextTextMultiLine"
+        android:id="@+id/etNotficationBody"
         android:layout_width="279dp"
         android:layout_height="246dp"
         android:background="#D6D6D6"
