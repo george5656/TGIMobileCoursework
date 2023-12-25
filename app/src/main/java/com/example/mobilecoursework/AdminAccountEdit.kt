@@ -1,15 +1,24 @@
 package com.example.mobilecoursework
 
+import android.content.ContentValues
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.AlarmClock.EXTRA_MESSAGE
 import android.view.View
 import android.widget.EditText
 import android.widget.RadioButton
 import com.example.mobilecoursework.model.DatabaseHelper
+import java.security.MessageDigest
 
 class AdminAccountEdit : AppCompatActivity() {
+
+    var accountId :String? = null
+    var db :DatabaseHelper? = null
+    var userName : EditText? = null
+    var password : EditText? = null
+    var fullName : EditText? = null
+    var email : EditText? = null
+    var phoneNo : EditText? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_admin_account_edit)
@@ -18,28 +27,28 @@ class AdminAccountEdit : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
 
-        var accountId = intent.getStringExtra("adminId")
-    var db = DatabaseHelper(this)
-        var userName = findViewById<EditText>(R.id.etuserNameEdit)
-        var password = findViewById<EditText>(R.id.etPasswordEdit)
-        var fullName = findViewById<EditText>(R.id.etFullNameEdit)
-        var email = findViewById<EditText>(R.id.etEmailEdit)
-        var phoneNo = findViewById<EditText>(R.id.etPhoneEdit)
-        userName.text.clear()
-        password.text.clear()
-        fullName.text.clear()
-        email.text.clear()
-        phoneNo.text.clear()
+         accountId = intent.getStringExtra("adminId")
+         db = DatabaseHelper(this)
+         userName = findViewById<EditText>(R.id.etuserNameEdit)
+         password = findViewById<EditText>(R.id.etPasswordEdit)
+         fullName = findViewById<EditText>(R.id.etFullNameEdit)
+         email = findViewById<EditText>(R.id.etEmailEdit)
+         phoneNo = findViewById<EditText>(R.id.etPhoneEdit)
+        userName!!.text.clear()
+        password!!.text.clear()
+        fullName!!.text.clear()
+        email!!.text.clear()
+        phoneNo!!.text.clear()
 
-        var details = db.getAdminDetails(accountId)
+        var details = db!!.getAdminDetails(accountId)
 
         details.moveToFirst()
 
-            userName.text.append(details.getString(4).toString())
-            password.text.append(details.getString(5).toString())
-            fullName.text.append(details.getString(2).toString())
-            email.text.append(details.getString(2).toString())
-            phoneNo.text.append(details.getString(3).toString())
+            userName!!.text.append(details.getString(4).toString())
+            password!!.text.append(details.getString(5).toString())
+            fullName!!.text.append(details.getString(2).toString())
+            email!!.text.append(details.getString(2).toString())
+            phoneNo!!.text.append(details.getString(3).toString())
             if (details.getInt(6) == 1) {
                 findViewById<RadioButton>(R.id.rbYesAdminAccountEdit).isChecked = true
             } else {
@@ -58,6 +67,18 @@ class AdminAccountEdit : AppCompatActivity() {
         startActivity(homeIntent)
     }
 
-
+fun saveButton(view: View){
+    var md = MessageDigest.getInstance("MD5")
+    var hash = md.digest(password!!.text.toString().toByteArray())
+    var byte = md.digest()
+    var cv = ContentValues()
+    cv.put("adminFullName",fullName.toString())
+    cv.put("adminEmail",email.toString())
+    cv.put("adminPhoneNo",phoneNo.toString())
+    cv.put("adminUserName",userName.toString())
+    cv.put("adminPassword",hash)
+    db = DatabaseHelper(this)
+    db!!.updateAdminAccount(cv,accountId.toString())
+}
 
 }
