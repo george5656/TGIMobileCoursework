@@ -75,16 +75,16 @@ fun saveButton(view: View){
       just keep changing the hash every time it is ran
 
      */
-    var result = StringBuilder()
-    for (byte in hash) {
-        result.append(byte.toString())
+    var outPutString = StringBuilder()
+    for (data in hash) {
+        outPutString.append(data.toString())
     }
     var cv = ContentValues()
     cv.put("adminFullName",fullName!!.text.toString())
     cv.put("adminEmail",email!!.text.toString())
     cv.put("adminPhoneNo",phoneNo!!.text.toString())
     cv.put("adminUserName",userName!!.text.toString())
-    cv.put("adminPassword",result.toString())
+    cv.put("adminPassword",outPutString.toString())
     db = DatabaseHelper(this)
     db!!.updateAdminAccount(cv,accountId.toString())
 }

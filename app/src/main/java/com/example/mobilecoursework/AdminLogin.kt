@@ -35,13 +35,13 @@ class AdminLogin : AppCompatActivity() {
   just keep changing the hash every time it is ran
 
  */
-        var result = StringBuilder()
-        for (byte in hash) {
-            result.append(byte.toString())
+        var outPutString = StringBuilder()
+        for (data in hash) {
+            outPutString.append(data.toString())
         }
         var error =findViewById<TextView>(R.id.txtErrorMessage)
         error.isVisible = true
-        error.text = result.toString()//result.toString()
+        error.text = outPutString.toString()//result.toString()
 
 
         if (results != null) {
@@ -50,7 +50,7 @@ class AdminLogin : AppCompatActivity() {
                      var comparison =   results.getString(5)
                     findViewById<EditText>(R.id.etUserName).text.append(comparison.toString())
 
-                        if (result.toString().equals(comparison)) {
+                        if (outPutString.toString().equals(comparison)) {
                         //  if(password.equals(results.getString(5))){
                        //as sending to home page will need another one to send message to the activity want to use
                         var loginIntent: Intent = Intent(this, AdminHomePage::class.java).apply{
