@@ -45,7 +45,7 @@ class AdminAccountEdit : AppCompatActivity() {
         details.moveToFirst()
 
             userName!!.text.append(details.getString(4).toString())
-            password!!.text.append(details.getString(5).toString())
+            password!!.text.append(details.getBlob(5).toString())
             fullName!!.text.append(details.getString(2).toString())
             email!!.text.append(details.getString(2).toString())
             phoneNo!!.text.append(details.getString(3).toString())
@@ -69,14 +69,22 @@ class AdminAccountEdit : AppCompatActivity() {
 
 fun saveButton(view: View){
     var md = MessageDigest.getInstance("MD5")
-    var hash = md.digest(password!!.text.toString().toByteArray())
-    var byte = md.digest()
+    md.update(password!!.text.toString().toByteArray())
+    var hash = md.digest()
+    /* basically a a string buffer, so can get the array data one at a time, else it will
+      just keep changing the hash every time it is ran
+
+     */
+    var result = StringBuilder()
+    for (byte in hash) {
+        result.append(byte.toString())
+    }
     var cv = ContentValues()
-    cv.put("adminFullName",fullName.toString())
-    cv.put("adminEmail",email.toString())
-    cv.put("adminPhoneNo",phoneNo.toString())
-    cv.put("adminUserName",userName.toString())
-    cv.put("adminPassword",hash)
+    cv.put("adminFullName",fullName!!.text.toString())
+    cv.put("adminEmail",email!!.text.toString())
+    cv.put("adminPhoneNo",phoneNo!!.text.toString())
+    cv.put("adminUserName",userName!!.text.toString())
+    cv.put("adminPassword",result.toString())
     db = DatabaseHelper(this)
     db!!.updateAdminAccount(cv,accountId.toString())
 }

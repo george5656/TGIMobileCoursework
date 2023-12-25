@@ -29,16 +29,32 @@ class AdminLogin : AppCompatActivity() {
         var password: String = "" + findViewById<EditText>(R.id.etPassword).text.toString()
         var results: Cursor? = db.getLoginDetails(username)
         var md = MessageDigest.getInstance("MD5")
-        var hash = md.digest(password.toByteArray())
-        var byte = md.digest()
+        md.update(password.toByteArray())
+        var hash = md.digest()
+/* basically a a string buffer, so can get the array data one at a time, else it will
+  just keep changing the hash every time it is ran
+
+ */
+        var result = StringBuilder()
+        for (byte in hash) {
+            result.append(byte.toString())
+        }
+        var error =findViewById<TextView>(R.id.txtErrorMessage)
+        error.isVisible = true
+        error.text = result.toString()//result.toString()
+
+
         if (results != null) {
             if (results.moveToFirst()) {
                 do {
-                    if (byte.equals(results.getBlob(5) as ByteArray)) {
+                     var comparison =   results.getString(5)
+                    findViewById<EditText>(R.id.etUserName).text.append(comparison.toString())
 
+                        if (result.toString().equals(comparison)) {
+                        //  if(password.equals(results.getString(5))){
                        //as sending to home page will need another one to send message to the activity want to use
                         var loginIntent: Intent = Intent(this, AdminHomePage::class.java).apply{
-                            putExtra("logedInId",results.getString(0).toString())
+                            putExtra("logedInId",results.getInt(0).toString())
                         }
 
                         startActivity(loginIntent)
@@ -49,7 +65,6 @@ class AdminLogin : AppCompatActivity() {
             }
 
         }
-
 
 
     }

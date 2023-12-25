@@ -20,7 +20,7 @@ var db : SQLiteDatabase = this.writableDatabase
                 "cusEmail TEXT NOT NULL,"+
                 "cusPhoneNo TEXT NOT NULL,"+
                 "cusUserName TEXT NOT NULL UNIQUE,"+
-                "cusPassword  BLOB NOT NULL,"+
+                "cusPassword  TEXT NOT NULL,"+
                 "cusIsActive INTEGER NOT NULL);"
 
 
@@ -33,7 +33,7 @@ var db : SQLiteDatabase = this.writableDatabase
                  "adminEmail TEXT NOT NULL,"+
                  "adminPhoneNo TEXT NOT NULL,"+
                  "adminUserName TEXT NOT NULL UNIQUE,"+
-                 "adminPassword  BLOB NOT NULL,"+
+                 "adminPassword  TEXT NOT NULL,"+
                  "adminIsActive INTEGER NOT NULL);"
         db?.execSQL(sQlCreateStament2)
 
