@@ -119,6 +119,7 @@
         android:id="@+id/btnSaveAccountEdit"
         android:layout_width="166dp"
         android:layout_height="82dp"
+        android:onClick="saveButton"
         android:text="Save"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -20,7 +20,7 @@ var db : SQLiteDatabase = this.writableDatabase
                 "cusEmail TEXT NOT NULL,"+
                 "cusPhoneNo TEXT NOT NULL,"+
                 "cusUserName TEXT NOT NULL UNIQUE,"+
-                "cusPassword TEXT NOT NULL,"+
+                "cusPassword  BLOB NOT NULL,"+
                 "cusIsActive INTEGER NOT NULL);"
 
 
@@ -33,7 +33,7 @@ var db : SQLiteDatabase = this.writableDatabase
                  "adminEmail TEXT NOT NULL,"+
                  "adminPhoneNo TEXT NOT NULL,"+
                  "adminUserName TEXT NOT NULL UNIQUE,"+
-                 "adminPassword TEXT NOT NULL,"+
+                 "adminPassword  BLOB NOT NULL,"+
                  "adminIsActive INTEGER NOT NULL);"
         db?.execSQL(sQlCreateStament2)
 
@@ -193,6 +193,10 @@ fun updateCafeMenuItem(cv:ContentValues, id:String){
 
 
     db.update("Product",cv,"productId = " + id,null )
+}
+
+fun updateAdminAccount(cv:ContentValues,id:String){
+    db.update("Admin",cv,"adminId = "+id,null)
 }
 }
 

@@ -11,6 +11,7 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.core.view.isVisible
 import com.example.mobilecoursework.model.DatabaseHelper
+import java.security.MessageDigest
 
 class AdminLogin : AppCompatActivity() {
 
@@ -27,10 +28,13 @@ class AdminLogin : AppCompatActivity() {
         var username: String = "" + findViewById<EditText>(R.id.etUserName).text.toString()
         var password: String = "" + findViewById<EditText>(R.id.etPassword).text.toString()
         var results: Cursor? = db.getLoginDetails(username)
+        var md = MessageDigest.getInstance("MD5")
+        var hash = md.digest(password.toByteArray())
+        var byte = md.digest()
         if (results != null) {
             if (results.moveToFirst()) {
                 do {
-                    if (password.equals(results.getString(5))) {
+                    if (byte.equals(results.getBlob(5) as ByteArray)) {
 
                        //as sending to home page will need another one to send message to the activity want to use
                         var loginIntent: Intent = Intent(this, AdminHomePage::class.java).apply{
