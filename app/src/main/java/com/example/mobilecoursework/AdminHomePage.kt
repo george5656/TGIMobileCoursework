@@ -12,12 +12,12 @@ class AdminHomePage : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_admin_home_page)
-        accountId = intent.getStringExtra("logedInId").toString()
+
     }
 
     override fun onStart() {
         super.onStart()
-
+        accountId = intent.getStringExtra("logedInId").toString()
     }
     fun menuLoad(view: View){
         var menuIntent:Intent = Intent(this,adminCafeMenu::class.java)
