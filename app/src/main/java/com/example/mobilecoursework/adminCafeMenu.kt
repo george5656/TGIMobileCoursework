@@ -20,8 +20,8 @@ import com.example.mobilecoursework.model.CafeItem
 import com.example.mobilecoursework.model.DatabaseHelper
 
 class adminCafeMenu : AppCompatActivity() {
-
-
+var error : TextView? = null
+var lv :ListView? = null
     var selectedItem: CafeItem? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +37,7 @@ class adminCafeMenu : AppCompatActivity() {
         var minPrice = intent.getStringExtra("minPrice")
         var inStock = intent.getStringExtra("inStock")
         var hasImage = intent.getStringExtra("image")
+        error = findViewById(R.id.txtCafeMenuError)
         if(intent.getStringExtra("from")=="filter"){
         if(maxPrice!=""){
             whereClause = whereClause + "prodPrice <= " + maxPrice + " AND "
@@ -61,14 +62,14 @@ class adminCafeMenu : AppCompatActivity() {
     }
         var data : ArrayList<CafeItem> = getCafeItems(cusrsor)
         var adapter = AdminMenuItemAdapter(this,data)
-        var lv = findViewById<ListView>(R.id.lvAdminCafeMenuItems)
-        lv.adapter = adapter
+         lv = findViewById<ListView>(R.id.lvAdminCafeMenuItems)
+        lv!!.adapter = adapter
 
-        var onclick = AdapterView.OnItemClickListener { adapterView, view, i, l -> selectedItem = lv.getItemAtPosition(i) as? CafeItem;
+        var onclick = AdapterView.OnItemClickListener { adapterView, view, i, l -> selectedItem = lv!!.getItemAtPosition(i) as? CafeItem;
 
         }
 
-        lv.setOnItemClickListener(onclick)
+        lv!!.setOnItemClickListener(onclick)
 
 
 
@@ -153,8 +154,11 @@ class adminCafeMenu : AppCompatActivity() {
     }
 
     fun  findButton(view:View){
+        error!!.isVisible = false
+        lv!!.isVisible = true
         var db: DatabaseHelper = DatabaseHelper(this)
         var menuItemName = findViewById<EditText>(R.id.etItem).text.toString()
+
         if(menuItemName!="") {
             var whereClauseUse = "prodName like \"%" + menuItemName+"%\""
             var cusrsor = db.getMenuItemThatMatchPassedInWhere(whereClauseUse)
@@ -162,6 +166,11 @@ class adminCafeMenu : AppCompatActivity() {
             var adapter = AdminMenuItemAdapter(this,data)
             var lv = findViewById<ListView>(R.id.lvAdminCafeMenuItems)
             lv.adapter = adapter
+
+        }else{
+            error!!.isVisible = true
+            error!!.text = "no info inputted"
+            lv!!.isVisible = false
 
         }
 

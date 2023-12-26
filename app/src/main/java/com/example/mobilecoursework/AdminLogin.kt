@@ -24,36 +24,61 @@ class AdminLogin : AppCompatActivity() {
     }
 
     fun login(view: View) {
-       var db: DatabaseHelper = DatabaseHelper(this)
-
+        var db: DatabaseHelper = DatabaseHelper(this)
+        var error = findViewById<TextView>(R.id.txtErrorMessage)
         var username: String = "" + findViewById<EditText>(R.id.etUserName).text.toString()
         var password: String = "" + findViewById<EditText>(R.id.etPassword).text.toString()
-        var results: Cursor? = db.getLoginDetails(username)
+        var errorMessage = ""
+        if(username==""){
+            errorMessage = "missing user name"
+        }else if(username.length >= 50) {
+            errorMessage = " user name is to big"
+        }
+        if(password ==""){
+            errorMessage = "missing password"
+        }else if(password.length >= 50) {
+            errorMessage = "password is to big"
+        }
 
-       var hash = Hash()
-        var outPutString = hash.hashMessage(password.toString())
+        if(errorMessage==""){
+            var results: Cursor? = db.getLoginDetails(username)
+            var hash = Hash()
+            var outPutString = hash.hashMessage(password.toString())
 
 
-        if (results != null) {
-            if (results.moveToFirst()) {
-                do {
+
+            if (results != null) {
+                if (results.moveToFirst()) {
+                    do {
                         var comparison = results.getString(5)
                         if (outPutString.toString().equals(comparison)) {
-                        //  if(password.equals(results.getString(5))){
-                       //as sending to home page will need another one to send message to the activity want to use
-                        var loginIntent: Intent = Intent(this, AdminHomePage::class.java).apply{
-                            putExtra("logedInId",results.getInt(0).toString())
+                            //  if(password.equals(results.getString(5))){
+                            //as sending to home page will need another one to send message to the activity want to use
+                            var loginIntent: Intent =
+                                Intent(this, AdminHomePage::class.java).apply {
+                                    putExtra("logedInId", results.getInt(0).toString())
+                                }
+
+                            startActivity(loginIntent)
+                        }else{
+                            errorMessage = "password didn't match username"
                         }
-
-                        startActivity(loginIntent)
-                    }
-                } while (results.moveToNext())
+                    } while (results.moveToNext())
 
 
-            }
+                }else{
+                    errorMessage = "no matching username"
+                }
+
+
+
 
         }
 
+
+        }
+            error.isVisible = true
+            error.text = errorMessage
 
     }
 
