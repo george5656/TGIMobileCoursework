@@ -37,6 +37,7 @@
         android:id="@+id/btnDeleteCancel"
         android:layout_width="149dp"
         android:layout_height="76dp"
+        android:onClick="cancelButton"
         android:text="cancel"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"

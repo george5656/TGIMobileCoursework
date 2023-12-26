@@ -9,6 +9,7 @@ import android.widget.RadioButton
 import android.widget.TextView
 import androidx.core.view.isVisible
 import com.example.mobilecoursework.model.DatabaseHelper
+import com.example.mobilecoursework.model.Hash
 import java.security.MessageDigest
 
 class AdminRegister : AppCompatActivity() {
@@ -26,6 +27,8 @@ fun back(view:View) {
         var userName : String = findViewById<EditText>(R.id.etUserNameCreate).text.toString()
        // var password : String = MessageDigest.getInstance(findViewById<EditText>(R.id.etPasswordCreate).text.toString(),"MD5").toString()
         var password : String = findViewById<EditText>(R.id.etPasswordCreate).text.toString()
+        var hash = Hash()
+        var passwordToBeSaved = hash.hashMessage(password)
         var fullname : String = findViewById<EditText>(R.id.etFullNameCreate).text.toString()
         var phonenumber : String = findViewById<EditText>(R.id.etPhoneCreate).text.toString()
         var email : String = findViewById<EditText>(R.id.etEmailCreate).text.toString()
@@ -78,7 +81,7 @@ fun back(view:View) {
         if(errorMessage =="") {
             var db: DatabaseHelper = DatabaseHelper(this)
             var output: Int =
-                db.createAdmin(userName, password, fullname, phonenumber, email, active).toInt()
+                db.createAdmin(userName, passwordToBeSaved, fullname, phonenumber, email, active).toInt()
             if (output != -1) {
                 var adminHomePage: Intent = Intent(this, AdminHomePage::class.java)
                 startActivity(adminHomePage)

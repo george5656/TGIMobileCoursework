@@ -11,6 +11,7 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.core.view.isVisible
 import com.example.mobilecoursework.model.DatabaseHelper
+import com.example.mobilecoursework.model.Hash
 import java.security.MessageDigest
 
 class AdminLogin : AppCompatActivity() {
@@ -28,28 +29,15 @@ class AdminLogin : AppCompatActivity() {
         var username: String = "" + findViewById<EditText>(R.id.etUserName).text.toString()
         var password: String = "" + findViewById<EditText>(R.id.etPassword).text.toString()
         var results: Cursor? = db.getLoginDetails(username)
-        var md = MessageDigest.getInstance("MD5")
-        md.update(password.toByteArray())
-        var hash = md.digest()
-/* basically a a string buffer, so can get the array data one at a time, else it will
-  just keep changing the hash every time it is ran
 
- */
-        var outPutString = StringBuilder()
-        for (data in hash) {
-            outPutString.append(data.toString())
-        }
-        var error =findViewById<TextView>(R.id.txtErrorMessage)
-        error.isVisible = true
-        error.text = outPutString.toString()//result.toString()
+       var hash = Hash()
+        var outPutString = hash.hashMessage(password.toString())
 
 
         if (results != null) {
             if (results.moveToFirst()) {
                 do {
-                     var comparison =   results.getString(5)
-                    findViewById<EditText>(R.id.etUserName).text.append(comparison.toString())
-
+                        var comparison = results.getString(5)
                         if (outPutString.toString().equals(comparison)) {
                         //  if(password.equals(results.getString(5))){
                        //as sending to home page will need another one to send message to the activity want to use

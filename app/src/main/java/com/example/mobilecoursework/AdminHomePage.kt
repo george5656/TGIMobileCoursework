@@ -17,7 +17,7 @@ class AdminHomePage : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        accountId = intent.getStringExtra("logedInId").toString()
+        accountId = intent?.getStringExtra("logedInId")
     }
     fun menuLoad(view: View){
         var menuIntent:Intent = Intent(this,adminCafeMenu::class.java)
@@ -38,7 +38,11 @@ class AdminHomePage : AppCompatActivity() {
     fun accountSettingLoad(view: View){
         var settingsIntent:Intent = Intent(this, AdminAccountEdit::class.java)
         // as intent aren't super global i am just forwaring the message here
-        settingsIntent.putExtra("adminId",accountId)
+        var sendData = ""
+        if(accountId!=null){
+            sendData = accountId!!
+        }
+        settingsIntent.putExtra("adminId",sendData)
         startActivity(settingsIntent)
     }
     fun logout(view:View){

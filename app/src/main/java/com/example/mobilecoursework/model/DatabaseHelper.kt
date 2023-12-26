@@ -165,7 +165,7 @@ fun getSpecificOrderFromOrderId(id:String?):Cursor{
     return db.rawQuery(query, null)
 }
 fun updateOrderStatus(status : String, id:String){
-    var cv = ContentValues()
+        var cv = ContentValues()
         cv.put("orderStatus",status)
 
     db.update("Purchase",cv,"orderId = " + id,null )
@@ -197,6 +197,10 @@ fun updateCafeMenuItem(cv:ContentValues, id:String){
 
 fun updateAdminAccount(cv:ContentValues,id:String){
     db.update("Admin",cv,"adminId = "+id,null)
+}
+
+fun createMenuItem(cv:ContentValues){
+    db.insert("Product",null,cv)
 }
 }
 

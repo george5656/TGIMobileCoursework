@@ -29,13 +29,9 @@ class adminCafeMenu : AppCompatActivity() {
     }
     override fun onStart() {
         super.onStart()
-
-
-
         var db: DatabaseHelper = DatabaseHelper(this)
-
         var cusrsor = db.getMenuItems()
-    var whereClause = ""
+        var whereClause = ""
         var whereClauseUse =""
         var maxPrice = intent.getStringExtra("maxPrice")
         var minPrice = intent.getStringExtra("minPrice")
@@ -125,6 +121,7 @@ class adminCafeMenu : AppCompatActivity() {
             var deleteItemIntent: Intent = Intent(this, AdminDeleteCOnfirmation::class.java)
             deleteItemIntent.putExtra("menuItemToBeDeleted", selectedItem!!.proId.toString())
             deleteItemIntent.putExtra("typeOfDelete", "menuItem")
+            deleteItemIntent.putExtra("itemName",selectedItem!!.proName)
             startActivity(deleteItemIntent)
         }
         }

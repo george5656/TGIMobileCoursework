@@ -18,11 +18,15 @@ class AdminDeleteCOnfirmation : AppCompatActivity() {
         super.onStart()
          deleteType = intent.getStringExtra("menuItem")
          data = intent.getStringExtra("menuItemToBeDeleted")
-        findViewById<TextView>(R.id.txtWaring).text = data
+        findViewById<TextView>(R.id.txtWaring).text = "are you sure \n you want to delete\n " + intent.getStringExtra("itemName")
     }
     fun confirmButton(view: View){
     var db = DatabaseHelper(this)
         db.deleteCafeMenuItem(data)
+        var menuIntent: Intent = Intent(this,adminCafeMenu::class.java)
+        startActivity(menuIntent)
+    }
+    fun cancelButton(view:View){
         var menuIntent: Intent = Intent(this,adminCafeMenu::class.java)
         startActivity(menuIntent)
     }

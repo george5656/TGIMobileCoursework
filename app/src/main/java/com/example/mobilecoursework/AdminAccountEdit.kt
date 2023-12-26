@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.EditText
 import android.widget.RadioButton
 import com.example.mobilecoursework.model.DatabaseHelper
+import com.example.mobilecoursework.model.Hash
 import java.security.MessageDigest
 
 class AdminAccountEdit : AppCompatActivity() {
@@ -27,25 +28,25 @@ class AdminAccountEdit : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
 
-         accountId = intent.getStringExtra("adminId")
-         db = DatabaseHelper(this)
-         userName = findViewById<EditText>(R.id.etuserNameEdit)
-         password = findViewById<EditText>(R.id.etPasswordEdit)
-         fullName = findViewById<EditText>(R.id.etFullNameEdit)
-         email = findViewById<EditText>(R.id.etEmailEdit)
-         phoneNo = findViewById<EditText>(R.id.etPhoneEdit)
-        userName!!.text.clear()
-        password!!.text.clear()
-        fullName!!.text.clear()
-        email!!.text.clear()
-        phoneNo!!.text.clear()
+        accountId = intent.getStringExtra("adminId")
+        db = DatabaseHelper(this)
+        userName = findViewById<EditText>(R.id.etuserNameEdit)
+        password = findViewById<EditText>(R.id.etPasswordEdit)
+        fullName = findViewById<EditText>(R.id.etFullNameEdit)
+        email = findViewById<EditText>(R.id.etEmailEdit)
+        phoneNo = findViewById<EditText>(R.id.etPhoneEdit)
 
-        var details = db!!.getAdminDetails(accountId)
-
-        details.moveToFirst()
+        if (accountId != "") {
+            userName!!.text.clear()
+            password!!.text.clear()
+            fullName!!.text.clear()
+            email!!.text.clear()
+            phoneNo!!.text.clear()
+            var details = db!!.getAdminDetails(accountId)
+            details.moveToFirst()
 
             userName!!.text.append(details.getString(4).toString())
-            password!!.text.append(details.getBlob(5).toString())
+           // password!!.text.append(details.getBlob(5).toString())
             fullName!!.text.append(details.getString(2).toString())
             email!!.text.append(details.getString(2).toString())
             phoneNo!!.text.append(details.getString(3).toString())
@@ -55,12 +56,9 @@ class AdminAccountEdit : AppCompatActivity() {
                 findViewById<RadioButton>(R.id.rbNoAdminAccountEdit).isChecked = true
             }
 
-
-
-
-
-
-
+        }else{
+            userName!!.text.append("error, login required")
+        }
     }
     fun backButton(view: View) {
         var homeIntent: Intent = Intent(this, AdminHomePage::class.java)
@@ -68,17 +66,8 @@ class AdminAccountEdit : AppCompatActivity() {
     }
 
 fun saveButton(view: View){
-    var md = MessageDigest.getInstance("MD5")
-    md.update(password!!.text.toString().toByteArray())
-    var hash = md.digest()
-    /* basically a a string buffer, so can get the array data one at a time, else it will
-      just keep changing the hash every time it is ran
-
-     */
-    var outPutString = StringBuilder()
-    for (data in hash) {
-        outPutString.append(data.toString())
-    }
+   var hash = Hash()
+    var outPutString = hash.hashMessage(password.toString())
     var cv = ContentValues()
     cv.put("adminFullName",fullName!!.text.toString())
     cv.put("adminEmail",email!!.text.toString())
