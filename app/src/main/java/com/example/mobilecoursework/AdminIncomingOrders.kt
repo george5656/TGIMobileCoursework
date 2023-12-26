@@ -15,6 +15,7 @@ import com.example.mobilecoursework.model.AdminIncomingOrderAdapter
 import com.example.mobilecoursework.model.AdminUserUserNameList
 import com.example.mobilecoursework.model.DatabaseHelper
 import com.example.mobilecoursework.model.Order
+import com.example.mobilecoursework.model.inputValdiation
 
 class AdminIncomingOrders : AppCompatActivity() {
 
@@ -137,7 +138,9 @@ class AdminIncomingOrders : AppCompatActivity() {
     }
 fun findButton(view: View){
     var userInput = findViewById<EditText>(R.id.etOrderName).text.toString()
-    if(userInput!="") {
+    var validation = inputValdiation()
+    var errorMessage = validation.stringValidaiton(userInput)
+    if(errorMessage=="") {
         var db = DatabaseHelper(this)
         var list = findViewById<ListView>(R.id.lvOrders)
         var data = db.getSpecificOrders(userInput)
@@ -146,9 +149,9 @@ fun findButton(view: View){
 
 
     }else{
-        var Error = findViewById<TextView>(R.id.txtErrorMessageIncomingOrders)
-        Error.isVisible = true
-        Error.text = "no inputted date"
+        var error = findViewById<TextView>(R.id.txtErrorMessageIncomingOrders)
+        error.isVisible = true
+        error.text = errorMessage
     }
 }
 }

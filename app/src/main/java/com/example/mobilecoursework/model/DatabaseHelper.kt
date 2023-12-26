@@ -190,13 +190,11 @@ db.insert("Notfifcation",null,cv)
 
   }
 fun updateCafeMenuItem(cv:ContentValues, id:String){
-
-
     db.update("Product",cv,"productId = " + id,null )
 }
 
-fun updateAdminAccount(cv:ContentValues,id:String){
-    db.update("Admin",cv,"adminId = "+id,null)
+fun updateAdminAccount(cv:ContentValues, id:String){
+    db.update("Admin",cv,"adminId = " + id ,null)
 }
 
 fun createMenuItem(cv:ContentValues){

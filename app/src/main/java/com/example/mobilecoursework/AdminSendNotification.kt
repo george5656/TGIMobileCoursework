@@ -21,6 +21,7 @@ import androidx.core.view.isVisible
 import androidx.core.view.size
 import com.example.mobilecoursework.model.AdminUserUserNameList
 import com.example.mobilecoursework.model.DatabaseHelper
+import com.example.mobilecoursework.model.inputValdiation
 import android.widget.AdapterView.OnItemSelectedListener as OnItemSelectedListener
 
 class AdminSendNotification : AppCompatActivity() {
@@ -123,7 +124,10 @@ class AdminSendNotification : AppCompatActivity() {
 
         fun findButton(view: View) {
             var userInput = findViewById<EditText>(R.id.etNotficationUser).text
-            if (userInput.toString() != "") {
+            var error = findViewById<TextView>(R.id.txtNotificatonError)
+            var validation = inputValdiation()
+            var errorMessage = validation.stringValidaiton(userInput.toString())
+            if ( errorMessage == "") {
                 var db = DatabaseHelper(this)
                 var list = findViewById<ListView>(R.id.lvUserUsernames)
                 var adapter = AdminUserUserNameList(
@@ -131,6 +135,9 @@ class AdminSendNotification : AppCompatActivity() {
                     getUserName(db.getSpecificCustomer(userInput.toString()))
                 )
                 list.adapter = adapter
+            }else{
+                error.isVisible = true
+                error.text = errorMessage
             }
         }
 

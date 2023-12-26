@@ -168,7 +168,7 @@ var lv :ListView? = null
         var db: DatabaseHelper = DatabaseHelper(this)
         var menuItemName = findViewById<EditText>(R.id.etItem).text.toString()
         var validation = inputValdiation()
-        var errorMessage = validation.StringValidaiton(menuItemName)
+        var errorMessage = validation.stringValidaiton(menuItemName)
         if(errorMessage=="") {
             var whereClauseUse = "prodName like \"%" + menuItemName+"%\""
             var cusrsor = db.getMenuItemThatMatchPassedInWhere(whereClauseUse)

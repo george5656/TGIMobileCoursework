@@ -30,14 +30,12 @@ class AdminLogin : AppCompatActivity() {
         var username: String = "" + findViewById<EditText>(R.id.etUserName).text.toString()
         var password: String = "" + findViewById<EditText>(R.id.etPassword).text.toString()
         var validation = inputValdiation()
-        var errorMessageUserName = validation.StringValidaiton(username)
-
-        var errorMessagePassword = validation.StringValidaiton(password)
+        var errorMessageUserName = validation.stringValidaiton(username)
+        var errorMessagePassword = validation.stringValidaiton(password)
         var errorMessage = errorMessagePassword
-       if (errorMessage!=""){
+        if (errorMessage!=""){
             errorMessage ="password"+ errorMessagePassword
        }else if (errorMessageUserName!=""){
-
             errorMessage = "username"+errorMessageUserName
         }
         if(errorMessage==""){

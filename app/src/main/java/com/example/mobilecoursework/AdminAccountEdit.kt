@@ -4,6 +4,7 @@ import android.content.ContentValues
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.ContactsContract.CommonDataKinds.Phone
 import android.view.View
 import android.widget.EditText
 import android.widget.RadioButton
@@ -51,7 +52,7 @@ class AdminAccountEdit : AppCompatActivity() {
 
             userName!!.text.append(details.getString(4).toString())
            // password!!.text.append(details.getBlob(5).toString())
-            fullName!!.text.append(details.getString(2).toString())
+            fullName!!.text.append(details.getString(1).toString())
             email!!.text.append(details.getString(2).toString())
             phoneNo!!.text.append(details.getString(3).toString())
             if (details.getInt(6) == 1) {
@@ -71,24 +72,49 @@ class AdminAccountEdit : AppCompatActivity() {
     }
 
 fun saveButton(view: View){
-   var hash = Hash()
+    db = DatabaseHelper(this)
+    var hash = Hash()
     var validation = inputValdiation()
     var errorMessage = ""
-     errorMessage = validation.StringValidaiton(fullName!!.text.toString())
-    if(errorMessage!=""){
-        errorMessage = "fullName" + errorMessage
+     var errorMessageFullName = validation.stringValidaiton(fullName!!.text.toString())
+    var errorMessageUserName = validation.stringValidaiton(userName!!.text.toString())
+    var existingUsers = db!!.getLoginDetails(userName!!.text.toString())
+    if(existingUsers!!.moveToFirst() && existingUsers.getInt(0)!= accountId!!.toInt()){
+        errorMessageUserName  = "username all ready taken"
     }
+    var errorMessagePassword = validation.stringValidaiton(password!!.text.toString())
+    var errorMessagePhone = validation.phoneNumberValidation(phoneNo!!.text.toString())
+    var errorMessageEmail = validation.emailValidation(email!!.text.toString())
+    var errorMessageIsActive = ""
+    var active: Int = 0
+    if(errorMessageFullName!="") {
+        errorMessage = "full name" + errorMessageFullName
+    }else if(errorMessageUserName!="") {
+        errorMessage = "username" + errorMessageUserName
+    }else if(errorMessagePassword!=""){
+        errorMessage = "password" + errorMessagePassword
+    }else if(errorMessagePhone!=""){
+        errorMessage = "phone number" + errorMessagePhone
+    }else if(errorMessageEmail!=""){
+        errorMessage = "email" + errorMessageEmail
+    }
+    if (!(findViewById<RadioButton>(R.id.rbYesAdminAccountEdit).isChecked)&&!(findViewById<RadioButton>(R.id.rbNoAdminAccountEdit).isChecked)){
+        errorMessage = "active not selected"
+    }else if((findViewById<RadioButton>(R.id.rbYesAdminAccountEdit).isChecked)){
+        active = 1
+    }else if((findViewById<RadioButton>(R.id.rbNoAdminAccountEdit).isChecked))
+        active = 0
     if(errorMessage=="") {
-        var outPutString = hash.hashMessage(password.toString())
+        var outPutString = hash.hashMessage(password!!.text.toString())
         var cv = ContentValues()
         cv.put("adminFullName", fullName!!.text.toString())
         cv.put("adminEmail", email!!.text.toString())
         cv.put("adminPhoneNo", phoneNo!!.text.toString())
         cv.put("adminUserName", userName!!.text.toString())
-        cv.put("adminPassword", outPutString.toString())
-        db = DatabaseHelper(this)
+        cv.put("adminPassword", outPutString)
+        cv.put("adminIsActive",active)
         db!!.updateAdminAccount(cv, accountId.toString())
-   var homePage : Intent = Intent(this, AdminHomePage::class.java)
+        var homePage : Intent = Intent(this, AdminHomePage::class.java)
         startActivity(homePage)
     }else{
         error!!.isVisible = true

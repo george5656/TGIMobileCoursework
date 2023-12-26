@@ -8,8 +8,8 @@
 
     <ListView
         android:id="@+id/lvOrders"
-        android:layout_width="408dp"
-        android:layout_height="440dp"
+        android:layout_width="407dp"
+        android:layout_height="362dp"
         android:choiceMode="singleChoice"
         android:clickable="true"
         android:listSelector="@android:drawable/alert_light_frame"
@@ -50,7 +50,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tbIncomingOrders"
-        app:layout_constraintVertical_bias="0.726" />
+        app:layout_constraintVertical_bias="0.714" />
 
     <Button
         android:id="@+id/btnOrderMessage"
@@ -63,8 +63,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.053"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.817" />
+        app:layout_constraintTop_toBottomOf="@+id/txtErrorMessageIncomingOrders"
+        app:layout_constraintVertical_bias="0.126" />
 
     <Button
         android:id="@+id/btnOrderFind"

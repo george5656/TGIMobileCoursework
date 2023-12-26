@@ -3,7 +3,7 @@ package com.example.mobilecoursework.model
 import java.lang.Error
 
 class inputValdiation() {
-    fun StringValidaiton(input : String):String{
+    fun stringValidaiton(input : String):String{
         var errorMessage = ""
         if(input.length > 50){
             errorMessage = " it to long"
@@ -22,9 +22,6 @@ var empty = ""
 if(price.indexOf(".")==0&& price.length == 1){
     errorMessage = "need more than just \".\""
 }
-
-
-
     if (price.length > 50) {
         errorMessage = " it to long"
     }
@@ -51,4 +48,41 @@ if(errorMessage==""&& empty ==""){
 }
         return errorMessage
     }
+fun phoneNumberValidation(phoneNo:String):String{
+    var errorMessage = ""
+    if(phoneNo.length > 11){
+        errorMessage = " it to long"
+    }
+    if(!phoneNo.matches(Regex("[0-9]+"))){
+        errorMessage = " only allows 0-9 allowed"
+    }
+    if(phoneNo.length<=9){
+        errorMessage=" to short"
+    }
+    return errorMessage
+
+}
+fun emailValidation(email:String):String{
+    var errorMessage = ""
+    var atLocaiton = email.indexOf("@")
+    if(email.length > 50){
+        errorMessage = " it\'s to long"
+    }
+    if(!email.matches(Regex("[0-9a-zA-Z.@_ -]+"))){
+        errorMessage = " only allows a-z, 0-9, @, \'.\', \'-\' allowed"
+    }
+    if(atLocaiton == -1){
+        errorMessage = " invalid"
+    }
+    if(!(email.subSequence(atLocaiton+1,email.length).indexOf("@")==-1)){
+        errorMessage = " invalid"
+    }
+    if((email.indexOf(".com")==-1)){
+        errorMessage = " missing .com"
+    }
+    if(email==""){
+        errorMessage=" missing inputted data"
+    }
+    return errorMessage
+}
 }
