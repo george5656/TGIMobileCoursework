@@ -6,6 +6,38 @@
     android:layout_height="match_parent"
     tools:context=".AdminSendNotification">
 
+    <ListView
+        android:id="@+id/lvUserUsernames"
+        android:layout_width="308dp"
+        android:layout_height="290dp"
+        android:animateLayoutChanges="false"
+        android:choiceMode="multipleChoice"
+        android:clickable="true"
+        android:contextClickable="true"
+        android:descendantFocusability="afterDescendants"
+        android:focusable="auto"
+        android:focusableInTouchMode="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar2"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/txtFindUser"
+        android:layout_width="120dp"
+        android:layout_height="70dp"
+        android:onClick="findButton"
+        android:text="Find"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/etNotficationUser"
+        app:layout_constraintHorizontal_bias="0.025"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtNotificatonError"
+        app:layout_constraintVertical_bias="0.188" />
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar2"
         android:layout_width="409dp"
@@ -24,18 +56,6 @@
         app:title="notfication" />
 
 
-    <TextView
-        android:id="@+id/txtNotificatonError"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Error"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.686" />
-
     <Button
         android:id="@+id/btnSendToSelected"
         android:layout_width="120dp"
@@ -43,12 +63,10 @@
         android:onClick="loadNotificationCreator"
         android:text="Send to chosen"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBaseline_toBaselineOf="@+id/btnFilterUsers"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.975" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/btnSendToAll"
@@ -57,39 +75,23 @@
         android:onClick="sendToAllButton"
         android:text="Send to all"
         android:textSize="19sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBaseline_toBaselineOf="@+id/btnSendToSelected"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.945"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.975" />
-
-    <Button
-        android:id="@+id/txtFindUser"
-        android:layout_width="120dp"
-        android:layout_height="70dp"
-        android:onClick="findButton"
-        android:text="Find"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.053"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.812" />
+        app:layout_constraintStart_toEndOf="@+id/btnSendToSelected" />
 
     <Button
         android:id="@+id/btnFilterUsers"
         android:layout_width="120dp"
         android:layout_height="70dp"
-        android:text="Filter"
+        android:layout_marginTop="52dp"
+        android:onClick="filterButton"
+        android:text="Filter Users"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.054"
+        app:layout_constraintEnd_toStartOf="@+id/btnSendToSelected"
+        app:layout_constraintHorizontal_bias="0.04"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.975" />
+        app:layout_constraintTop_toBottomOf="@+id/txtFindUser" />
 
     <EditText
         android:id="@+id/etNotficationUser"
@@ -100,23 +102,21 @@
         android:text="Name"
         app:layout_constraintBaseline_toBaselineOf="@+id/txtFindUser"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.865"
+        app:layout_constraintHorizontal_bias="0.791"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <ListView
-        android:id="@+id/lvUserUsernames"
-        android:layout_width="309dp"
-        android:layout_height="345dp"
-        android:animateLayoutChanges="false"
-        android:choiceMode="multipleChoice"
-        android:clickable="true"
-        android:contextClickable="true"
-        android:descendantFocusability="afterDescendants"
-        android:focusable="auto"
-        android:focusableInTouchMode="true"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <TextView
+        android:id="@+id/txtNotificatonError"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textSize="24sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/etNotficationUser"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar2"
-        app:layout_constraintVertical_bias="0.008" />
+        app:layout_constraintTop_toBottomOf="@+id/lvUserUsernames"
+        app:layout_constraintVertical_bias="0.337" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

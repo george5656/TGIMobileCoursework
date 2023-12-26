@@ -145,7 +145,7 @@ fun deleteCafeMenuItem(id:String?){
         return db.rawQuery(query, null)
     }
 fun getFeedbackCustomerWhere(where:String):Cursor{
-    var query : String = "select * from \"Feedback\", \"Purchase\" where " + where
+    var query : String = "select * from \"Feedback\" Left Join \"Purchase\" On Feedback.orderId = Purchase.orderId where $where"
     return db.rawQuery(query, null)
 }
 fun getOrders():Cursor {
@@ -165,7 +165,7 @@ fun getSpecificOrderFromOrderId(id:String?):Cursor{
     return db.rawQuery(query, null)
 }
 fun updateOrderStatus(status : String, id:String){
-    var cv = ContentValues()
+        var cv = ContentValues()
         cv.put("orderStatus",status)
 
     db.update("Purchase",cv,"orderId = " + id,null )
@@ -190,14 +190,21 @@ db.insert("Notfifcation",null,cv)
 
   }
 fun updateCafeMenuItem(cv:ContentValues, id:String){
-
-
     db.update("Product",cv,"productId = " + id,null )
 }
 
-fun updateAdminAccount(cv:ContentValues,id:String){
-    db.update("Admin",cv,"adminId = "+id,null)
+fun updateAdminAccount(cv:ContentValues, id:String){
+    db.update("Admin",cv,"adminId = " + id ,null)
 }
+
+fun createMenuItem(cv:ContentValues){
+    db.insert("Product",null,cv)
+}
+fun getUserThatMatchCustomeWhere(where:String):Cursor{
+    var query: String = "select * from \"Customers\" Left Join \"Purchase\" ON \"Customers.cusId\" = \"Purchase.cusId\" where $where"
+    return db.rawQuery(query, null)
+}
+
 }
 
 

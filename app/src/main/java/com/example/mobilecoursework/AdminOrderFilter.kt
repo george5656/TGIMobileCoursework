@@ -37,4 +37,8 @@ fun applyButton(view: View){
     notificationIntent.putExtra("from", "filter")
     startActivity(notificationIntent)
 }
+fun back(view:View){
+    var orderIntent:Intent = Intent(this,AdminIncomingOrders::class.java)
+    startActivity(orderIntent)
+}
 }

@@ -18,10 +18,11 @@ import androidx.core.view.isVisible
 import com.example.mobilecoursework.model.AdminMenuItemAdapter
 import com.example.mobilecoursework.model.CafeItem
 import com.example.mobilecoursework.model.DatabaseHelper
+import com.example.mobilecoursework.model.inputValdiation
 
 class adminCafeMenu : AppCompatActivity() {
-
-
+var error : TextView? = null
+var lv :ListView? = null
     var selectedItem: CafeItem? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,18 +30,15 @@ class adminCafeMenu : AppCompatActivity() {
     }
     override fun onStart() {
         super.onStart()
-
-
-
         var db: DatabaseHelper = DatabaseHelper(this)
-
         var cusrsor = db.getMenuItems()
-    var whereClause = ""
+        var whereClause = ""
         var whereClauseUse =""
         var maxPrice = intent.getStringExtra("maxPrice")
         var minPrice = intent.getStringExtra("minPrice")
         var inStock = intent.getStringExtra("inStock")
         var hasImage = intent.getStringExtra("image")
+        error = findViewById(R.id.txtCafeMenuError)
         if(intent.getStringExtra("from")=="filter"){
         if(maxPrice!=""){
             whereClause = whereClause + "prodPrice <= " + maxPrice + " AND "
@@ -60,19 +58,20 @@ class adminCafeMenu : AppCompatActivity() {
             }
         if(whereClause!="") {
             whereClauseUse = whereClause.subSequence(0, whereClause.length-4).toString() + ";"
-        }
             cusrsor = db.getMenuItemThatMatchPassedInWhere(whereClauseUse)
+        }
+
     }
         var data : ArrayList<CafeItem> = getCafeItems(cusrsor)
         var adapter = AdminMenuItemAdapter(this,data)
-        var lv = findViewById<ListView>(R.id.lvAdminCafeMenuItems)
-        lv.adapter = adapter
+         lv = findViewById<ListView>(R.id.lvAdminCafeMenuItems)
+        lv!!.adapter = adapter
 
-        var onclick = AdapterView.OnItemClickListener { adapterView, view, i, l -> selectedItem = lv.getItemAtPosition(i) as? CafeItem;
+        var onclick = AdapterView.OnItemClickListener { adapterView, view, i, l -> selectedItem = lv!!.getItemAtPosition(i) as? CafeItem;
 
         }
 
-        lv.setOnItemClickListener(onclick)
+        lv!!.setOnItemClickListener(onclick)
 
 
 
@@ -85,9 +84,14 @@ class adminCafeMenu : AppCompatActivity() {
         startActivity(addItemIntent)
     }
     fun backButton(view:View){
-        var homeIntent: Intent = Intent(this, AdminHomePage::class.java)
-        startActivity(homeIntent)
-    }
+        if(error!!.isVisible){
+            error!!.isVisible = false
+            lv!!.isVisible = true
+        }else {
+            var homeIntent: Intent = Intent(this, AdminHomePage::class.java)
+            startActivity(homeIntent)
+        }
+        }
 
    fun getCafeItems(cusrsor: Cursor): ArrayList<CafeItem>{
 
@@ -120,11 +124,13 @@ class adminCafeMenu : AppCompatActivity() {
         var error = findViewById<TextView>(R.id.txtCafeMenuError)
         if(selectedItem == null) {
             error.isVisible = true
+            lv!!.isVisible = false
             error.text = "none selected"
         }else {
             var deleteItemIntent: Intent = Intent(this, AdminDeleteCOnfirmation::class.java)
             deleteItemIntent.putExtra("menuItemToBeDeleted", selectedItem!!.proId.toString())
             deleteItemIntent.putExtra("typeOfDelete", "menuItem")
+            deleteItemIntent.putExtra("itemName",selectedItem!!.proName)
             startActivity(deleteItemIntent)
         }
         }
@@ -133,6 +139,7 @@ class adminCafeMenu : AppCompatActivity() {
         var error = findViewById<TextView>(R.id.txtCafeMenuError)
       if(selectedItem == null){
           error.isVisible = true
+          lv!!.isVisible = false
           error.text = "none selected"
       }else {
 
@@ -156,15 +163,24 @@ class adminCafeMenu : AppCompatActivity() {
     }
 
     fun  findButton(view:View){
+        error!!.isVisible = false
+        lv!!.isVisible = true
         var db: DatabaseHelper = DatabaseHelper(this)
         var menuItemName = findViewById<EditText>(R.id.etItem).text.toString()
-        if(menuItemName!="") {
+        var validation = inputValdiation()
+        var errorMessage = validation.stringValidaiton(menuItemName)
+        if(errorMessage=="") {
             var whereClauseUse = "prodName like \"%" + menuItemName+"%\""
             var cusrsor = db.getMenuItemThatMatchPassedInWhere(whereClauseUse)
             var data : ArrayList<CafeItem> = getCafeItems(cusrsor)
             var adapter = AdminMenuItemAdapter(this,data)
             var lv = findViewById<ListView>(R.id.lvAdminCafeMenuItems)
             lv.adapter = adapter
+
+        }else{
+            error!!.isVisible = true
+            error!!.text = errorMessage
+            lv!!.isVisible = false
 
         }
 

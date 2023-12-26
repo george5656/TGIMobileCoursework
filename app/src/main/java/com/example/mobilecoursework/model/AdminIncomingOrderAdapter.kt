@@ -33,8 +33,11 @@ class AdminIncomingOrderAdapter(private var context : Context, private var items
         var time = view.findViewById<TextView>(R.id.txtOrderListItemTime)
         var status = view.findViewById<TextView>(R.id.txtOrderListItemStatus)
         username.text = items[p0].userName.toString()
-        date.text = items[p0].date.toString()
-        time.text = items[p0].time.toString()
+        var dateAsString = items[p0].date.toString()
+        var formattedDate = "" + dateAsString.subSequence(0,2) + "\\" + dateAsString.subSequence(2,4) + "\\"+dateAsString.subSequence(4,8)
+        date.text = formattedDate
+        var formattedTime = "" + items[p0].time.toString().subSequence(0,2) + ":" + items[p0].time.toString().subSequence(2,4)
+        time.text = formattedTime
         status.text = items[p0].status.toString()
         return view
     }

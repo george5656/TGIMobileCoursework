@@ -41,7 +41,7 @@ class AdminMenuItemAdapter(var context : Context, var items:ArrayList<CafeItem>)
 
         name.text = "name " + items[position].proName
         price.text = " cost £" + items[position].prodPrice.toString()
-        availble.text = "avalbe " + items[position].prodAvailable.toString()
+        availble.text = "available " + items[position].prodAvailable.toString()
         /*
         is basically just coveriting the ByteArray into, bitmap for it to be displaid, the zero is the offset, so
         if anything it shouldn't effect, the last part is simply the length for it to decoded, and first part is the

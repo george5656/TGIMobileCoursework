@@ -21,6 +21,7 @@ import androidx.core.view.isVisible
 import androidx.core.view.size
 import com.example.mobilecoursework.model.AdminUserUserNameList
 import com.example.mobilecoursework.model.DatabaseHelper
+import com.example.mobilecoursework.model.inputValdiation
 import android.widget.AdapterView.OnItemSelectedListener as OnItemSelectedListener
 
 class AdminSendNotification : AppCompatActivity() {
@@ -39,9 +40,31 @@ class AdminSendNotification : AppCompatActivity() {
             var db = DatabaseHelper(this)
             var list = findViewById<ListView>(R.id.lvUserUsernames)
             var adapter = AdminUserUserNameList(this, getUserName(db.getAllCustomer()))
+            if(intent.getStringExtra("from")=="filter"){
+                var status = intent.getStringExtra("status")
+                if(status == "yes"){
+                    status = "1"
+                }else if(status == "no"){
+                    status = "0"
+                }
+                var lob = intent.getStringExtra("lob")
+                var loa = intent.getStringExtra("loa")
+                var whereClause = ""
+                if(status != ""){
+                    whereClause = whereClause + "Customers.cusIsActive == " + status + " AND "
+                }
+                if (lob !=""){
+                    whereClause = whereClause + "\"Purchase.orderDate\" <= " + lob.toString().toInt() + " AND "
+                }
+                if (loa !=""){
+                    whereClause = whereClause + "\"Purchase.orderDate\" >= " + loa + " AND "
+                }
+                if(whereClause!="") {
+                    whereClause = whereClause.subSequence(0, whereClause.length-4).toString() + ";"
+                }
+                 adapter = AdminUserUserNameList(this, getUserName(db.getUserThatMatchCustomeWhere(whereClause)))
+            }
             list.adapter = adapter
-
-
 
             /*var onclick = AdapterView.OnItemClickListener { adapterView, view, i, l ->
 
@@ -52,10 +75,6 @@ class AdminSendNotification : AppCompatActivity() {
                 selectedItems.add(list.getItemAtPosition(i).toString())
 
            }
-
-
-
-
                 Toast.makeText(this, "hit", Toast.LENGTH_SHORT).show()
 
 
@@ -89,7 +108,7 @@ class AdminSendNotification : AppCompatActivity() {
         }
 
         fun filterButton(view: View) {
-            var filterLoad: Intent = Intent(this, AdminSendPromotions::class.java)
+            var filterLoad: Intent = Intent(this, AdminNotificationFilter::class.java)
             startActivity(filterLoad)
         }
 
@@ -105,7 +124,10 @@ class AdminSendNotification : AppCompatActivity() {
 
         fun findButton(view: View) {
             var userInput = findViewById<EditText>(R.id.etNotficationUser).text
-            if (userInput.toString() != "") {
+            var error = findViewById<TextView>(R.id.txtNotificatonError)
+            var validation = inputValdiation()
+            var errorMessage = validation.stringValidaiton(userInput.toString())
+            if ( errorMessage == "") {
                 var db = DatabaseHelper(this)
                 var list = findViewById<ListView>(R.id.lvUserUsernames)
                 var adapter = AdminUserUserNameList(
@@ -113,6 +135,9 @@ class AdminSendNotification : AppCompatActivity() {
                     getUserName(db.getSpecificCustomer(userInput.toString()))
                 )
                 list.adapter = adapter
+            }else{
+                error.isVisible = true
+                error.text = errorMessage
             }
         }
 
