@@ -58,8 +58,9 @@ var lv :ListView? = null
             }
         if(whereClause!="") {
             whereClauseUse = whereClause.subSequence(0, whereClause.length-4).toString() + ";"
-        }
             cusrsor = db.getMenuItemThatMatchPassedInWhere(whereClauseUse)
+        }
+
     }
         var data : ArrayList<CafeItem> = getCafeItems(cusrsor)
         var adapter = AdminMenuItemAdapter(this,data)
@@ -83,9 +84,14 @@ var lv :ListView? = null
         startActivity(addItemIntent)
     }
     fun backButton(view:View){
-        var homeIntent: Intent = Intent(this, AdminHomePage::class.java)
-        startActivity(homeIntent)
-    }
+        if(error!!.isVisible){
+            error!!.isVisible = false
+            lv!!.isVisible = true
+        }else {
+            var homeIntent: Intent = Intent(this, AdminHomePage::class.java)
+            startActivity(homeIntent)
+        }
+        }
 
    fun getCafeItems(cusrsor: Cursor): ArrayList<CafeItem>{
 

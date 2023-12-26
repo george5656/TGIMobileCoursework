@@ -7,8 +7,11 @@ import android.os.Bundle
 import android.view.View
 import android.widget.EditText
 import android.widget.RadioButton
+import android.widget.TextView
+import androidx.core.view.isVisible
 import com.example.mobilecoursework.model.DatabaseHelper
 import com.example.mobilecoursework.model.Hash
+import com.example.mobilecoursework.model.inputValdiation
 import java.security.MessageDigest
 
 class AdminAccountEdit : AppCompatActivity() {
@@ -20,6 +23,7 @@ class AdminAccountEdit : AppCompatActivity() {
     var fullName : EditText? = null
     var email : EditText? = null
     var phoneNo : EditText? = null
+    var error: TextView? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_admin_account_edit)
@@ -35,7 +39,7 @@ class AdminAccountEdit : AppCompatActivity() {
         fullName = findViewById<EditText>(R.id.etFullNameEdit)
         email = findViewById<EditText>(R.id.etEmailEdit)
         phoneNo = findViewById<EditText>(R.id.etPhoneEdit)
-
+        error = findViewById<TextView>(R.id.txtAccountEditError)
         if (accountId != "") {
             userName!!.text.clear()
             password!!.text.clear()
@@ -57,7 +61,8 @@ class AdminAccountEdit : AppCompatActivity() {
             }
 
         }else{
-            userName!!.text.append("error, login required")
+            error!!.text = "error, login required"
+
         }
     }
     fun backButton(view: View) {
@@ -67,15 +72,28 @@ class AdminAccountEdit : AppCompatActivity() {
 
 fun saveButton(view: View){
    var hash = Hash()
-    var outPutString = hash.hashMessage(password.toString())
-    var cv = ContentValues()
-    cv.put("adminFullName",fullName!!.text.toString())
-    cv.put("adminEmail",email!!.text.toString())
-    cv.put("adminPhoneNo",phoneNo!!.text.toString())
-    cv.put("adminUserName",userName!!.text.toString())
-    cv.put("adminPassword",outPutString.toString())
-    db = DatabaseHelper(this)
-    db!!.updateAdminAccount(cv,accountId.toString())
-}
+    var validation = inputValdiation()
+    var errorMessage = ""
+     errorMessage = validation.StringValidaiton(fullName!!.text.toString())
+    if(errorMessage!=""){
+        errorMessage = "fullName" + errorMessage
+    }
+    if(errorMessage=="") {
+        var outPutString = hash.hashMessage(password.toString())
+        var cv = ContentValues()
+        cv.put("adminFullName", fullName!!.text.toString())
+        cv.put("adminEmail", email!!.text.toString())
+        cv.put("adminPhoneNo", phoneNo!!.text.toString())
+        cv.put("adminUserName", userName!!.text.toString())
+        cv.put("adminPassword", outPutString.toString())
+        db = DatabaseHelper(this)
+        db!!.updateAdminAccount(cv, accountId.toString())
+   var homePage : Intent = Intent(this, AdminHomePage::class.java)
+        startActivity(homePage)
+    }else{
+        error!!.isVisible = true
+        error!!.text = errorMessage
+    }
+    }
 
 }

@@ -32,10 +32,10 @@
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/linearLayout2"
         app:layout_constraintEnd_toStartOf="@+id/linearLayout2"
-        app:layout_constraintHorizontal_bias="0.052"
+        app:layout_constraintHorizontal_bias="0.213"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/linearLayout2"
-        app:layout_constraintVertical_bias="0.355" />
+        app:layout_constraintVertical_bias="0.367" />
 
     <TextView
         android:id="@+id/txtEmailEdit"
@@ -45,10 +45,10 @@
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/linearLayout2"
         app:layout_constraintEnd_toStartOf="@+id/linearLayout2"
-        app:layout_constraintHorizontal_bias="0.045"
+        app:layout_constraintHorizontal_bias="0.129"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/linearLayout2"
-        app:layout_constraintVertical_bias="0.515" />
+        app:layout_constraintVertical_bias="0.503" />
 
     <TextView
         android:id="@+id/txtPhoneNoEdit"
@@ -58,10 +58,10 @@
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/linearLayout2"
         app:layout_constraintEnd_toStartOf="@+id/linearLayout2"
-        app:layout_constraintHorizontal_bias="0.053"
+        app:layout_constraintHorizontal_bias="0.225"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/linearLayout2"
-        app:layout_constraintVertical_bias="0.69" />
+        app:layout_constraintVertical_bias="0.694" />
 
     <TextView
         android:id="@+id/txtUserNameEdit"
@@ -71,10 +71,10 @@
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/linearLayout2"
         app:layout_constraintEnd_toStartOf="@+id/linearLayout2"
-        app:layout_constraintHorizontal_bias="0.053"
+        app:layout_constraintHorizontal_bias="0.225"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/linearLayout2"
-        app:layout_constraintVertical_bias="0.039" />
+        app:layout_constraintVertical_bias="0.054" />
 
     <TextView
         android:id="@+id/txtPasswordEdit"
@@ -84,10 +84,10 @@
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/linearLayout2"
         app:layout_constraintEnd_toStartOf="@+id/linearLayout2"
-        app:layout_constraintHorizontal_bias="0.052"
+        app:layout_constraintHorizontal_bias="0.21"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/linearLayout2"
-        app:layout_constraintVertical_bias="0.203" />
+        app:layout_constraintVertical_bias="0.197" />
 
     <TextView
         android:id="@+id/txtActiveEdit"
@@ -97,10 +97,10 @@
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/linearLayout2"
         app:layout_constraintEnd_toStartOf="@+id/linearLayout2"
-        app:layout_constraintHorizontal_bias="0.049"
+        app:layout_constraintHorizontal_bias="0.17"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/linearLayout2"
-        app:layout_constraintVertical_bias="0.854" />
+        app:layout_constraintVertical_bias="0.89" />
 
     <Button
         android:id="@+id/btnCancelAccountEdit"
@@ -110,10 +110,10 @@
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.065"
+        app:layout_constraintHorizontal_bias="0.024"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.919" />
+        app:layout_constraintVertical_bias="0.972" />
 
     <Button
         android:id="@+id/btnSaveAccountEdit"
@@ -124,10 +124,10 @@
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.934"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.919" />
+        app:layout_constraintVertical_bias="0.972" />
 
     <RadioGroup
         android:id="@+id/radioGroup"
@@ -139,7 +139,7 @@
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="228dp"
-        android:layout_height="473dp"
+        android:layout_height="443dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -153,7 +153,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="30dp"
+            android:layout_marginBottom="20dp"
             android:ems="10"
             android:inputType="text" />
 
@@ -161,7 +161,7 @@
             android:id="@+id/etPasswordEdit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="30dp"
+            android:layout_marginBottom="20dp"
             android:ems="10"
             android:inputType="textPassword" />
 
@@ -169,7 +169,7 @@
             android:id="@+id/etFullNameEdit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="30dp"
+            android:layout_marginBottom="20dp"
             android:ems="10"
             android:inputType="text" />
 
@@ -177,7 +177,7 @@
             android:id="@+id/etEmailEdit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="30dp"
+            android:layout_marginBottom="20dp"
             android:ems="10"
             android:inputType="textEmailAddress" />
 
@@ -185,7 +185,7 @@
             android:id="@+id/etPhoneEdit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="30dp"
+            android:layout_marginBottom="20dp"
             android:ems="10"
             android:inputType="phone" />
 
@@ -209,5 +209,16 @@
         </RadioGroup>
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/txtAccountEditError"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Error"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/btnCancelAccountEdit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

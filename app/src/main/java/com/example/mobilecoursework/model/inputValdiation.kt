@@ -18,7 +18,7 @@ class inputValdiation() {
     }
 fun priceValidaiton(price:String):String {
     var errorMessage = ""
-
+var empty = ""
 if(price.indexOf(".")==0&& price.length == 1){
     errorMessage = "need more than just \".\""
 }
@@ -35,13 +35,15 @@ if(price.indexOf(".")==0&& price.length == 1){
             errorMessage = " only 2 decimal places"
         }
     }
-        if (!price.matches(Regex("[0-9.]+"))) {
-            errorMessage = " only allows a-z and 0-9 allowed"
+        if (!price.matches(Regex("[0-9. ]+"))&& price!="") {
+
+                errorMessage = " only allows a-z and 0-9 allowed"
+
         }
         if (price == "") {
-            errorMessage = " missing inputted data"
+            empty = " missing inputted data"
         }
-if(errorMessage==""){
+if(errorMessage==""&& empty ==""){
     var priceD: Double? = price?.toDouble()
     if (priceD == null) {
         errorMessage = "wrong data type"

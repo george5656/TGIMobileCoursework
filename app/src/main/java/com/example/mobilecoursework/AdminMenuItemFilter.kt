@@ -40,16 +40,24 @@ class AdminMenuItemFilter : AppCompatActivity() {
         }
         var db = DatabaseHelper(this)
        errorMessage = validation.priceValidaiton(maxPrice)
+        if(errorMessage!=""){
+            errorMessage = "max price" + errorMessage
+        }else{
+            errorMessage = validation.priceValidaiton(minPrice)
+            if(errorMessage!=""){
+                errorMessage = "min price" + errorMessage
+            }
+        }
         if (errorMessage != "") {
             error.isVisible = true
             error.text = errorMessage
         } else {
             var menuIntent: Intent = Intent(this, adminCafeMenu::class.java)
-           /* menuIntent.putExtra("maxPrice", maxPrice)
+            menuIntent.putExtra("maxPrice", maxPrice)
             menuIntent.putExtra("minPrice", minPrice)
             menuIntent.putExtra("image", image)
             menuIntent.putExtra("inStock", itemStock)
-            */menuIntent.putExtra("from", "filter")
+            menuIntent.putExtra("from", "filter")
             startActivity(menuIntent)
         }
     }
