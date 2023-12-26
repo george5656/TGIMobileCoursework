@@ -145,7 +145,7 @@ fun deleteCafeMenuItem(id:String?){
         return db.rawQuery(query, null)
     }
 fun getFeedbackCustomerWhere(where:String):Cursor{
-    var query : String = "select * from \"Feedback\", \"Purchase\" where " + where
+    var query : String = "select * from \"Feedback\" Left Join \"Purchase\" On Feedback.orderId = Purchase.orderId where $where"
     return db.rawQuery(query, null)
 }
 fun getOrders():Cursor {
@@ -202,6 +202,11 @@ fun updateAdminAccount(cv:ContentValues,id:String){
 fun createMenuItem(cv:ContentValues){
     db.insert("Product",null,cv)
 }
+fun getUserThatMatchCustomeWhere(where:String):Cursor{
+    var query: String = "select * from \"Customers\" Left Join \"Purchase\" ON \"Customers.cusId\" = \"Purchase.cusId\" where $where"
+    return db.rawQuery(query, null)
+}
+
 }
 
 

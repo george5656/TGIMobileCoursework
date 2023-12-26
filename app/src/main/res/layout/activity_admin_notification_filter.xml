@@ -8,20 +8,22 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/tbNotificationFilter"
-        android:layout_width="409dp"
-        android:layout_height="wrap_content"
+        android:layout_width="404dp"
+        android:layout_height="67dp"
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
+        android:onClick="back"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.001"
+        app:layout_constraintVertical_bias="0.0"
         app:navigationIcon="?attr/homeAsUpIndicator"
         app:title="Notification filter" />
 
     <RadioGroup
+        android:id="@+id/radioGroup6"
         android:layout_width="168dp"
         android:layout_height="127dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -55,11 +57,11 @@
         android:text="Account Is active"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.056"
+        app:layout_constraintEnd_toStartOf="@+id/radioGroup6"
+        app:layout_constraintHorizontal_bias="0.164"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.162" />
+        app:layout_constraintVertical_bias="0.153" />
 
     <EditText
         android:id="@+id/etBeforeDate"
@@ -79,11 +81,11 @@
         android:text="Last order before"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.053"
+        app:layout_constraintEnd_toStartOf="@+id/etBeforeDate"
+        app:layout_constraintHorizontal_bias="0.219"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.374" />
+        app:layout_constraintVertical_bias="0.367" />
 
     <TextView
         android:id="@+id/txtLastOrderAfter"
@@ -92,11 +94,11 @@
         android:text="Last order after"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.065"
+        app:layout_constraintEnd_toStartOf="@+id/etAfterDate"
+        app:layout_constraintHorizontal_bias="0.271"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.537" />
+        app:layout_constraintVertical_bias="0.53" />
 
     <EditText
         android:id="@+id/etAfterDate"
@@ -113,20 +115,22 @@
         android:id="@+id/btnNotificationFilterCancel"
         android:layout_width="144dp"
         android:layout_height="81dp"
+        android:onClick="back"
         android:text="cancel"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.059"
+        app:layout_constraintEnd_toStartOf="@+id/btnNotifcationFilterApply"
+        app:layout_constraintHorizontal_bias="0.144"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.975" />
+        app:layout_constraintVertical_bias="0.977" />
 
     <Button
-        android:id="@+id/btnNotificationFilterSave"
+        android:id="@+id/btnNotifcationFilterApply"
         android:layout_width="141dp"
         android:layout_height="77dp"
-        android:text="Save"
+        android:onClick="applyButton"
+        android:text="apply"
         android:textSize="24sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/btnNotificationFilterCancel"
         app:layout_constraintEnd_toEndOf="parent"
