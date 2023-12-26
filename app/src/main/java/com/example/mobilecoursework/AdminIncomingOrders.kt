@@ -127,7 +127,7 @@ class AdminIncomingOrders : AppCompatActivity() {
                     cursor.getInt(0),
                     user.getString(4),
                     cursor.getInt(2),
-                    cursor.getString(3),
+                    cursor.getInt(3),
                     cursor.getString(4)
                 )
                 orderItems.add(order)
