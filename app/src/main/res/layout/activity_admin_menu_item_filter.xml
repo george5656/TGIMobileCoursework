@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:onClick="back"
     tools:context=".AdminMenuItemFilter">
 
     <androidx.appcompat.widget.Toolbar
@@ -13,6 +14,7 @@
         android:background="?attr/colorPrimary"
         android:longClickable="true"
         android:minHeight="?attr/actionBarSize"
+        android:onClick="back"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -81,6 +83,7 @@
         android:id="@+id/btnMenuFilterCancel"
         android:layout_width="138dp"
         android:layout_height="70dp"
+        android:onClick="back"
         android:text="Cancel"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -137,7 +140,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.876" />
+        app:layout_constraintVertical_bias="0.848" />
 
     <TextView
         android:id="@+id/txtItemAvailble"

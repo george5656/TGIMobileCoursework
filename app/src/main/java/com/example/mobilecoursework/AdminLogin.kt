@@ -12,6 +12,7 @@ import android.widget.TextView
 import androidx.core.view.isVisible
 import com.example.mobilecoursework.model.DatabaseHelper
 import com.example.mobilecoursework.model.Hash
+import com.example.mobilecoursework.model.inputValdiation
 import java.security.MessageDigest
 
 class AdminLogin : AppCompatActivity() {
@@ -28,25 +29,21 @@ class AdminLogin : AppCompatActivity() {
         var error = findViewById<TextView>(R.id.txtErrorMessage)
         var username: String = "" + findViewById<EditText>(R.id.etUserName).text.toString()
         var password: String = "" + findViewById<EditText>(R.id.etPassword).text.toString()
-        var errorMessage = ""
-        if(username==""){
-            errorMessage = "missing user name"
-        }else if(username.length >= 50) {
-            errorMessage = " user name is to big"
-        }
-        if(password ==""){
-            errorMessage = "missing password"
-        }else if(password.length >= 50) {
-            errorMessage = "password is to big"
-        }
+        var validation = inputValdiation()
+        var errorMessageUserName = validation.StringValidaiton(username)
 
+        var errorMessagePassword = validation.StringValidaiton(password)
+        var errorMessage = errorMessagePassword
+       if (errorMessage!=""){
+            errorMessage ="password"+ errorMessagePassword
+       }else if (errorMessageUserName!=""){
+
+            errorMessage = "username"+errorMessageUserName
+        }
         if(errorMessage==""){
             var results: Cursor? = db.getLoginDetails(username)
             var hash = Hash()
             var outPutString = hash.hashMessage(password.toString())
-
-
-
             if (results != null) {
                 if (results.moveToFirst()) {
                     do {

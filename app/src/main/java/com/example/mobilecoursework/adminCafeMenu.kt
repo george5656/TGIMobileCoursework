@@ -18,6 +18,7 @@ import androidx.core.view.isVisible
 import com.example.mobilecoursework.model.AdminMenuItemAdapter
 import com.example.mobilecoursework.model.CafeItem
 import com.example.mobilecoursework.model.DatabaseHelper
+import com.example.mobilecoursework.model.inputValdiation
 
 class adminCafeMenu : AppCompatActivity() {
 var error : TextView? = null
@@ -117,6 +118,7 @@ var lv :ListView? = null
         var error = findViewById<TextView>(R.id.txtCafeMenuError)
         if(selectedItem == null) {
             error.isVisible = true
+            lv!!.isVisible = false
             error.text = "none selected"
         }else {
             var deleteItemIntent: Intent = Intent(this, AdminDeleteCOnfirmation::class.java)
@@ -131,6 +133,7 @@ var lv :ListView? = null
         var error = findViewById<TextView>(R.id.txtCafeMenuError)
       if(selectedItem == null){
           error.isVisible = true
+          lv!!.isVisible = false
           error.text = "none selected"
       }else {
 
@@ -158,8 +161,9 @@ var lv :ListView? = null
         lv!!.isVisible = true
         var db: DatabaseHelper = DatabaseHelper(this)
         var menuItemName = findViewById<EditText>(R.id.etItem).text.toString()
-
-        if(menuItemName!="") {
+        var validation = inputValdiation()
+        var errorMessage = validation.StringValidaiton(menuItemName)
+        if(errorMessage=="") {
             var whereClauseUse = "prodName like \"%" + menuItemName+"%\""
             var cusrsor = db.getMenuItemThatMatchPassedInWhere(whereClauseUse)
             var data : ArrayList<CafeItem> = getCafeItems(cusrsor)
@@ -169,7 +173,7 @@ var lv :ListView? = null
 
         }else{
             error!!.isVisible = true
-            error!!.text = "no info inputted"
+            error!!.text = errorMessage
             lv!!.isVisible = false
 
         }

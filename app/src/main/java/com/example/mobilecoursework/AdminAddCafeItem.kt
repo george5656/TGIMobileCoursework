@@ -99,8 +99,8 @@ id = result.getInt(0)
     }
 
     fun backButton(view: View) {
-        var homeIntent: Intent = Intent(this, AdminHomePage::class.java)
-        startActivity(homeIntent)
+        var menuIntent:Intent = Intent(this,adminCafeMenu::class.java)
+        startActivity(menuIntent)
     }
 
     fun populateWidgets(data: CafeItem) {

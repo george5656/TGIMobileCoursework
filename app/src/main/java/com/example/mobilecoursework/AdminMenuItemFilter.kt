@@ -9,6 +9,7 @@ import android.widget.RadioButton
 import android.widget.TextView
 import androidx.core.view.isVisible
 import com.example.mobilecoursework.model.DatabaseHelper
+import com.example.mobilecoursework.model.inputValdiation
 
 class AdminMenuItemFilter : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,12 +19,13 @@ class AdminMenuItemFilter : AppCompatActivity() {
 
 
     fun applyButton(view: View) {
-        var Error = findViewById<TextView>(R.id.txtMenuFilterError)
-        var whereClause = ""
+        var validation = inputValdiation()
+        var error = findViewById<TextView>(R.id.txtMenuFilterError)
         var maxPrice = findViewById<EditText>(R.id.etMaxPrice).text.toString()
         var minPrice = findViewById<EditText>(R.id.etMinPrice).text.toString()
         var itemStock: String = ""
         var image: String = ""
+        var errorMessage:String = ""
         if (findViewById<RadioButton>(R.id.rbRemoveNoImage).isChecked) {
             image = "false"
         }
@@ -37,19 +39,23 @@ class AdminMenuItemFilter : AppCompatActivity() {
             itemStock = "false"
         }
         var db = DatabaseHelper(this)
-        if (maxPrice == "" && minPrice == "" && itemStock == "") {
-            Error.isVisible = true
-            Error.text = "not enough options picked"
+       errorMessage = validation.priceValidaiton(maxPrice)
+        if (errorMessage != "") {
+            error.isVisible = true
+            error.text = errorMessage
         } else {
             var menuIntent: Intent = Intent(this, adminCafeMenu::class.java)
-            menuIntent.putExtra("maxPrice", maxPrice)
+           /* menuIntent.putExtra("maxPrice", maxPrice)
             menuIntent.putExtra("minPrice", minPrice)
             menuIntent.putExtra("image", image)
             menuIntent.putExtra("inStock", itemStock)
-            menuIntent.putExtra("from", "filter")
+            */menuIntent.putExtra("from", "filter")
             startActivity(menuIntent)
         }
     }
-
+fun back(view: View){
+    var menuIntent:Intent = Intent(this,adminCafeMenu::class.java)
+    startActivity(menuIntent)
+}
 
 }
