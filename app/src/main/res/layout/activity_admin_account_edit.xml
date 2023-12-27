@@ -8,8 +8,8 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/tbAccountEdit"
-        android:layout_width="425dp"
-        android:layout_height="73dp"
+        android:layout_width="399dp"
+        android:layout_height="64dp"
         android:background="?attr/colorPrimary"
         android:contextClickable="true"
         android:minHeight="?attr/actionBarSize"

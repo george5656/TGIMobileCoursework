@@ -8,8 +8,8 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/tbNotificationFilter"
-        android:layout_width="404dp"
-        android:layout_height="67dp"
+        android:layout_width="386dp"
+        android:layout_height="59dp"
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         android:onClick="back"

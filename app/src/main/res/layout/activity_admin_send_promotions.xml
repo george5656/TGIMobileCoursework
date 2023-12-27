@@ -10,8 +10,8 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/tbNotfifcationCreation"
-        android:layout_width="409dp"
-        android:layout_height="wrap_content"
+        android:layout_width="366dp"
+        android:layout_height="58dp"
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         android:onClick="back"

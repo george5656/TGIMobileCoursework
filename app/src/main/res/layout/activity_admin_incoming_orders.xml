@@ -23,8 +23,8 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/tbIncomingOrders"
-        android:layout_width="409dp"
-        android:layout_height="wrap_content"
+        android:layout_width="388dp"
+        android:layout_height="61dp"
         android:background="?attr/colorPrimary"
         android:contextClickable="true"
         android:minHeight="?attr/actionBarSize"
