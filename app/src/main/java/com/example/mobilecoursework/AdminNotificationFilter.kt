@@ -6,6 +6,10 @@ import android.os.Bundle
 import android.view.View
 import android.widget.EditText
 import android.widget.RadioButton
+import android.widget.TextView
+import androidx.core.view.isVisible
+import com.example.mobilecoursework.model.StringFormat
+import com.example.mobilecoursework.model.inputValdiation
 
 class AdminNotificationFilter : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,12 +28,27 @@ if (findViewById<RadioButton>(R.id.rbNotificationFilterYes).isChecked){
 var lob = findViewById<EditText>(R.id.etBeforeDate).text.toString()
 var loa = findViewById<EditText>(R.id.etAfterDate).text.toString()
     var notificationIntent:Intent = Intent(this,AdminSendNotification::class.java)
-    notificationIntent.putExtra("from","filter")
-    notificationIntent.putExtra("status",accountStatus)
-    notificationIntent.putExtra("lob",lob)
-    notificationIntent.putExtra("loa",loa)
-    startActivity(notificationIntent)
-
+    var errorMessage = ""
+    var validation = inputValdiation()
+    var errorMessageLob = validation.dateValdiation(lob)
+    var errorMessageLoa = validation.dateValdiation(loa)
+    var format = StringFormat()
+    if(errorMessageLob!=""){
+        errorMessage = "last order before "+ errorMessageLob
+    } else if(errorMessageLoa!=""){
+        errorMessage = "last order after "+ errorMessageLoa
+    }
+    if (errorMessage=="") {
+        notificationIntent.putExtra("from", "filter")
+        notificationIntent.putExtra("status", accountStatus)
+        notificationIntent.putExtra("lob", format.DateFormat(lob))
+        notificationIntent.putExtra("loa", format.DateFormat(loa))
+        startActivity(notificationIntent)
+    }else{
+        var error = findViewById<TextView>(R.id.txtNotificationFilterError)
+    error.isVisible = true
+        error.text = errorMessage
+    }
 }
     fun back(view:View){
         var notificationIntent:Intent = Intent(this,AdminSendNotification::class.java)

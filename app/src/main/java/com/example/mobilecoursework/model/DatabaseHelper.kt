@@ -104,16 +104,9 @@ var db : SQLiteDatabase = this.writableDatabase
         return db.rawQuery(query, null)
     }
 
-    fun createAdmin(userName: String, password: String, fullName:String, phoneNo:String, email:String, active: Int ):Long{
+    fun createAdmin(cv:ContentValues){
         var table : String = "Admin"
-        var cv = ContentValues()
-        cv.put("adminUserName",userName)
-        cv.put("adminPassword",password)
-        cv.put("adminFullName",fullName)
-        cv.put("adminPhoneNo",phoneNo)
-        cv.put("adminEmail",email)
-        cv.put("adminIsActive",active)
-        return db.insert(table,null,cv)
+        db.insert(table,null,cv)
     }
 
 fun getMenuItems():Cursor{
@@ -201,7 +194,9 @@ fun createMenuItem(cv:ContentValues){
     db.insert("Product",null,cv)
 }
 fun getUserThatMatchCustomeWhere(where:String):Cursor{
-    var query: String = "select * from \"Customers\" Left Join \"Purchase\" ON \"Customers.cusId\" = \"Purchase.cusId\" where $where"
+    var query: String = "select * from Customers Left join Purchase ON Customers.cusId = Purchase.cusId where $where"
+    //var query: String = "select * from \"Customers\", \"Purchase\" where $where"
+
     return db.rawQuery(query, null)
 }
 

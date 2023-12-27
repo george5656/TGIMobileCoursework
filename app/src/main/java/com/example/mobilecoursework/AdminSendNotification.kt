@@ -54,16 +54,16 @@ class AdminSendNotification : AppCompatActivity() {
                     whereClause = whereClause + "Customers.cusIsActive == " + status + " AND "
                 }
                 if (lob !=""){
-                    whereClause = whereClause + "\"Purchase.orderDate\" <= " + lob.toString().toInt() + " AND "
+                    whereClause = whereClause + "Purchase.orderData <= " + lob + " AND "
                 }
                 if (loa !=""){
-                    whereClause = whereClause + "\"Purchase.orderDate\" >= " + loa + " AND "
+                    whereClause = whereClause + "Purchase.orderData >= " + loa + " AND "
                 }
                 if(whereClause!="") {
-                    whereClause = whereClause.subSequence(0, whereClause.length-4).toString() + ";"
+                    whereClause = whereClause.subSequence(0, whereClause.length-5).toString() + ";"
+                    adapter = AdminUserUserNameList(this, getUserName(db.getUserThatMatchCustomeWhere(whereClause)))
                 }
-                 adapter = AdminUserUserNameList(this, getUserName(db.getUserThatMatchCustomeWhere(whereClause)))
-            }
+                  }
             list.adapter = adapter
 
             /*var onclick = AdapterView.OnItemClickListener { adapterView, view, i, l ->
@@ -88,6 +88,7 @@ class AdminSendNotification : AppCompatActivity() {
                 var notifcationMakerLoad: Intent = Intent(this, AdminSendPromotions::class.java)
                 notifcationMakerLoad.putExtra("from", "sendToChosen")
                 notifcationMakerLoad.putExtra("selected", selectedItems)
+                notifcationMakerLoad.putExtra("origins", "sn")
                 startActivity(notifcationMakerLoad)
             } else {
                 var error = findViewById<TextView>(R.id.txtNotificatonError)
@@ -99,6 +100,7 @@ class AdminSendNotification : AppCompatActivity() {
         fun sendToAllButton(view: View) {
             var notifcationMakerLoad: Intent = Intent(this, AdminSendPromotions::class.java)
             notifcationMakerLoad.putExtra("from", "sendToAll")
+            notifcationMakerLoad.putExtra("origins", "sn")
             startActivity(notifcationMakerLoad)
         }
 
@@ -116,8 +118,10 @@ class AdminSendNotification : AppCompatActivity() {
             var userNames: ArrayList<String> = ArrayList()
             if (cursor.moveToFirst()) {
                 do {
-                    userNames.add(cursor.getString(4))
-                } while (cursor.moveToNext())
+                    if(!userNames.contains(cursor.getString(4))) {
+                        userNames.add(cursor.getString(4))
+                    }
+                    } while (cursor.moveToNext())
             }
             return userNames
         }
@@ -127,7 +131,7 @@ class AdminSendNotification : AppCompatActivity() {
             var error = findViewById<TextView>(R.id.txtNotificatonError)
             var validation = inputValdiation()
             var errorMessage = validation.stringValidaiton(userInput.toString())
-            if ( errorMessage == "") {
+            if (errorMessage == "") {
                 var db = DatabaseHelper(this)
                 var list = findViewById<ListView>(R.id.lvUserUsernames)
                 var adapter = AdminUserUserNameList(

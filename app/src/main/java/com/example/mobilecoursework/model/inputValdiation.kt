@@ -164,12 +164,46 @@ fun dateValdiation(date:String):String {
 
 }
 
-
-
-
-
         return errorMessage
 }
+fun timeValdiaiton(time:String):String{
+    var errorMessage = ""
+    var loactionOfCollon = time.indexOf(":")
+    var locationOfExtraCollon = time.indexOf(":",loactionOfCollon+1)
+     if(!time.matches(Regex("[0-9:]+"))&&time!=""){
+        errorMessage = " only allows 0-9 and :"
+    } else if(loactionOfCollon == -1&& time!="") {
+        errorMessage = " not in the format mm:hh"
+    } else if(locationOfExtraCollon!=-1) {
+        errorMessage = " has more than one :"
+    }else if(time.length==1){
+         errorMessage = " not enough data"
+     } else if(time!="") {
+         var hhInt : Int = -1
+         var mmInt : Int =-1
+         var hh = time.subSequence(0, loactionOfCollon)
+         var mm = time.subSequence(loactionOfCollon + 1, time.length)
+         if (hh.length < 2) {
+             errorMessage = " hour need to be in the format hh"
+         } else if (mm.length < 2) {
+             errorMessage = " minutes need to be in the format mm"
+         }else {
+             try {
+                 hhInt = hh.toString().toInt()
+                 mmInt = mm.toString().toInt()
+             } catch (e: Error) {
+                 errorMessage = " wrong data type"
+             }
+             if (hhInt > 24 && hhInt != -1) {
+                 errorMessage = " only 24 hours in a day"
+             } else if (mmInt > 60 && mmInt != -1) {
+                 errorMessage = " only 60 minutes a hour"
+             }
+         }
+     }
+    return errorMessage
 }
+}
+
 
 

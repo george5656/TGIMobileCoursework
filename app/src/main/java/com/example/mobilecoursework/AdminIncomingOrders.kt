@@ -106,6 +106,7 @@ class AdminIncomingOrders : AppCompatActivity() {
             messagePage.putExtra("from", "sendToChosen")
             messagePage.putExtra("return","orders")
             messagePage.putExtra("selected", selectedItems)
+            messagePage.putExtra("origins","io")
             startActivity(messagePage)
         }else{
             var errorMessage = findViewById<TextView>(R.id.txtErrorMessageIncomingOrders)

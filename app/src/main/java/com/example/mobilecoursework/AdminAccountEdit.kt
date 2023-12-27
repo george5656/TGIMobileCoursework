@@ -2,6 +2,7 @@ package com.example.mobilecoursework
 
 import android.content.ContentValues
 import android.content.Intent
+import android.database.Cursor
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.ContactsContract.CommonDataKinds.Phone
@@ -9,6 +10,7 @@ import android.view.View
 import android.widget.EditText
 import android.widget.RadioButton
 import android.widget.TextView
+import android.widget.Toolbar
 import androidx.core.view.isVisible
 import com.example.mobilecoursework.model.DatabaseHelper
 import com.example.mobilecoursework.model.Hash
@@ -25,15 +27,17 @@ class AdminAccountEdit : AppCompatActivity() {
     var email : EditText? = null
     var phoneNo : EditText? = null
     var error: TextView? = null
+    var from : String? = "accountEdit"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_admin_account_edit)
+
+
     }
 
-    override fun onStart() {
-        super.onStart()
+     override fun onStart() {
+       super.onStart()
 
-        accountId = intent.getStringExtra("adminId")
         db = DatabaseHelper(this)
         userName = findViewById<EditText>(R.id.etuserNameEdit)
         password = findViewById<EditText>(R.id.etPasswordEdit)
@@ -41,28 +45,38 @@ class AdminAccountEdit : AppCompatActivity() {
         email = findViewById<EditText>(R.id.etEmailEdit)
         phoneNo = findViewById<EditText>(R.id.etPhoneEdit)
         error = findViewById<TextView>(R.id.txtAccountEditError)
-        if (accountId != "") {
-            userName!!.text.clear()
-            password!!.text.clear()
-            fullName!!.text.clear()
-            email!!.text.clear()
-            phoneNo!!.text.clear()
-            var details = db!!.getAdminDetails(accountId)
-            details.moveToFirst()
+        password!!.text.clear()
+        fullName!!.text.clear()
+        email!!.text.clear()
+        phoneNo!!.text.clear()
+        from = intent.getStringExtra("from")
+        if(from=="accountEdit") {
+            accountId = intent.getStringExtra("adminId")
 
-            userName!!.text.append(details.getString(4).toString())
-           // password!!.text.append(details.getBlob(5).toString())
-            fullName!!.text.append(details.getString(1).toString())
-            email!!.text.append(details.getString(2).toString())
-            phoneNo!!.text.append(details.getString(3).toString())
-            if (details.getInt(6) == 1) {
-                findViewById<RadioButton>(R.id.rbYesAdminAccountEdit).isChecked = true
+
+            if (accountId != "") {
+                userName!!.text.clear()
+                var details = db!!.getAdminDetails(accountId)
+                details.moveToFirst()
+
+                userName!!.text.append(details.getString(4).toString())
+                // password!!.text.append(details.getBlob(5).toString())
+                fullName!!.text.append(details.getString(1).toString())
+                email!!.text.append(details.getString(2).toString())
+                phoneNo!!.text.append(details.getString(3).toString())
+                if (details.getInt(6) == 1) {
+                    findViewById<RadioButton>(R.id.rbYesAdminAccountEdit).isChecked = true
+                } else {
+                    findViewById<RadioButton>(R.id.rbNoAdminAccountEdit).isChecked = true
+                }
+
             } else {
-                findViewById<RadioButton>(R.id.rbNoAdminAccountEdit).isChecked = true
-            }
+                error!!.isVisible = true
+                error!!.text = "error, login required"
 
-        }else{
-            error!!.text = "error, login required"
+            }
+        }else if(accountId != "createAccount"){
+            userName!!.text.clear()
 
         }
     }
@@ -79,13 +93,17 @@ fun saveButton(view: View){
      var errorMessageFullName = validation.stringValidaiton(fullName!!.text.toString())
     var errorMessageUserName = validation.stringValidaiton(userName!!.text.toString())
     var existingUsers = db!!.getLoginDetails(userName!!.text.toString())
-    if(existingUsers!!.moveToFirst() && existingUsers.getInt(0)!= accountId!!.toInt()){
+
+
+    if(existingUsers!!.moveToFirst() && from == "createAccount"){
+        errorMessageUserName  = "username all ready taken"
+    }else if(existingUsers!!.moveToFirst() && from == "accountEdit" && existingUsers.getInt(0).toString() != accountId){
         errorMessageUserName  = "username all ready taken"
     }
+
     var errorMessagePassword = validation.stringValidaiton(password!!.text.toString())
     var errorMessagePhone = validation.phoneNumberValidation(phoneNo!!.text.toString())
     var errorMessageEmail = validation.emailValidation(email!!.text.toString())
-    var errorMessageIsActive = ""
     var active: Int = 0
     if(errorMessageFullName!="") {
         errorMessage = "full name" + errorMessageFullName
@@ -113,9 +131,15 @@ fun saveButton(view: View){
         cv.put("adminUserName", userName!!.text.toString())
         cv.put("adminPassword", outPutString)
         cv.put("adminIsActive",active)
-        db!!.updateAdminAccount(cv, accountId.toString())
-        var homePage : Intent = Intent(this, AdminHomePage::class.java)
+        if(from == "accountEdit") {
+            db!!.updateAdminAccount(cv, accountId.toString())
+        }else if(from == "createAccount" ){
+            db!!.createAdmin(cv)
+        }
+            var homePage : Intent = Intent(this, AdminHomePage::class.java)
+
         startActivity(homePage)
+
     }else{
         error!!.isVisible = true
         error!!.text = errorMessage

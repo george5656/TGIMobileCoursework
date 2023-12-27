@@ -79,14 +79,17 @@ fun back(view:View) {
             active = 0
         }
         if(errorMessage =="") {
-            var db: DatabaseHelper = DatabaseHelper(this)
+            /*var db: DatabaseHelper = DatabaseHelper(this)
             var output: Int =
                 db.createAdmin(userName, passwordToBeSaved, fullname, phonenumber, email, active).toInt()
             if (output != -1) {
                 var adminHomePage: Intent = Intent(this, AdminHomePage::class.java)
                 startActivity(adminHomePage)
-            }
+
+           }
+        */
         }else{
+
             var error = findViewById<TextView>(R.id.txtRegisterErrorMessage)
             error.isVisible = true
             error.text = errorMessage

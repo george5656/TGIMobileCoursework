@@ -43,6 +43,7 @@ class AdminHomePage : AppCompatActivity() {
             sendData = accountId!!
         }
         settingsIntent.putExtra("adminId",sendData)
+        settingsIntent.putExtra("from","accountEdit")
         startActivity(settingsIntent)
     }
     fun logout(view:View){
@@ -50,8 +51,10 @@ class AdminHomePage : AppCompatActivity() {
         startActivity(logOutIntent)
     }
     fun register(view:View){
-        var registerIntent:Intent = Intent(this, AdminRegister::class.java)
-        startActivity(registerIntent)
+        var settingsIntent:Intent = Intent(this, AdminAccountEdit::class.java)
+       settingsIntent.putExtra("from","createAccount")
+        startActivity(settingsIntent)
+
     }
 
 }

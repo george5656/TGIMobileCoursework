@@ -42,13 +42,15 @@ class AdminAddCafeItem : AppCompatActivity() {
 // the GetContent is just telling the replacemeant for startactivityforresult that the type of activity want is one to getContent
     var results = registerForActivityResult(ActivityResultContracts.GetContent()) {
         //this is creating an image source from uri which intnet gets
-            uri: Uri? ->
+            uri: Uri? ->if(uri != null) {
+
+
         var imageSocurce = ImageDecoder.createSource(contentResolver, uri!!)
         //this is decoding source into a bitmap
         var imageBitmap = ImageDecoder.decodeBitmap(imageSocurce)
         //this is showing the image
         findViewById<ImageView>(R.id.ivImageAddCafeItem).setImageBitmap(imageBitmap)
-
+    }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

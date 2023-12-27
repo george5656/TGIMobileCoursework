@@ -1,6 +1,7 @@
 package com.example.mobilecoursework.model
 
 class StringFormat {
+    // nfs = not formatted string
     fun DateFormat(nfs:String):String{
         var formattedString = ""
       if(nfs!="") {
@@ -13,4 +14,14 @@ class StringFormat {
       }
           return formattedString
     }
+fun timeFormat(nfs:String):String{
+    var formattedString = ""
+    if(nfs!="") {
+        var indexOfCollon = nfs.indexOf(":")
+        var hh = nfs.subSequence(0, indexOfCollon)
+        var mm = nfs.subSequence(indexOfCollon + 1, nfs.length)
+        formattedString = "" + hh + mm
+    }
+    return formattedString
+}
 }
