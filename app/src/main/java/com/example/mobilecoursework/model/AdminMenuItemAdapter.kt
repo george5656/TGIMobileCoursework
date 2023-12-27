@@ -47,8 +47,15 @@ class AdminMenuItemAdapter(var context : Context, var items:ArrayList<CafeItem>)
         if anything it shouldn't effect, the last part is simply the length for it to decoded, and first part is the
         byte array to decoded
          */
-        image.setImageBitmap(BitmapFactory.decodeByteArray(items[position].prodImage,0,items[position].prodImage.size))
-
+        if(items[position].prodImage != null) {
+            image.setImageBitmap(
+                BitmapFactory.decodeByteArray(
+                    items[position].prodImage,
+                    0,
+                    items[position].prodImage!!.size
+                )
+            )
+        }
 
 
 

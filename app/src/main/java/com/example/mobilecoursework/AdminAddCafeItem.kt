@@ -16,14 +16,17 @@ import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.RadioButton
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.core.graphics.drawable.toBitmap
+import androidx.core.view.isVisible
 import com.example.mobilecoursework.model.CafeItem
 import com.example.mobilecoursework.model.DatabaseHelper
 import com.example.mobilecoursework.model.ImageSave
+import com.example.mobilecoursework.model.inputValdiation
 import java.io.ByteArrayOutputStream
 
 
@@ -111,7 +114,7 @@ id = result.getInt(0)
             BitmapFactory.decodeByteArray(
                 data.prodImage,
                 0,
-                data.prodImage.size
+                data.prodImage!!.size
             )
         )
         var nameText = name!!.text
@@ -129,15 +132,29 @@ id = result.getInt(0)
     }
 
     fun saveButton(view: View) {
+        var validation = inputValdiation()
+        var errorMessage = ""
+        var nameErrors = validation.stringValidaiton(name!!.text.toString())
+        var priceErrors = validation.priceValidaiton(price!!.text.toString())
+        if(nameErrors!=""){
+            errorMessage = "name " + nameErrors
+        }else if(priceErrors!=""){
+            errorMessage = "price " + priceErrors
+        }
         if (availableYes!!.isChecked) {
             available = "yes"
         } else if (availableNo!!.isChecked) {
             available = "no"
+        }else{
+            errorMessage = "not stated if item is available"
         }
-        if (name!!.text.toString() != "" && price!!.text.toString() != "" && available != "") {
-            var db = DatabaseHelper(this)
-            var cv = saveChanges()
-               if (intent.getStringExtra("type") == "edit") {
+        if(price!!.text.toString() == ""){
+            errorMessage = "price missing"
+        }
+        if (errorMessage == "") {
+                var db = DatabaseHelper(this)
+                var cv = saveChanges()
+                if (intent.getStringExtra("type") == "edit") {
                     db.updateCafeMenuItem(cv,id.toString())
                     var menuIntent: Intent = Intent(this, adminCafeMenu::class.java)
                     startActivity(menuIntent)
@@ -147,6 +164,10 @@ id = result.getInt(0)
                     startActivity(menuIntent)
                 }
 
+        }else{
+            var error = findViewById<TextView>(R.id.txtNameAddCafeItemError)
+            error.isVisible = true
+            error.text = errorMessage
         }
     }
 fun saveChanges():ContentValues {
@@ -158,9 +179,14 @@ fun saveChanges():ContentValues {
     var cv = ContentValues()
     cv.put("prodName", name!!.text.toString())
     cv.put("prodPrice", price!!.text.toString())
-    var imageSave = ImageSave()
-    var byteArray = imageSave.bitmapToByteArray(image!!)
-    cv.put("prodImage", byteArray)
+
+    if(image!!.equals(null)) {
+       var imageSave = ImageSave()
+       var byteArray = imageSave.bitmapToByteArray(image!!)
+       cv.put("prodImage", byteArray)
+   }else{
+       cv.putNull("prodImage")
+   }
     if (available == "yes") {
         cv.put("prodAvailable", 1)
     } else if (available == "no") {

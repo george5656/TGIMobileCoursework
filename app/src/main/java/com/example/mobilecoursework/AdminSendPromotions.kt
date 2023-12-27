@@ -38,8 +38,8 @@ class AdminSendPromotions : AppCompatActivity() {
         var cv = ContentValues()
         var validation = inputValdiation()
         var errorMessage = ""
-        var titleError = validation.stringValidaiton(messageTitle)
-        var bodyError = validation.stringValidaiton(messageBody)
+        var titleError = validation.stringMessageValidaiton(messageTitle)
+        var bodyError = validation.stringMessageValidaiton(messageBody)
 
         if (titleError != "") {
             errorMessage = "title " + titleError

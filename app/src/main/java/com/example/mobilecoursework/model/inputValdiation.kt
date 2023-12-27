@@ -203,6 +203,19 @@ fun timeValdiaiton(time:String):String{
      }
     return errorMessage
 }
+    fun stringMessageValidaiton(input : String):String{
+        var errorMessage = ""
+        if(input.length > 50){
+            errorMessage = " it to long"
+        }
+        if(!input.matches(Regex("[0-9a-zA-Z£,.? ]+"))){
+            errorMessage = " only allows a-z, 0-9, £, ',', '.', ? allowed"
+        }
+        if(input==""){
+            errorMessage=" missing inputted data"
+        }
+        return errorMessage
+    }
 }
 
 
