@@ -1,10 +1,7 @@
 package com.example.mobilecoursework
 
-import android.app.Instrumentation.ActivityResult
-import android.content.ContentResolver
 import android.content.ContentValues
 import android.content.Intent
-import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.ImageDecoder
 import android.graphics.drawable.BitmapDrawable
@@ -17,17 +14,13 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.RadioButton
 import android.widget.TextView
-import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
-import androidx.core.graphics.drawable.toBitmap
 import androidx.core.view.isVisible
 import com.example.mobilecoursework.model.CafeItem
 import com.example.mobilecoursework.model.DatabaseHelper
 import com.example.mobilecoursework.model.ImageSave
-import com.example.mobilecoursework.model.inputValdiation
-import java.io.ByteArrayOutputStream
+import com.example.mobilecoursework.model.InputValdiation
 
 
 class AdminAddCafeItem : AppCompatActivity() {
@@ -38,22 +31,23 @@ class AdminAddCafeItem : AppCompatActivity() {
     var availableNo: RadioButton? = null
     var image: ImageView? = null
     var available: String? = ""
-    var id:Int = -1
+    var id: Int = -1
 
     // this is basically the intent that andorid want you to use now
     @RequiresApi(Build.VERSION_CODES.P)
 // the GetContent is just telling the replacemeant for startactivityforresult that the type of activity want is one to getContent
     var results = registerForActivityResult(ActivityResultContracts.GetContent()) {
         //this is creating an image source from uri which intnet gets
-            uri: Uri? ->if(uri != null) {
+            uri: Uri? ->
+        if (uri != null) {
 
 
-        var imageSocurce = ImageDecoder.createSource(contentResolver, uri!!)
-        //this is decoding source into a bitmap
-        var imageBitmap = ImageDecoder.decodeBitmap(imageSocurce)
-        //this is showing the image
-        findViewById<ImageView>(R.id.ivImageAddCafeItem).setImageBitmap(imageBitmap)
-    }
+            var imageSocurce = ImageDecoder.createSource(contentResolver, uri!!)
+            //this is decoding source into a bitmap
+            var imageBitmap = ImageDecoder.decodeBitmap(imageSocurce)
+            //this is showing the image
+            findViewById<ImageView>(R.id.ivImageAddCafeItem).setImageBitmap(imageBitmap)
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -85,7 +79,7 @@ class AdminAddCafeItem : AppCompatActivity() {
                 tOrF = false
             }
 
-id = result.getInt(0)
+            id = result.getInt(0)
             var data = CafeItem(
                 result.getInt(0),
                 result.getString(1),
@@ -104,7 +98,7 @@ id = result.getInt(0)
     }
 
     fun backButton(view: View) {
-        var menuIntent:Intent = Intent(this,adminCafeMenu::class.java)
+        var menuIntent: Intent = Intent(this, AdminCafeMenu::class.java)
         startActivity(menuIntent)
     }
 
@@ -132,67 +126,68 @@ id = result.getInt(0)
     }
 
     fun saveButton(view: View) {
-        var validation = inputValdiation()
+        var validation = InputValdiation()
         var errorMessage = ""
         var nameErrors = validation.stringValidaiton(name!!.text.toString())
         var priceErrors = validation.priceValidaiton(price!!.text.toString())
-        if(nameErrors!=""){
+        if (nameErrors != "") {
             errorMessage = "name " + nameErrors
-        }else if(priceErrors!=""){
+        } else if (priceErrors != "") {
             errorMessage = "price " + priceErrors
         }
         if (availableYes!!.isChecked) {
             available = "yes"
         } else if (availableNo!!.isChecked) {
             available = "no"
-        }else{
+        } else {
             errorMessage = "not stated if item is available"
         }
-        if(price!!.text.toString() == ""){
+        if (price!!.text.toString() == "") {
             errorMessage = "price missing"
         }
         if (errorMessage == "") {
-                var db = DatabaseHelper(this)
-                var cv = saveChanges()
-                if (intent.getStringExtra("type") == "edit") {
-                    db.updateCafeMenuItem(cv,id.toString())
-                    var menuIntent: Intent = Intent(this, adminCafeMenu::class.java)
-                    startActivity(menuIntent)
-                }else{
-                    db.createMenuItem(cv)
-                    var menuIntent: Intent = Intent(this, adminCafeMenu::class.java)
-                    startActivity(menuIntent)
-                }
+            var db = DatabaseHelper(this)
+            var cv = saveChanges()
+            if (intent.getStringExtra("type") == "edit") {
+                db.updateCafeMenuItem(cv, id.toString())
+                var menuIntent: Intent = Intent(this, AdminCafeMenu::class.java)
+                startActivity(menuIntent)
+            } else {
+                db.createMenuItem(cv)
+                var menuIntent: Intent = Intent(this, AdminCafeMenu::class.java)
+                startActivity(menuIntent)
+            }
 
-        }else{
+        } else {
             var error = findViewById<TextView>(R.id.txtNameAddCafeItemError)
             error.isVisible = true
             error.text = errorMessage
         }
     }
-fun saveChanges():ContentValues {
-    if (availableYes!!.isChecked) {
-        available = "yes"
-    } else if (availableNo!!.isChecked) {
-        available = "no"
-    }
-    var cv = ContentValues()
-    cv.put("prodName", name!!.text.toString())
-    cv.put("prodPrice", price!!.text.toString())
 
-    if(image!!.equals(null)) {
-       var imageSave = ImageSave()
-       var byteArray = imageSave.bitmapToByteArray(image!!)
-       cv.put("prodImage", byteArray)
-   }else{
-       cv.putNull("prodImage")
-   }
-    if (available == "yes") {
-        cv.put("prodAvailable", 1)
-    } else if (available == "no") {
-        cv.put("prodAvailable", 0)
-    }
-    return cv
+    fun saveChanges(): ContentValues {
+        if (availableYes!!.isChecked) {
+            available = "yes"
+        } else if (availableNo!!.isChecked) {
+            available = "no"
+        }
+        var cv = ContentValues()
+        cv.put("prodName", name!!.text.toString())
+        cv.put("prodPrice", price!!.text.toString())
+        var content = image?.drawable as? BitmapDrawable
+        if (content != null) {
+            var imageSave = ImageSave()
+            var byteArray = imageSave.bitmapToByteArray(image!!)
+            cv.put("prodImage", byteArray)
+        } else {
+            cv.putNull("prodImage")
+        }
+        if (available == "yes") {
+            cv.put("prodAvailable", 1)
+        } else if (available == "no") {
+            cv.put("prodAvailable", 0)
+        }
+        return cv
 
-}
+    }
 }

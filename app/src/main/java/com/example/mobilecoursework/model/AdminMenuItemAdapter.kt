@@ -11,8 +11,7 @@ import android.widget.TextView
 import com.example.mobilecoursework.R
 
 
-
-class AdminMenuItemAdapter(var context : Context, var items:ArrayList<CafeItem>) : BaseAdapter()  {
+class AdminMenuItemAdapter(var context: Context, var items: ArrayList<CafeItem>) : BaseAdapter() {
 
 
     override fun getCount(): Int {
@@ -31,13 +30,14 @@ class AdminMenuItemAdapter(var context : Context, var items:ArrayList<CafeItem>)
 
         var view: View? = view
 
-            view = LayoutInflater.from(context).inflate(R.layout.admin_cafe_menu_list_item,parent,false)
+        view =
+            LayoutInflater.from(context).inflate(R.layout.admin_cafe_menu_list_item, parent, false)
 
-            var name = view.findViewById<TextView>(R.id.txtProdName)
-            var price = view.findViewById<TextView>(R.id.txtProdPrice)
-            var availble = view.findViewById<TextView>(R.id.txtProdAvailable)
+        var name = view.findViewById<TextView>(R.id.txtProdName)
+        var price = view.findViewById<TextView>(R.id.txtProdPrice)
+        var availble = view.findViewById<TextView>(R.id.txtProdAvailable)
 
-            var image = view.findViewById<ImageView>(R.id.ivProduct)
+        var image = view.findViewById<ImageView>(R.id.ivProduct)
 
         name.text = "name " + items[position].proName
         price.text = " cost £" + items[position].prodPrice.toString()
@@ -47,7 +47,7 @@ class AdminMenuItemAdapter(var context : Context, var items:ArrayList<CafeItem>)
         if anything it shouldn't effect, the last part is simply the length for it to decoded, and first part is the
         byte array to decoded
          */
-        if(items[position].prodImage != null) {
+        if (items[position].prodImage != null) {
             image.setImageBitmap(
                 BitmapFactory.decodeByteArray(
                     items[position].prodImage,

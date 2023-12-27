@@ -2,8 +2,8 @@ package com.example.mobilecoursework.model
 
 import java.security.MessageDigest
 
-class Hash(){
-    fun hashMessage(password:String):String {
+class Hash() {
+    fun hashMessage(password: String): String {
         var md = MessageDigest.getInstance("MD5")
         md.update(password.toByteArray())
         var hash = md.digest()
@@ -14,6 +14,6 @@ class Hash(){
         for (data in hash) {
             outPutString.append(data.toString())
         }
-   return outPutString.toString()
+        return outPutString.toString()
     }
 }

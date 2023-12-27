@@ -4,7 +4,6 @@ import android.content.Intent
 import android.database.Cursor
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.ContactsContract.Data
 import android.view.View
 import android.widget.AdapterView
 import android.widget.EditText
@@ -12,10 +11,9 @@ import android.widget.ListView
 import android.widget.TextView
 import androidx.core.view.isVisible
 import com.example.mobilecoursework.model.AdminIncomingOrderAdapter
-import com.example.mobilecoursework.model.AdminUserUserNameList
 import com.example.mobilecoursework.model.DatabaseHelper
 import com.example.mobilecoursework.model.Order
-import com.example.mobilecoursework.model.inputValdiation
+import com.example.mobilecoursework.model.InputValdiation
 
 class AdminIncomingOrders : AppCompatActivity() {
 
@@ -38,8 +36,8 @@ class AdminIncomingOrders : AppCompatActivity() {
         var beforeTime = intent.getStringExtra("beforeTime")
         var afterTime = intent.getStringExtra("afterTime")
         var whereClause = ""
-        var adapter = AdminIncomingOrderAdapter(this,createData(db.getOrders()))
-        if (intent.getStringExtra("from")=="filter") {
+        var adapter = AdminIncomingOrderAdapter(this, createData(db.getOrders()))
+        if (intent.getStringExtra("from") == "filter") {
             if (status != "") {
                 whereClause = whereClause + "\"orderStatus\" == \"" + status + "\" AND "
             } else if (afterDate != "") {
@@ -53,42 +51,45 @@ class AdminIncomingOrders : AppCompatActivity() {
             }
             if (whereClause != "") {
                 whereClause = whereClause.subSequence(0, whereClause.length - 4).toString() + ";"
-                adapter = AdminIncomingOrderAdapter(this, createData(db.getOrdersThatMatchWhere(whereClause))
+                adapter = AdminIncomingOrderAdapter(
+                    this, createData(db.getOrdersThatMatchWhere(whereClause))
                 )
             }
 
         }
-            list!!.adapter = adapter
+        list!!.adapter = adapter
 
 
-            /*  as the drag and drop doesn't have the onclick without crashing, had to use another
-            event litininer,
-            basically its a lambda function, going in to a OnitemClickListener, interface so
-            event listener can take it as no first class functions.
+        /*  as the drag and drop doesn't have the onclick without crashing, had to use another
+        event litininer,
+        basically its a lambda function, going in to a OnitemClickListener, interface so
+        event listener can take it as no first class functions.
 
-         */
-            var onclick = AdapterView.OnItemClickListener { adapterView, view, i, l ->
-                selectedItem = list.getItemAtPosition(i) as Order
-            }
-            list.setOnItemClickListener(onclick)
+     */
+        var onclick = AdapterView.OnItemClickListener { adapterView, view, i, l ->
+            selectedItem = list.getItemAtPosition(i) as Order
+        }
+        list.setOnItemClickListener(onclick)
 
     }
-    fun backButton(view: View){
-        var backPage : Intent = Intent(this, AdminHomePage::class.java)
+
+    fun backButton(view: View) {
+        var backPage: Intent = Intent(this, AdminHomePage::class.java)
         startActivity((backPage))
     }
 
-    fun  filterButton(view: View){
-        var filterPage : Intent = Intent(this, AdminOrderFilter::class.java)
+    fun filterButton(view: View) {
+        var filterPage: Intent = Intent(this, AdminOrderFilter::class.java)
         startActivity((filterPage))
     }
-    fun orderStatus(view:View){
-        if (selectedItem != null ){
-            var orderStatusPage : Intent = Intent(this, AdminEditOrderStatus::class.java)
 
-            orderStatusPage.putExtra("orderId",selectedItem!!.orderId.toString())
+    fun orderStatus(view: View) {
+        if (selectedItem != null) {
+            var orderStatusPage: Intent = Intent(this, AdminEditOrderStatus::class.java)
+
+            orderStatusPage.putExtra("orderId", selectedItem!!.orderId.toString())
             startActivity(orderStatusPage)
-        }else{
+        } else {
             var errorMessage = findViewById<TextView>(R.id.txtErrorMessageIncomingOrders)
             errorMessage.isVisible = true
             errorMessage.text = "no data selected"
@@ -97,18 +98,18 @@ class AdminIncomingOrders : AppCompatActivity() {
     }
 
     // used as the eventhandler, for when
-    fun message(view:View){
+    fun message(view: View) {
         var list = findViewById<ListView>(R.id.lvOrders)
-        if (selectedItem != null ){
+        if (selectedItem != null) {
             var selectedItems: ArrayList<String> = ArrayList()
             selectedItems.add(selectedItem!!.userName)
-            var messagePage : Intent = Intent(this, AdminSendPromotions::class.java)
+            var messagePage: Intent = Intent(this, AdminSendPromotions::class.java)
             messagePage.putExtra("from", "sendToChosen")
-            messagePage.putExtra("return","orders")
+            messagePage.putExtra("return", "orders")
             messagePage.putExtra("selected", selectedItems)
-            messagePage.putExtra("origins","io")
+            messagePage.putExtra("origins", "io")
             startActivity(messagePage)
-        }else{
+        } else {
             var errorMessage = findViewById<TextView>(R.id.txtErrorMessageIncomingOrders)
             errorMessage.isVisible = true
             errorMessage.text = "no data selected"
@@ -117,10 +118,10 @@ class AdminIncomingOrders : AppCompatActivity() {
 
     }
 
-    fun createData(cursor:Cursor):ArrayList<Order>{
+    fun createData(cursor: Cursor): ArrayList<Order> {
         var orderItems = ArrayList<Order>()
         var order: Order
-        if(cursor.moveToFirst()){
+        if (cursor.moveToFirst()) {
             do {
                 var db = DatabaseHelper(this)
                 var user = db.getSpecificUser(cursor.getInt(1).toString())
@@ -133,26 +134,27 @@ class AdminIncomingOrders : AppCompatActivity() {
                     cursor.getString(4)
                 )
                 orderItems.add(order)
-            }while(cursor.moveToNext())
-            }
+            } while (cursor.moveToNext())
+        }
         return orderItems
     }
-fun findButton(view: View){
-    var userInput = findViewById<EditText>(R.id.etOrderName).text.toString()
-    var validation = inputValdiation()
-    var errorMessage = validation.stringValidaiton(userInput)
-    if(errorMessage=="") {
-        var db = DatabaseHelper(this)
-        var list = findViewById<ListView>(R.id.lvOrders)
-        var data = db.getSpecificOrders(userInput)
-        var adapter = AdminIncomingOrderAdapter(this, createData(data))
-        list!!.adapter = adapter
+
+    fun findButton(view: View) {
+        var userInput = findViewById<EditText>(R.id.etOrderName).text.toString()
+        var validation = InputValdiation()
+        var errorMessage = validation.stringValidaiton(userInput)
+        if (errorMessage == "") {
+            var db = DatabaseHelper(this)
+            var list = findViewById<ListView>(R.id.lvOrders)
+            var data = db.getSpecificOrders(userInput)
+            var adapter = AdminIncomingOrderAdapter(this, createData(data))
+            list!!.adapter = adapter
 
 
-    }else{
-        var error = findViewById<TextView>(R.id.txtErrorMessageIncomingOrders)
-        error.isVisible = true
-        error.text = errorMessage
+        } else {
+            var error = findViewById<TextView>(R.id.txtErrorMessageIncomingOrders)
+            error.isVisible = true
+            error.text = errorMessage
+        }
     }
-}
 }

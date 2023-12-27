@@ -9,7 +9,7 @@ import android.widget.RadioButton
 import android.widget.TextView
 import androidx.core.view.isVisible
 import com.example.mobilecoursework.model.DatabaseHelper
-import com.example.mobilecoursework.model.inputValdiation
+import com.example.mobilecoursework.model.InputValdiation
 
 class AdminMenuItemFilter : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,13 +19,13 @@ class AdminMenuItemFilter : AppCompatActivity() {
 
 
     fun applyButton(view: View) {
-        var validation = inputValdiation()
+        var validation = InputValdiation()
         var error = findViewById<TextView>(R.id.txtMenuFilterError)
         var maxPrice = findViewById<EditText>(R.id.etMaxPrice).text.toString()
         var minPrice = findViewById<EditText>(R.id.etMinPrice).text.toString()
         var itemStock: String = ""
         var image: String = ""
-        var errorMessage:String = ""
+        var errorMessage: String = ""
         if (findViewById<RadioButton>(R.id.rbRemoveNoImage).isChecked) {
             image = "false"
         }
@@ -39,12 +39,12 @@ class AdminMenuItemFilter : AppCompatActivity() {
             itemStock = "false"
         }
         var db = DatabaseHelper(this)
-       errorMessage = validation.priceValidaiton(maxPrice)
-        if(errorMessage!=""){
+        errorMessage = validation.priceValidaiton(maxPrice)
+        if (errorMessage != "") {
             errorMessage = "max price" + errorMessage
-        }else{
+        } else {
             errorMessage = validation.priceValidaiton(minPrice)
-            if(errorMessage!=""){
+            if (errorMessage != "") {
                 errorMessage = "min price" + errorMessage
             }
         }
@@ -52,7 +52,7 @@ class AdminMenuItemFilter : AppCompatActivity() {
             error.isVisible = true
             error.text = errorMessage
         } else {
-            var menuIntent: Intent = Intent(this, adminCafeMenu::class.java)
+            var menuIntent: Intent = Intent(this, AdminCafeMenu::class.java)
             menuIntent.putExtra("maxPrice", maxPrice)
             menuIntent.putExtra("minPrice", minPrice)
             menuIntent.putExtra("image", image)
@@ -61,9 +61,10 @@ class AdminMenuItemFilter : AppCompatActivity() {
             startActivity(menuIntent)
         }
     }
-fun back(view: View){
-    var menuIntent:Intent = Intent(this,adminCafeMenu::class.java)
-    startActivity(menuIntent)
-}
+
+    fun back(view: View) {
+        var menuIntent: Intent = Intent(this, AdminCafeMenu::class.java)
+        startActivity(menuIntent)
+    }
 
 }

@@ -21,58 +21,61 @@ class AdminFeedbackAndRatings : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-       var db = DatabaseHelper(this)
+        var db = DatabaseHelper(this)
         var data = db.getFeedback()
-       var max = intent.getStringExtra("max")
-       var min = intent.getStringExtra("min")
-       var before = intent.getStringExtra("before")
-       var after = intent.getStringExtra("after")
+        var max = intent.getStringExtra("max")
+        var min = intent.getStringExtra("min")
+        var before = intent.getStringExtra("before")
+        var after = intent.getStringExtra("after")
         var whereClause = ""
         var whereClauseUse = ""
-        if(intent.getStringExtra("from")=="filter"){
-            if(max !=""){
+        if (intent.getStringExtra("from") == "filter") {
+            if (max != "") {
                 whereClause = whereClause + "Feedback.rating <= " + max + " and "
             }
-            if(min !=""){
+            if (min != "") {
                 whereClause = whereClause + "Feedback.rating >= " + min + " and "
             }
-            if(before !=""){
-                whereClause = whereClause + "(\"orderData\" <= \"" + before!!.toInt()  + "\") and "
+            if (before != "") {
+                whereClause = whereClause + "(\"orderData\" <= \"" + before!!.toInt() + "\") and "
             }
-            if(after !=""){
+            if (after != "") {
                 whereClause = whereClause + "(\"orderData\" >= \"" + after!!.toInt() + "\") and "
             }
-            if(whereClause!="") {
-                whereClauseUse = whereClause.subSequence(0, whereClause.length-4).toString() + ";"
+            if (whereClause != "") {
+                whereClauseUse = whereClause.subSequence(0, whereClause.length - 4).toString() + ";"
                 data = db.getFeedbackCustomerWhere(whereClauseUse)
             }
 
         }
 
-        var adpater = AdminFeedbackAdapter(this,getDate(data) )
-            findViewById<ListView>(R.id.lvFeedback).adapter = adpater
+        var adpater = AdminFeedbackAdapter(this, getDate(data))
+        findViewById<ListView>(R.id.lvFeedback).adapter = adpater
     }
-    fun backButton(view: View){
+
+    fun backButton(view: View) {
         var homeIntent: Intent = Intent(this, AdminHomePage::class.java)
         startActivity(homeIntent)
     }
 
-    fun filterButton(view:View){
+    fun filterButton(view: View) {
         var filterIntent: Intent = Intent(this, AdminFeedbackFilter::class.java)
         startActivity(filterIntent)
     }
-fun getDate(cursor: Cursor):ArrayList<Feedback>{
-    var FeedbackItem = ArrayList<Feedback>()
-    var listItem: Feedback
-    if(cursor.moveToFirst()){
-        do {
-            var db = DatabaseHelper(this)
-var userNameCursor = db.getSpecificUser(cursor.getInt(1).toString())
-            userNameCursor.moveToFirst()
-            listItem = Feedback(userNameCursor.getString(4),cursor.getString(3),cursor.getInt(4))
-        FeedbackItem.add(listItem)
-        }while(cursor.moveToNext())
+
+    fun getDate(cursor: Cursor): ArrayList<Feedback> {
+        var FeedbackItem = ArrayList<Feedback>()
+        var listItem: Feedback
+        if (cursor.moveToFirst()) {
+            do {
+                var db = DatabaseHelper(this)
+                var userNameCursor = db.getSpecificUser(cursor.getInt(1).toString())
+                userNameCursor.moveToFirst()
+                listItem =
+                    Feedback(userNameCursor.getString(4), cursor.getString(3), cursor.getInt(4))
+                FeedbackItem.add(listItem)
+            } while (cursor.moveToNext())
         }
-    return FeedbackItem
-}
+        return FeedbackItem
+    }
 }

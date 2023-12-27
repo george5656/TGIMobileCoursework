@@ -7,10 +7,9 @@ import android.os.Bundle
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
-import android.widget.Toast
 import androidx.core.view.isVisible
 import com.example.mobilecoursework.model.DatabaseHelper
-import com.example.mobilecoursework.model.inputValdiation
+import com.example.mobilecoursework.model.InputValdiation
 import java.util.ArrayList
 
 class AdminSendPromotions : AppCompatActivity() {
@@ -24,7 +23,7 @@ class AdminSendPromotions : AppCompatActivity() {
         super.onStart()
         from = intent.getStringExtra("from")
         //var arrayOfString:ArrayList<String> = intent.getSerializableExtra("selected") as ArrayList<String>
-       // Toast.makeText(this, arrayOfString.get(0), Toast.LENGTH_SHORT).show()
+        // Toast.makeText(this, arrayOfString.get(0), Toast.LENGTH_SHORT).show()
     }
 
     fun sendButton(view: View) {
@@ -36,7 +35,7 @@ class AdminSendPromotions : AppCompatActivity() {
         var specificCustomer: Int = 0
         var notificationIntent: Intent
         var cv = ContentValues()
-        var validation = inputValdiation()
+        var validation = InputValdiation()
         var errorMessage = ""
         var titleError = validation.stringMessageValidaiton(messageTitle)
         var bodyError = validation.stringMessageValidaiton(messageBody)
@@ -77,31 +76,32 @@ class AdminSendPromotions : AppCompatActivity() {
                     counter = counter + 1
                 }
             }
-                if (intent.getStringExtra("return") == "orders") {
-                    notificationIntent = Intent(this, AdminIncomingOrders::class.java)
-
-                } else {
-                    notificationIntent = Intent(this, AdminSendNotification::class.java)
-
-                    counter = 0
-                }
-                startActivity(notificationIntent)
+            if (intent.getStringExtra("return") == "orders") {
+                notificationIntent = Intent(this, AdminIncomingOrders::class.java)
 
             } else {
-                var error = findViewById<TextView>(R.id.txtNotificcationError)
-                error.isVisible = true
-                error.text = errorMessage
+                notificationIntent = Intent(this, AdminSendNotification::class.java)
+
+                counter = 0
             }
+            startActivity(notificationIntent)
+
+        } else {
+            var error = findViewById<TextView>(R.id.txtNotificcationError)
+            error.isVisible = true
+            error.text = errorMessage
+        }
 
     }
-        fun back(view: View) {
-            var origins = intent.getStringExtra("origins")
-            var loadHome: Intent = Intent(this, AdminHomePage::class.java)
-            if (origins == "io") {
-                loadHome = Intent(this, AdminIncomingOrders::class.java)
-            } else if (origins == "sn") {
-                loadHome = Intent(this, AdminSendNotification::class.java)
-            }
-            startActivity(loadHome)
+
+    fun back(view: View) {
+        var origins = intent.getStringExtra("origins")
+        var loadHome: Intent = Intent(this, AdminHomePage::class.java)
+        if (origins == "io") {
+            loadHome = Intent(this, AdminIncomingOrders::class.java)
+        } else if (origins == "sn") {
+            loadHome = Intent(this, AdminSendNotification::class.java)
         }
+        startActivity(loadHome)
     }
+}

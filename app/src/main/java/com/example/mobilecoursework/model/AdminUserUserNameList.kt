@@ -8,7 +8,7 @@ import android.widget.BaseAdapter
 import android.widget.TextView
 import com.example.mobilecoursework.R
 
-class AdminUserUserNameList(var context : Context, var items:ArrayList<String>):BaseAdapter() {
+class AdminUserUserNameList(var context: Context, var items: ArrayList<String>) : BaseAdapter() {
     override fun getCount(): Int {
         return items.size
     }
@@ -23,11 +23,11 @@ class AdminUserUserNameList(var context : Context, var items:ArrayList<String>):
 
     override fun getView(p0: Int, p1: View?, p2: ViewGroup?): View {
         var view: View? = p1
-if(view==null) {
-    view = LayoutInflater.from(context).inflate(R.layout.admin_user_list, p2, false)
+        if (view == null) {
+            view = LayoutInflater.from(context).inflate(R.layout.admin_user_list, p2, false)
 
-    var userName = view.findViewById<TextView>(R.id.cbNotificationUserName)
-    userName.text = items[p0]
+            var userName = view.findViewById<TextView>(R.id.cbNotificationUserName)
+            userName.text = items[p0]
 
         }
         return view!!
