@@ -84,12 +84,12 @@ var db : SQLiteDatabase = this.writableDatabase
         db?.execSQL(sQlCreateStament7)
 
        val sQlCreateStament8 = "CREATE TABLE Notfifcation ("+
-           " \"notficationId\"	PRIMARY KEY AUTOINCREMENT,"+
-           " \"cusId\"	INTEGER NOT NULL,"+
-           " \"Title\"	TEXT NOT NULL,"+
-           " \"Messeage\"	TEXT NOT NULL,"+
-           " \"sent\"	INTEGER NOT NULL,"+
-           " FOREIGN KEY(cusId) REFERENCES Customers(cusId));"
+           "notficationId INTEGER PRIMARY KEY AUTOINCREMENT,"+
+           "cusId INTEGER NOT NULL,"+
+           "Title TEXT NOT NULL,"+
+           "Messeage TEXT NOT NULL,"+
+           "sent INTEGER NOT NULL,"+
+           "FOREIGN KEY(cusId) REFERENCES Customers(cusId));"
         db?.execSQL(sQlCreateStament8)
 
     }

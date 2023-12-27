@@ -44,8 +44,9 @@ class AdminFeedbackAndRatings : AppCompatActivity() {
             }
             if(whereClause!="") {
                 whereClauseUse = whereClause.subSequence(0, whereClause.length-4).toString() + ";"
+                data = db.getFeedbackCustomerWhere(whereClauseUse)
             }
-            data = db.getFeedbackCustomerWhere(whereClauseUse)
+
         }
 
         var adpater = AdminFeedbackAdapter(this,getDate(data) )

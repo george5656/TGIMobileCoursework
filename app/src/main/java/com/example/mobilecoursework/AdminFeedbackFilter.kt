@@ -7,6 +7,8 @@ import android.view.View
 import android.widget.EditText
 import android.widget.TextView
 import androidx.core.view.isVisible
+import com.example.mobilecoursework.model.StringFormat
+import com.example.mobilecoursework.model.inputValdiation
 
 class AdminFeedbackFilter : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,19 +21,35 @@ class AdminFeedbackFilter : AppCompatActivity() {
         var minRating = findViewById<EditText>(R.id.etFeedbackMinRating).text.toString()
         var beforeDate = findViewById<EditText>(R.id.etFeedbackBeforeDate).text.toString()
         var afterDate = findViewById<EditText>(R.id.etFeedbackAfterDate).text.toString()
-if(maxRating==""&&minRating==""&&beforeDate==""&&afterDate==""){
+        var validation = inputValdiation()
+        var userInputMaxRating = validation.ratingValidation(maxRating)
+        var userInputMinRating = validation.ratingValidation(minRating)
+       var beforeDateValdiation = validation.dateValdiation(beforeDate)
+        var afterDateValdiation = validation.dateValdiation(afterDate)
+        var errorMessage = ""
+        if(userInputMaxRating!=""){
+            errorMessage = "max rating " + userInputMaxRating
+        }else if(userInputMinRating!=""){
+            errorMessage = "min rating " + userInputMinRating
+        }else if(beforeDateValdiation!=""){
+            errorMessage = "before date " + beforeDateValdiation
+        }else if(afterDateValdiation!=""){
+            errorMessage = "after date " + afterDateValdiation
+        }
+        if(errorMessage!=""){
   var error =   findViewById<TextView>(R.id.txtFeedbackFilterError)
     error.isVisible = true
-    error.text = "error, please give more info"
+    error.text = errorMessage
 }else {
+    var sf = StringFormat()
     var applyIntent: Intent = Intent(this, AdminFeedbackAndRatings::class.java)
     applyIntent.putExtra("from", "filter")
     applyIntent.putExtra("max", maxRating)
     applyIntent.putExtra("min", minRating)
-    applyIntent.putExtra("before", beforeDate)
-    applyIntent.putExtra("after", afterDate)
+    applyIntent.putExtra("before", sf.DateFormat(beforeDate))
+    applyIntent.putExtra("after", sf.DateFormat(afterDate))
 
-    startActivity(applyIntent)
+   startActivity(applyIntent)
 }
     }
 fun cancelButton(view:View){
