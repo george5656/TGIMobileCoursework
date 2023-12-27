@@ -50,8 +50,8 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/tbAddCafeMenuItem"
-        android:layout_width="410dp"
-        android:layout_height="wrap_content"
+        android:layout_width="382dp"
+        android:layout_height="62dp"
         android:background="?attr/colorPrimary"
         android:contextClickable="true"
         android:hapticFeedbackEnabled="true"
@@ -60,7 +60,7 @@
         android:theme="?attr/actionBarTheme"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.482"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
@@ -155,14 +155,17 @@
         app:layout_constraintVertical_bias="0.828" />
 
     <TextView
-        android:id="@+id/txtNameAddCafeItem5"
+        android:id="@+id/txtNameAddCafeItemError"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:text="Name"
         android:textSize="24sp"
         android:visibility="invisible"
-        tools:layout_editor_absoluteX="173dp"
-        tools:layout_editor_absoluteY="511dp" />
+        app:layout_constraintBottom_toTopOf="@+id/btnCafeItemAddCancel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnImageAdd" />
 
     <ImageView
         android:id="@+id/ivImageAddCafeItem"

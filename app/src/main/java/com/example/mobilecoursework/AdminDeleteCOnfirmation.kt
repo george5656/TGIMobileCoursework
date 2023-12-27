@@ -8,26 +8,30 @@ import android.widget.TextView
 import com.example.mobilecoursework.model.DatabaseHelper
 
 class AdminDeleteCOnfirmation : AppCompatActivity() {
-    var deleteType : String? = null
+    var deleteType: String? = null
     var data: String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_admin_delete_confirmation)
     }
-    override fun onStart(){
+
+    override fun onStart() {
         super.onStart()
-         deleteType = intent.getStringExtra("menuItem")
-         data = intent.getStringExtra("menuItemToBeDeleted")
-        findViewById<TextView>(R.id.txtWaring).text = "are you sure \n you want to delete\n " + intent.getStringExtra("itemName")
+        deleteType = intent.getStringExtra("menuItem")
+        data = intent.getStringExtra("menuItemToBeDeleted")
+        findViewById<TextView>(R.id.txtWaring).text =
+            "are you sure \n you want to delete\n " + intent.getStringExtra("itemName")
     }
-    fun confirmButton(view: View){
-    var db = DatabaseHelper(this)
+
+    fun confirmButton(view: View) {
+        var db = DatabaseHelper(this)
         db.deleteCafeMenuItem(data)
-        var menuIntent: Intent = Intent(this,adminCafeMenu::class.java)
+        var menuIntent: Intent = Intent(this, AdminCafeMenu::class.java)
         startActivity(menuIntent)
     }
-    fun cancelButton(view:View){
-        var menuIntent: Intent = Intent(this,adminCafeMenu::class.java)
+
+    fun cancelButton(view: View) {
+        var menuIntent: Intent = Intent(this, AdminCafeMenu::class.java)
         startActivity(menuIntent)
     }
 }

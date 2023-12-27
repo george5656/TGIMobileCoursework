@@ -29,13 +29,13 @@
         android:layout_height="60dp"
         android:onClick="back"
         android:text="@android:string/cancel"
-        android:textSize="24sp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.057"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.976" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/btnOrderFilterApply"
@@ -43,10 +43,10 @@
         android:layout_height="60dp"
         android:onClick="applyButton"
         android:text="apply"
-        android:textSize="24sp"
+        android:textSize="20sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/btnOrderFilterCancel"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.942"
+        app:layout_constraintHorizontal_bias="0.996"
         app:layout_constraintStart_toStartOf="parent" />
 
     <RadioGroup
@@ -64,55 +64,40 @@
             android:id="@+id/rbFilterPreparing"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="15dp"
             android:text="Preparing"
-            android:textSize="24sp" />
+            android:textSize="20sp" />
 
         <RadioButton
             android:id="@+id/rbFilterCollect"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="15dp"
             android:text="Collect"
-            android:textSize="24sp" />
+            android:textSize="20sp" />
 
         <RadioButton
             android:id="@+id/rbFilterFinished"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="15dp"
             android:text="Finished"
-            android:textSize="24sp" />
+            android:textSize="20sp" />
 
         <RadioButton
             android:id="@+id/rbFilterCancled"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="15dp"
             android:text="Cancled"
-            android:textSize="24sp" />
+            android:textSize="20sp" />
     </RadioGroup>
-
-    <TextView
-        android:id="@+id/txtOrderFilterError"
-        android:layout_width="109dp"
-        android:layout_height="30dp"
-        android:gravity="center"
-        android:text="Error"
-        android:textSize="24sp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.509"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.949" />
 
     <EditText
         android:id="@+id/etFilterAfterTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
         android:ems="10"
         android:inputType="time"
         app:layout_constraintEnd_toEndOf="parent"
@@ -124,7 +109,7 @@
         android:id="@+id/etFilterBeforeTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
         android:ems="10"
         android:inputType="time"
         app:layout_constraintEnd_toEndOf="parent"
@@ -137,7 +122,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Status"
-        android:textSize="24sp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/radioGroup2"
         app:layout_constraintHorizontal_bias="0.046"
@@ -150,7 +135,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="After set time"
-        android:textSize="24sp"
+        android:textSize="20sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/etFilterAfterTime"
         app:layout_constraintEnd_toStartOf="@+id/etFilterAfterTime"
         app:layout_constraintHorizontal_bias="0.06"
@@ -161,7 +146,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Before set time"
-        android:textSize="24sp"
+        android:textSize="20sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/etFilterBeforeTime"
         app:layout_constraintEnd_toStartOf="@+id/etFilterBeforeTime"
         app:layout_constraintHorizontal_bias="0.06"
@@ -172,7 +157,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="After set date"
-        android:textSize="24sp"
+        android:textSize="20sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/etFilterDateAfter"
         app:layout_constraintEnd_toStartOf="@+id/etFilterDateAfter"
         app:layout_constraintHorizontal_bias="0.06"
@@ -183,7 +168,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Before set Date"
-        android:textSize="24sp"
+        android:textSize="20sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/etFilterDateBefore"
         app:layout_constraintEnd_toStartOf="@+id/etFilterDateBefore"
         app:layout_constraintHorizontal_bias="0.06"
@@ -193,7 +178,7 @@
         android:id="@+id/etFilterDateAfter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
         android:ems="10"
         android:inputType="date"
         app:layout_constraintEnd_toEndOf="parent"
@@ -205,12 +190,25 @@
         android:id="@+id/etFilterDateBefore"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
         android:ems="10"
         android:inputType="date"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.94"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etFilterDateAfter" />
+
+    <TextView
+        android:id="@+id/txtOrderFilterError"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Error"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtFilterOrderBeforeTime"
+        app:layout_constraintVertical_bias="0.705" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

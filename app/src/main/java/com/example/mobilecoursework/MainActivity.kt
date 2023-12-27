@@ -11,8 +11,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
     }
 
-    fun adminLogin(view: View){
-        var intent : Intent = Intent(this,AdminLogin::class.java)
+    fun adminLogin(view: View) {
+        var intent: Intent = Intent(this, AdminLogin::class.java)
         startActivity(intent)
     }
 }

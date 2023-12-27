@@ -52,7 +52,7 @@
             android:name=".AdminRegister"
             android:exported="false" />
         <activity
-            android:name=".adminCafeMenu"
+            android:name=".AdminCafeMenu"
             android:exported="false" />
         <activity
             android:name=".AdminHomePage"

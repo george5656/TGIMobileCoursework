@@ -23,8 +23,8 @@
         tools:layout_editor_absoluteX="1dp" />
 
     <LinearLayout
-        android:layout_width="363dp"
-        android:layout_height="647dp"
+        android:layout_width="347dp"
+        android:layout_height="595dp"
         android:gravity="center"
         android:orientation="vertical"
         android:paddingLeft="10dp"
@@ -33,7 +33,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tbHomePage"
-        app:layout_constraintVertical_bias="0.875">
+        app:layout_constraintVertical_bias="1.0">
 
         <Button
             android:id="@+id/btnMenuItems"
