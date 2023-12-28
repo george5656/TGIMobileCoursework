@@ -37,10 +37,10 @@ class AdminFeedbackAndRatings : AppCompatActivity() {
                 whereClause = whereClause + "Feedback.rating >= " + min + " and "
             }
             if (before != "") {
-                whereClause = whereClause + "(\"orderData\" <= \"" + before!!.toInt() + "\") and "
+                whereClause = whereClause + "(\"orderDate\" < \"" + before!!.toInt() + "\") and "
             }
             if (after != "") {
-                whereClause = whereClause + "(\"orderData\" >= \"" + after!!.toInt() + "\") and "
+                whereClause = whereClause + "(\"orderDate\" > \"" + after!!.toInt() + "\") and "
             }
             if (whereClause != "") {
                 whereClauseUse = whereClause.subSequence(0, whereClause.length - 4).toString() + ";"

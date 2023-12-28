@@ -49,7 +49,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "cafeDatabase
         val sQlCreateStament4 = "CREATE TABLE \"Order\" (" +
                 "orderId INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "cusId INTEGER NOT NULL," +
-                "orderData INTEGER NOT NULL," +
+                "orderDate INTEGER NOT NULL," +
                 "orderTime NTEGER NOT NULL," +
                 "orderStatus TEXT NOT NULL," +
                 "FOREIGN KEY(cusId) REFERENCES Customers(cusId));"
@@ -59,7 +59,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "cafeDatabase
                 "paymentId INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "orderId INTEGER NOT NULL," +
                 "paymentType TEXT NOT NULL," +
-                "amount	INTEGER NOT NULL," +
+                "amount	REAL NOT NULL," +
                 "paymentDate TEXT NOT NULL," +
                 "FOREIGN KEY(orderId) REFERENCES \"Order\" (orderId));"
 
@@ -75,7 +75,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "cafeDatabase
 
         db?.execSQL(sQlCreateStament6)
         val sQlCreateStament7 = "CREATE TABLE OrderDetails (" +
-                "orderDetailsID	INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "orderDetailsId	INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "orderId INTEGER NOT NULL," +
                 "prodId	INTEGER NOT NULL," +
                 "FOREIGN KEY(orderId) REFERENCES \"Order\" (orderId)," +
@@ -167,7 +167,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "cafeDatabase
 
     fun getSpecificOrders(userName: String): Cursor {
         var query: String =
-            "select * from \"Order\", \"Customers\" where (\"Order.cusId\" == Customers.cusId) AND Customers.cusUserName like \'%" + userName + "%\'"
+            "select * from \"Order\", \"Customers\" where (\"Order\".cusId == Customers.cusId) AND Customers.cusUserName like \'%" + userName + "%\'"
         return db.rawQuery(query, null)
     }
 

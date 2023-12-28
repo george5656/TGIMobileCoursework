@@ -41,13 +41,13 @@ class AdminIncomingOrders : AppCompatActivity() {
             if (status != "") {
                 whereClause = whereClause + "\"orderStatus\" == \"" + status + "\" AND "
             } else if (afterDate != "") {
-                whereClause = whereClause + "\"orderData\" >= \"" + afterDate + "\" AND "
+                whereClause = whereClause + "\"orderDate\" > \"" + afterDate + "\" AND "
             } else if (beforeDate != "") {
-                whereClause = whereClause + "\"orderData\" <= \"" + beforeDate + "\" AND "
+                whereClause = whereClause + "\"orderDate\" < \"" + beforeDate + "\" AND "
             } else if (beforeTime != "") {
-                whereClause = whereClause + "\"orderTime\" <= \"" + beforeTime + "\" AND "
+                whereClause = whereClause + "\"orderTime\" < \"" + beforeTime + "\" AND "
             } else if (afterTime != "") {
-                whereClause = whereClause + "\"orderTime\" >= \"" + afterTime + "\" AND "
+                whereClause = whereClause + "\"orderTime\" > \"" + afterTime + "\" AND "
             }
             if (whereClause != "") {
                 whereClause = whereClause.subSequence(0, whereClause.length - 4).toString() + ";"
