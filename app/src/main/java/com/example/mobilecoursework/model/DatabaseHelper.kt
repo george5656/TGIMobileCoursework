@@ -180,7 +180,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "cafeDatabase
         var cv = ContentValues()
         cv.put("orderStatus", status)
 
-        db.update("Order", cv, "orderId = " + id, null)
+        db.update("\"Order\"", cv, "orderId = " + id, null)
     }
 
     fun getSpecificCustomer(userName: String): Cursor {
