@@ -37,7 +37,7 @@ class AdminHomePage : AppCompatActivity() {
     }
 
     fun sendNotifcationLoad(view: View) {
-        var notificationIntent: Intent = Intent(this, AdminSendNotification::class.java)
+        var notificationIntent: Intent = Intent(this, AdminListCustomers::class.java)
         startActivity(notificationIntent)
     }
 

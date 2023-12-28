@@ -7,7 +7,7 @@ import android.view.View
 import android.widget.TextView
 import com.example.mobilecoursework.model.DatabaseHelper
 
-class AdminDeleteCOnfirmation : AppCompatActivity() {
+class AdminDeleteConfirmation : AppCompatActivity() {
     var deleteType: String? = null
     var data: String? = null
     override fun onCreate(savedInstanceState: Bundle?) {

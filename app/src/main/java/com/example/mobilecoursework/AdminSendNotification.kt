@@ -1,158 +1,107 @@
 package com.example.mobilecoursework
 
+import android.content.ContentValues
 import android.content.Intent
-import android.database.Cursor
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.CheckBox
 import android.widget.EditText
-
-import android.widget.ListView
 import android.widget.TextView
 import androidx.core.view.isVisible
-import com.example.mobilecoursework.model.AdminUserUserNameList
 import com.example.mobilecoursework.model.DatabaseHelper
 import com.example.mobilecoursework.model.InputValdiation
+import java.util.ArrayList
 
 class AdminSendNotification : AppCompatActivity() {
-
-    var selectedItems: ArrayList<String> = ArrayList()
-
+    var from: String? = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_admin_send_notification)
-
+        setContentView(R.layout.activity_admin_send_notifications)
     }
 
     override fun onStart() {
         super.onStart()
-        selectedItems = ArrayList()
+        from = intent.getStringExtra("from")
+        //var arrayOfString:ArrayList<String> = intent.getSerializableExtra("selected") as ArrayList<String>
+        // Toast.makeText(this, arrayOfString.get(0), Toast.LENGTH_SHORT).show()
+    }
+
+    fun sendButton(view: View) {
         var db = DatabaseHelper(this)
-        var list = findViewById<ListView>(R.id.lvUserUsernames)
-        var adapter = AdminUserUserNameList(this, getUserName(db.getAllCustomer()))
-        if (intent.getStringExtra("from") == "filter") {
-            var status = intent.getStringExtra("status")
-            if (status == "yes") {
-                status = "1"
-            } else if (status == "no") {
-                status = "0"
-            }
-            var lob = intent.getStringExtra("lob")
-            var loa = intent.getStringExtra("loa")
-            var whereClause = ""
-            if (status != "") {
-                whereClause = whereClause + "Customers.cusIsActive == " + status + " AND "
-            }
-            if (lob != "") {
-                whereClause = whereClause + "\"Order\".orderDate < " + lob + " AND "
-            }
-            if (loa != "") {
-                whereClause = whereClause + "\"Order\".orderDate > " + loa + " AND "
-            }
-            if (whereClause != "") {
-                whereClause = whereClause.subSequence(0, whereClause.length - 5).toString() + ";"
-                adapter = AdminUserUserNameList(
-                    this,
-                    getUserName(db.getUserThatMatchCustomeWhere(whereClause))
-                )
-            }
-        }
-        list.adapter = adapter
+        var messageTitle = findViewById<EditText>(R.id.etNotficationTitle).text.toString()
+        var messageBody = findViewById<EditText>(R.id.etNotficationBody).text.toString()
 
-        /*var onclick = AdapterView.OnItemClickListener { adapterView, view, i, l ->
-
-            if(selectedItems.contains(list.getItemAtPosition(i).toString())){
-            selectedItems.remove(list.getItemAtPosition(i).toString())
-
-        }else{
-            selectedItems.add(list.getItemAtPosition(i).toString())
-
-       }
-            Toast.makeText(this, "hit", Toast.LENGTH_SHORT).show()
-
-
-        }
-
-        list!!.setOnItemClickListener(onclick)
-*/
-    }
-
-    fun loadNotificationCreator(view: View) {
-        if (selectedItems.size != 0) {
-            var notifcationMakerLoad: Intent = Intent(this, AdminSendPromotions::class.java)
-            notifcationMakerLoad.putExtra("from", "sendToChosen")
-            notifcationMakerLoad.putExtra("selected", selectedItems)
-            notifcationMakerLoad.putExtra("origins", "sn")
-            startActivity(notifcationMakerLoad)
-        } else {
-            var error = findViewById<TextView>(R.id.txtNotificatonError)
-            error.isVisible = true
-            error.text = "no items selected"
-        }
-    }
-
-    fun sendToAllButton(view: View) {
-        var notifcationMakerLoad: Intent = Intent(this, AdminSendPromotions::class.java)
-        notifcationMakerLoad.putExtra("from", "sendToAll")
-        notifcationMakerLoad.putExtra("origins", "sn")
-        startActivity(notifcationMakerLoad)
-    }
-
-    fun backButton(view: View) {
-        var homeIntent: Intent = Intent(this, AdminHomePage::class.java)
-        startActivity(homeIntent)
-    }
-
-    fun filterButton(view: View) {
-        var filterLoad: Intent = Intent(this, AdminNotificationFilter::class.java)
-        startActivity(filterLoad)
-    }
-
-    fun getUserName(cursor: Cursor): ArrayList<String> {
-        var userNames: ArrayList<String> = ArrayList()
-        if (cursor.moveToFirst()) {
-            do {
-                if (!userNames.contains(cursor.getString(4))) {
-                    userNames.add(cursor.getString(4))
-                }
-            } while (cursor.moveToNext())
-        }
-        return userNames
-    }
-
-    fun findButton(view: View) {
-        var userInput = findViewById<EditText>(R.id.etNotficationUser).text
-        var error = findViewById<TextView>(R.id.txtNotificatonError)
+        var counter = 0;
+        var specificCustomer: Int = 0
+        var notificationIntent: Intent
+        var cv = ContentValues()
         var validation = InputValdiation()
-        var errorMessage = validation.stringValidaiton(userInput.toString())
+        var errorMessage = ""
+        var titleError = validation.stringMessageValidaiton(messageTitle)
+        var bodyError = validation.stringMessageValidaiton(messageBody)
+
+        if (titleError != "") {
+            errorMessage = "title " + titleError
+        } else if (bodyError != "") {
+            errorMessage = "body " + bodyError
+        }
+
         if (errorMessage == "") {
-            var db = DatabaseHelper(this)
-            var list = findViewById<ListView>(R.id.lvUserUsernames)
-            var adapter = AdminUserUserNameList(
-                this,
-                getUserName(db.getSpecificCustomer(userInput.toString()))
-            )
-            list.adapter = adapter
+
+            if (from == "sendToAll") {
+                var allCustomers = db.getAllCustomer()
+                if (allCustomers.moveToFirst()) {
+                    do {
+                        cv.put("title", messageTitle)
+                        cv.put("messeage", messageBody)
+                        cv.put("sent", 0)
+                        cv.put("cusId", allCustomers.getInt(0).toInt())
+                        db.createNotification(cv)
+                    } while (allCustomers.moveToNext())
+                }
+            } else if (from == "sendToChosen") {
+                var arrayOfString: ArrayList<String>? =
+                    intent.getSerializableExtra("selected") as ArrayList<String>
+                while (arrayOfString!!.size != counter) {
+                    var selectedCustomer =
+                        db.getCustomerThatMatchesUserName(arrayOfString.get(counter))
+                    selectedCustomer.moveToFirst()
+
+                    specificCustomer = selectedCustomer.getInt(0)
+                    cv.put("title", messageTitle)
+                    cv.put("messeage", messageBody)
+                    cv.put("sent", 0)
+                    cv.put("cusId", specificCustomer)
+                    db.createNotification(cv)
+                    counter = counter + 1
+                }
+            }
+            if (intent.getStringExtra("return") == "orders") {
+                notificationIntent = Intent(this, AdminIncomingOrders::class.java)
+
+            } else {
+                notificationIntent = Intent(this, AdminListCustomers::class.java)
+
+                counter = 0
+            }
+            startActivity(notificationIntent)
+
         } else {
+            var error = findViewById<TextView>(R.id.txtNotificcationError)
             error.isVisible = true
             error.text = errorMessage
         }
+
     }
 
-
-    fun optionTicked(view: View) {
-        var button = view as CheckBox
-        if (selectedItems.contains(button.text.toString())) {
-            selectedItems.remove(button.text.toString())
-
-        } else {
-            selectedItems.add(button.text.toString())
-
+    fun back(view: View) {
+        var origins = intent.getStringExtra("origins")
+        var loadHome: Intent = Intent(this, AdminHomePage::class.java)
+        if (origins == "io") {
+            loadHome = Intent(this, AdminIncomingOrders::class.java)
+        } else if (origins == "sn") {
+            loadHome = Intent(this, AdminListCustomers::class.java)
         }
-
-
+        startActivity(loadHome)
     }
-
-
 }

@@ -22,16 +22,16 @@
             android:name=".AdminAccountEdit"
             android:exported="false" />
         <activity
-            android:name=".AdminDeleteCOnfirmation"
+            android:name=".AdminDeleteConfirmation"
             android:exported="false" />
         <activity
-            android:name=".AdminSendPromotions"
+            android:name=".AdminSendNotification"
             android:exported="false" />
         <activity
             android:name=".AdminFeedbackAndRatings"
             android:exported="false" />
         <activity
-            android:name=".AdminSendNotification"
+            android:name=".AdminListCustomers"
             android:exported="false" />
         <activity
             android:name=".AdminEditOrderStatus"

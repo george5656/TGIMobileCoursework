@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#FFFFFF"
     android:outlineProvider="none"
-    tools:context=".AdminSendPromotions">
+    tools:context=".AdminSendNotification">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/tbNotfifcationCreation"

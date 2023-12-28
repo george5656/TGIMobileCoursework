@@ -27,7 +27,7 @@ class AdminNotificationFilter : AppCompatActivity() {
         }
         var lob = findViewById<EditText>(R.id.etBeforeDate).text.toString()
         var loa = findViewById<EditText>(R.id.etAfterDate).text.toString()
-        var notificationIntent: Intent = Intent(this, AdminSendNotification::class.java)
+        var notificationIntent: Intent = Intent(this, AdminListCustomers::class.java)
         var errorMessage = ""
         var validation = InputValdiation()
         var errorMessageLob = validation.dateValdiation(lob)
@@ -52,7 +52,7 @@ class AdminNotificationFilter : AppCompatActivity() {
     }
 
     fun back(view: View) {
-        var notificationIntent: Intent = Intent(this, AdminSendNotification::class.java)
+        var notificationIntent: Intent = Intent(this, AdminListCustomers::class.java)
         startActivity(notificationIntent)
     }
 }

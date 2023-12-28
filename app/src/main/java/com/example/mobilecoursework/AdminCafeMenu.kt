@@ -131,7 +131,7 @@ class AdminCafeMenu : AppCompatActivity() {
             lv!!.isVisible = false
             error.text = "none selected"
         } else {
-            var deleteItemIntent: Intent = Intent(this, AdminDeleteCOnfirmation::class.java)
+            var deleteItemIntent: Intent = Intent(this, AdminDeleteConfirmation::class.java)
             deleteItemIntent.putExtra("menuItemToBeDeleted", selectedItem!!.proId.toString())
             deleteItemIntent.putExtra("typeOfDelete", "menuItem")
             deleteItemIntent.putExtra("itemName", selectedItem!!.proName)

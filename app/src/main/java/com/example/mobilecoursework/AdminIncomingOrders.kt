@@ -103,7 +103,7 @@ class AdminIncomingOrders : AppCompatActivity() {
         if (selectedItem != null) {
             var selectedItems: ArrayList<String> = ArrayList()
             selectedItems.add(selectedItem!!.userName)
-            var messagePage: Intent = Intent(this, AdminSendPromotions::class.java)
+            var messagePage: Intent = Intent(this, AdminSendNotification::class.java)
             messagePage.putExtra("from", "sendToChosen")
             messagePage.putExtra("return", "orders")
             messagePage.putExtra("selected", selectedItems)
