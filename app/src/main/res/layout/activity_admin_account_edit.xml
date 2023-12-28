@@ -8,8 +8,8 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/tbAccountEdit"
-        android:layout_width="399dp"
-        android:layout_height="64dp"
+        android:layout_width="412dp"
+        android:layout_height="69dp"
         android:background="?attr/colorPrimary"
         android:contextClickable="true"
         android:minHeight="?attr/actionBarSize"
@@ -215,7 +215,7 @@
         android:id="@+id/txtAccountEditError"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Error"
+        android:text="Error Message"
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/btnCancelAccountEdit"
         app:layout_constraintEnd_toEndOf="parent"

@@ -41,8 +41,8 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar2"
-        android:layout_width="369dp"
-        android:layout_height="57dp"
+        android:layout_width="411dp"
+        android:layout_height="59dp"
         android:background="?attr/colorPrimary"
         android:contextClickable="true"
         android:minHeight="?attr/actionBarSize"
@@ -50,7 +50,7 @@
         android:theme="?attr/actionBarTheme"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.49"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
@@ -110,7 +110,7 @@
         android:id="@+id/txtNotificatonError"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:text="Error"
         android:textSize="24sp"
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/etNotficationUser"
