@@ -106,6 +106,7 @@
         android:id="@+id/btnCancelAccountEdit"
         android:layout_width="166dp"
         android:layout_height="82dp"
+        android:onClick="backButton"
         android:text="cancel"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"

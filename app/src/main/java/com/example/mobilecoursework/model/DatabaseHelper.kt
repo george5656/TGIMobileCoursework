@@ -151,7 +151,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "cafeDatabase
 
     fun getFeedbackCustomerWhere(where: String): Cursor {
         var query: String =
-            "select * from \"Feedback\" Left Join \"Order\" On Feedback.orderId = \"Order.orderId\" where $where"
+            "select * from \"Feedback\" Left Join \"Order\" On Feedback.orderId = \"Order\".orderId where $where"
         return db.rawQuery(query, null)
     }
 
@@ -220,7 +220,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "cafeDatabase
 
     fun getUserThatMatchCustomeWhere(where: String): Cursor {
         var query: String =
-            "select * from Customers Left join \"Order\" ON Customers.cusId = \"Order.cusId\" where $where"
+            "select * from Customers Left join \"Order\" ON Customers.cusId = \"Order\".cusId where $where"
         //var query: String = "select * from \"Customers\", \"Purchase\" where $where"
 
         return db.rawQuery(query, null)

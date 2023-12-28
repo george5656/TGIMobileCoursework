@@ -50,7 +50,9 @@ class AdminCafeMenu : AppCompatActivity() {
             }
             if (hasImage != "") {
                 if (hasImage == "false") {
-                    whereClause = whereClause + "prodImage == " + "null" + " AND "
+                    whereClause = whereClause + "prodImage Is Null AND "
+                }else{
+                    whereClause = whereClause + "prodImage is not NULL AND "
                 }
 
             }
