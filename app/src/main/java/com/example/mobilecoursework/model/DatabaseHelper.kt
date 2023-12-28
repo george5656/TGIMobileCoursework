@@ -46,7 +46,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "cafeDatabase
 
         db?.execSQL(sQlCreateStament3)
         // var tableName : String = "Order"
-        val sQlCreateStament4 = "CREATE TABLE Purchase (" +
+        val sQlCreateStament4 = "CREATE TABLE \"Order\" (" +
                 "orderId INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "cusId INTEGER NOT NULL," +
                 "orderData INTEGER NOT NULL," +
@@ -59,9 +59,9 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "cafeDatabase
                 "paymentId INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "orderId INTEGER NOT NULL," +
                 "paymentType TEXT NOT NULL," +
-                "Amount	INTEGER NOT NULL," +
+                "amount	INTEGER NOT NULL," +
                 "paymentDate TEXT NOT NULL," +
-                "FOREIGN KEY(orderId) REFERENCES Purchase (orderId));"
+                "FOREIGN KEY(orderId) REFERENCES \"Order\" (orderId));"
 
         db?.execSQL(sQlCreateStament5)
         val sQlCreateStament6 = "CREATE TABLE Feedback (" +
@@ -71,14 +71,14 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "cafeDatabase
                 "feedback TEXT NOT NULL," +
                 "rating INTEGER NOT NULL," +
                 "FOREIGN KEY(cusId) REFERENCES Customers(cusId)," +
-                "FOREIGN KEY(orderId) REFERENCES Purchase (orderId));"
+                "FOREIGN KEY(orderId) REFERENCES \"Order\" (orderId));"
 
         db?.execSQL(sQlCreateStament6)
         val sQlCreateStament7 = "CREATE TABLE OrderDetails (" +
                 "orderDetailsID	INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "orderId INTEGER NOT NULL," +
                 "prodId	INTEGER NOT NULL," +
-                "FOREIGN KEY(orderId) REFERENCES Purchase (orderId)," +
+                "FOREIGN KEY(orderId) REFERENCES \"Order\" (orderId)," +
                 "FOREIGN KEY(prodId) REFERENCES Product(productId));"
 
         db?.execSQL(sQlCreateStament7)
@@ -86,8 +86,8 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "cafeDatabase
         val sQlCreateStament8 = "CREATE TABLE Notfifcation (" +
                 "notficationId INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "cusId INTEGER NOT NULL," +
-                "Title TEXT NOT NULL," +
-                "Messeage TEXT NOT NULL," +
+                "title TEXT NOT NULL," +
+                "messeage TEXT NOT NULL," +
                 "sent INTEGER NOT NULL," +
                 "FOREIGN KEY(cusId) REFERENCES Customers(cusId));"
         db?.execSQL(sQlCreateStament8)
@@ -120,6 +120,11 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "cafeDatabase
         return db.rawQuery(query, null)
     }
 
+    fun getMenuItemThatMatchId(id: Int): Cursor {
+        var query: String = "select * from \"Product\" where productId = \"" + id + "\""
+        return db.rawQuery(query, null)
+    }
+
     fun getMenuItemThatMatchPassedInWhere(where: String): Cursor {
         var query: String = "select * from \"Product\" where $where"
         return db.rawQuery(query, null)
@@ -146,12 +151,12 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "cafeDatabase
 
     fun getFeedbackCustomerWhere(where: String): Cursor {
         var query: String =
-            "select * from \"Feedback\" Left Join \"Purchase\" On Feedback.orderId = Purchase.orderId where $where"
+            "select * from \"Feedback\" Left Join \"Order\" On Feedback.orderId = \"Order.orderId\" where $where"
         return db.rawQuery(query, null)
     }
 
     fun getOrders(): Cursor {
-        var query: String = "select * from \"Purchase\""
+        var query: String = "select * from \"Order\""
         return db.rawQuery(query, null)
     }
 
@@ -162,12 +167,12 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "cafeDatabase
 
     fun getSpecificOrders(userName: String): Cursor {
         var query: String =
-            "select * from \"Purchase\", \"Customers\" where (Purchase.cusId == Customers.cusId) AND Customers.cusUserName like \'%" + userName + "%\'"
+            "select * from \"Order\", \"Customers\" where (\"Order.cusId\" == Customers.cusId) AND Customers.cusUserName like \'%" + userName + "%\'"
         return db.rawQuery(query, null)
     }
 
     fun getSpecificOrderFromOrderId(id: String?): Cursor {
-        var query: String = "select * from \"Purchase\" where orderId = \"" + id + "\""
+        var query: String = "select * from \"Order\" where orderId = \"" + id + "\""
         return db.rawQuery(query, null)
     }
 
@@ -175,7 +180,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "cafeDatabase
         var cv = ContentValues()
         cv.put("orderStatus", status)
 
-        db.update("Purchase", cv, "orderId = " + id, null)
+        db.update("Order", cv, "orderId = " + id, null)
     }
 
     fun getSpecificCustomer(userName: String): Cursor {
@@ -191,7 +196,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "cafeDatabase
     }
 
     fun getOrdersThatMatchWhere(where: String): Cursor {
-        var query: String = "select * from \"Purchase\" where $where"
+        var query: String = "select * from \"Order\" where $where"
         return db.rawQuery(query, null)
     }
 
@@ -215,7 +220,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "cafeDatabase
 
     fun getUserThatMatchCustomeWhere(where: String): Cursor {
         var query: String =
-            "select * from Customers Left join Purchase ON Customers.cusId = Purchase.cusId where $where"
+            "select * from Customers Left join \"Order\" ON Customers.cusId = \"Order.cusId\" where $where"
         //var query: String = "select * from \"Customers\", \"Purchase\" where $where"
 
         return db.rawQuery(query, null)

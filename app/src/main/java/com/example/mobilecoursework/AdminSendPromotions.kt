@@ -52,8 +52,8 @@ class AdminSendPromotions : AppCompatActivity() {
                 var allCustomers = db.getAllCustomer()
                 if (allCustomers.moveToFirst()) {
                     do {
-                        cv.put("Title", messageTitle)
-                        cv.put("Messeage", messageBody)
+                        cv.put("title", messageTitle)
+                        cv.put("messeage", messageBody)
                         cv.put("sent", 0)
                         cv.put("cusId", allCustomers.getInt(0).toInt())
                         db.createNotification(cv)
@@ -68,8 +68,8 @@ class AdminSendPromotions : AppCompatActivity() {
                     selectedCustomer.moveToFirst()
 
                     specificCustomer = selectedCustomer.getInt(0)
-                    cv.put("Title", messageTitle)
-                    cv.put("Messeage", messageBody)
+                    cv.put("title", messageTitle)
+                    cv.put("messeage", messageBody)
                     cv.put("sent", 0)
                     cv.put("cusId", specificCustomer)
                     db.createNotification(cv)

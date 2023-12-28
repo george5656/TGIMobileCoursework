@@ -16,6 +16,7 @@ import android.widget.RadioButton
 import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
+import androidx.core.database.getBlobOrNull
 import androidx.core.view.isVisible
 import com.example.mobilecoursework.model.CafeItem
 import com.example.mobilecoursework.model.DatabaseHelper
@@ -32,6 +33,7 @@ class AdminAddCafeItem : AppCompatActivity() {
     var image: ImageView? = null
     var available: String? = ""
     var id: Int = -1
+
 
     // this is basically the intent that andorid want you to use now
     @RequiresApi(Build.VERSION_CODES.P)
@@ -57,6 +59,7 @@ class AdminAddCafeItem : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
+
         name = findViewById<EditText>(R.id.etNameCafeItemAdd)
         price = findViewById<EditText>(R.id.etPriceCafeItemAdd)
         availableYes = findViewById<RadioButton>(R.id.rbCafeItemAddYes)
@@ -68,8 +71,10 @@ class AdminAddCafeItem : AppCompatActivity() {
 
         if (typeCall == "edit") {
 
-            var name = intent.getStringExtra("menuItem")
-            var result = db.getMenuItemThatMatchName(name!!);
+            id = intent!!.getStringExtra("menuItem")!!.toInt()
+
+            var result = db.getMenuItemThatMatchId(id)
+
             result.moveToFirst();
             var tOrF: Boolean? = null
 
@@ -79,16 +84,18 @@ class AdminAddCafeItem : AppCompatActivity() {
                 tOrF = false
             }
 
-            id = result.getInt(0)
             var data = CafeItem(
                 result.getInt(0),
                 result.getString(1),
                 result.getFloat(2),
-                result.getBlob(3),
+                result.getBlobOrNull(3),
                 tOrF
             )
+
             populateWidgets(data)
+
         }
+
 
     }
 
@@ -103,14 +110,15 @@ class AdminAddCafeItem : AppCompatActivity() {
     }
 
     fun populateWidgets(data: CafeItem) {
-
-        image!!.setImageBitmap(
-            BitmapFactory.decodeByteArray(
-                data.prodImage,
-                0,
-                data.prodImage!!.size
+        if (data.prodImage != null) {
+            image!!.setImageBitmap(
+                BitmapFactory.decodeByteArray(
+                    data.prodImage,
+                    0,
+                    data.prodImage!!.size
+                )
             )
-        )
+        }
         var nameText = name!!.text
         var priceText = price!!.text
         //as is an editable object have to do the eextra loops

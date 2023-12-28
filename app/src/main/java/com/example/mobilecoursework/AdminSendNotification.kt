@@ -45,10 +45,10 @@ class AdminSendNotification : AppCompatActivity() {
                 whereClause = whereClause + "Customers.cusIsActive == " + status + " AND "
             }
             if (lob != "") {
-                whereClause = whereClause + "Purchase.orderData <= " + lob + " AND "
+                whereClause = whereClause + "\"Order.orderData\" <= " + lob + " AND "
             }
             if (loa != "") {
-                whereClause = whereClause + "Purchase.orderData >= " + loa + " AND "
+                whereClause = whereClause + "\"Order.orderData\" >= " + loa + " AND "
             }
             if (whereClause != "") {
                 whereClause = whereClause.subSequence(0, whereClause.length - 5).toString() + ";"

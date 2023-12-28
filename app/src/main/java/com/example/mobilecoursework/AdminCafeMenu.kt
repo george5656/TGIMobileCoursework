@@ -151,7 +151,7 @@ class AdminCafeMenu : AppCompatActivity() {
             editItemIntent.putExtra("type", "edit")
 
 
-            editItemIntent.putExtra("menuItem", selectedItem!!.proName)
+            editItemIntent.putExtra("menuItem", selectedItem!!.proId.toString())
             startActivity(editItemIntent)
 
             error.isVisible = false
