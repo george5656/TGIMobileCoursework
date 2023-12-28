@@ -83,7 +83,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "cafeDatabase
 
         db?.execSQL(sQlCreateStament7)
 
-        val sQlCreateStament8 = "CREATE TABLE Notfifcation (" +
+        val sQlCreateStament8 = "CREATE TABLE Notification (" +
                 "notficationId INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "cusId INTEGER NOT NULL," +
                 "title TEXT NOT NULL," +
@@ -202,7 +202,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "cafeDatabase
 
     fun createNotification(cv: ContentValues) {
 
-        db.insert("Notfifcation", null, cv)
+        db.insert("Notification", null, cv)
 
     }
 
