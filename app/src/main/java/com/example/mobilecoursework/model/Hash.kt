@@ -4,7 +4,7 @@ import java.security.MessageDigest
 
 class Hash() {
     fun hashMessage(password: String): String {
-        var md = MessageDigest.getInstance("MD5")
+        var md = MessageDigest.getInstance("SHA-256")
         md.update(password.toByteArray())
         var hash = md.digest()
         /* basically a a string buffer, so can get the array data one at a time, else it will
