@@ -43,7 +43,10 @@ class AdminAddCafeItem : AppCompatActivity() {
             uri: Uri? ->
         if (uri != null) {
 
-
+            /*
+            contentResolver is there so it can access to the content on a user devices, eg so can
+            use the URI and find the conetnet its relating to
+             */
             var imageSocurce = ImageDecoder.createSource(contentResolver, uri!!)
             //this is decoding source into a bitmap
             var imageBitmap = ImageDecoder.decodeBitmap(imageSocurce)
