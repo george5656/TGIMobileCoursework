@@ -38,7 +38,7 @@ class AdminMenuItemFilter : AppCompatActivity() {
         if (findViewById<RadioButton>(R.id.rbRemoveNotAvailable).isChecked) {
             itemStock = "false"
         }
-        var db = DatabaseHelper(this)
+
         errorMessage = validation.priceValidaiton(maxPrice)
         if (errorMessage != "") {
             errorMessage = "max price" + errorMessage

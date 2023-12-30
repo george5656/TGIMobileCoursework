@@ -28,12 +28,12 @@
         android:gravity="center"
         android:orientation="vertical"
         android:paddingLeft="10dp"
-        android:paddingRight="25dp"
+        android:paddingRight="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tbHomePage"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintVertical_bias="0.0">
 
         <Button
             android:id="@+id/btnMenuItems"
