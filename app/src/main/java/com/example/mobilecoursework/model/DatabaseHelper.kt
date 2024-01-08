@@ -109,6 +109,11 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "cafeDatabase
         db.insert(table, null, cv)
     }
 
+    fun createCustomer(cv: ContentValues) {
+        var table: String = "Customers"
+        db.insert(table, null, cv)
+    }
+
     fun getMenuItems(): Cursor {
 
         var query: String = "select * from \"Product\""
@@ -216,6 +221,10 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, "cafeDatabase
 
     fun createMenuItem(cv: ContentValues) {
         db.insert("Product", null, cv)
+    }
+
+    fun createOrder(cv: ContentValues) {
+        db.insert("\"Order\"", null, cv)
     }
 
     fun getUserThatMatchCustomeWhere(where: String): Cursor {
