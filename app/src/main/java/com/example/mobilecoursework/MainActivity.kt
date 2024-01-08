@@ -15,4 +15,14 @@ class MainActivity : AppCompatActivity() {
         var intent: Intent = Intent(this, AdminLogin::class.java)
         startActivity(intent)
     }
+
+    fun customerLogin(view: View) {
+        var intent: Intent = Intent(this, CustomerLogin::class.java)
+        startActivity(intent)
+    }
+
+    fun customerRegister(view: View) {
+        var intent: Intent = Intent(this, CustomerAccountRegister::class.java)
+        startActivity(intent)
+    }
 }
